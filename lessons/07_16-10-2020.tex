@@ -1,0 +1,84 @@
+\documentclass[../main/main.tex]{subfiles}
+
+\newdate{date}{16}{10}{2020}
+
+
+\begin{document}
+
+\marginpar{ \textbf{Lecture 7.} \\  \displaydate{date}. \\ Compiled:  \today.}
+
+Let us start from the definition of small world networks. We have seen tha the average path length scales with the logarithm of the number of nodes in the network, not just with the number of nodes. How is it possible? A paper which explain it is “collective dynamics of small world networks”. Their idea is what is called the Watss and Strogatz model. Let us focus with the first regular ring in which we have each connected connected with the neighbour in their left and right. The structure is totally regular. If we want to measure the longest distance that we can find in the network we have that:
+\begin{equation*}
+  \expval{l^{circle}} \sim \frac{N}{4 m}
+\end{equation*}
+What happens if we just rewire one of the connection? We connect it with a another random nodes in the network (small-world). What do happen for the distance? Just rewiring one connection reduce the size in an incredible way. If we can control the number of connection with a probability \( p \), what happens is that every time I am rewiring the connection the average steps is reduced by a factor 2. If we repeat this process several time we obtain a logarithmic scaling. At the end we obtain a random network which scales as:
+\begin{equation*}
+  \expval{l} \sim \log{N}
+\end{equation*}
+
+Now the question is: how degrees are distributed over the newtork? Let us consider a small network, the plot on the right represent the distribution of the degrees in this small network. How this quantity is distributed in real networks?
+The first assumption that we can make is what happens if the connection are built at random. So there is no rule behind it, but a certain probability.
+Let us consider Erdos and Renyi model. In their paper we have the evolution of a graph where links between nodes are drawn at random. What are the properties of this graph?
+Let us call a graph \( G \) with \( G(N,p) \) where \( N \) are the number of nodes and \( p \) is the probability of connection.
+Before 1959 people assumed that connection were regular, but this is the first paper in which random connections are been considered.
+
+Given that we are drawing connection at random? What is the degree distribution at the end? Each link is drawed with a probability \( p \). What is the probability that a node has \( k \) connections?
+\begin{equation*}
+  p_k = \qty(\substack{N-1 \\ k} ) p^k (1-p)^{N-1-k}
+\end{equation*}
+From that we can reocver that \( \expval{k} = p(N-1)  \) and variance \( \sigma _k^2 = p(1-p)(N-1) \). As we can see, the average and the variance scales in the same way with the size of the network.
+
+The problem of the last distribution is that it is difficult to be treated analitically and we need an approximation. Fortunately, we have that for sparse networks we have \( k \ll N \), the binomial \( (N,p) \) distribution can be approximated by a Poisson distribution with \( \lambda = p N \). Hence:
+\begin{equation*}
+  p_k = e^{- \expval{k} } \frac{\expval{k} }{k!}
+\end{equation*}
+As before, the average and the variance scales in the same way with the size of the network. This is telling us that all the nodes more or less are the same. If we have a bounded variance means that all the nodes have more or less the same degree. That is the point.
+
+\begin{itemize}
+\item if \( N p < 1 \), the graph will almost surely have no connected compontens of size larger than \( O(\log(N)) \);
+\item if \( N p = 1 \) the graph will almost surely have a giant component of size \( O(N^{2/3}) \);
+\end{itemize}
+
+The idea is: what is the degree distribution of real networks? In the last decades we start to have very very complex and large networks. Their structure is nothing like the structure that you see for a random network. This are examples of social networks as Facebook and Twitter. All this plots are in log-log scale. We have a lot of networks that scales in the same way.
+
+What is the form of this connection? In black we see the Poissonian distribution that we saw before, and then we plot the function \( P(k) \sim k^{- \gamma  } \). We see that the Poissonian distribution is not able to reproduce the hetherogeneity you see in the data.
+
+The power low have an important role, in particular \( \gamma   \) is the slope of the curve in log-log scale.
+?? Another important thing is that if you look at the distribution  is that assuming that these two distributions have the same number of degree, the hetherogenity is much larger ??
+The functional form is the same at all scales for scale-free network, but it is not the same for Poissonian distributions. These are the main characteristics.
+
+The most important thing is that the probability of having large Hubs is not zero. Even for small networks you can have large Hubs and this is something we have to take into account for the spreading of diseases.
+
+
+We can study the limiting cases of this scale-free networks. We can study some of the properties we have seen before, as the average degrees or we can prove how the largest degree scales as the size of the network.
+\begin{equation*}
+  \int_{k_{max}}^{\infty } P(k) \dd[]{k}  = \frac{1}{N} \quad \rightarrow  \qty(\frac{k_{min}}{k_{max}})^{\gamma -1 } = N
+\end{equation*}
+The most important thing is that more of the network we have \( \gamma =2,3  \) (plots of before).
+
+The general moments of the distribution are:
+...
+The moment converges only if \( \gamma -1 > n  \). This gives an hint on how the average of the degree scales as the size of the network.
+
+\begin{itemize}
+\item if \( \gamma <2  \) both \( \expval{k}  \) and \( \expval{k^2}  \) diverge with \( N \rightarrow  \infty  \);
+
+\item if \( 2 < \gamma < 3  \) the average degree \( \expval{k}  \rightarrow c \) but \( \expval{k^2}  \rightarrow \infty \) as \( N \rightarrow  \infty  \) and \( \sigma ^2 \rightarrow \infty  \).
+\end{itemize}
+
+This means that all the models we have been used before (where we assumed that all the people in the population are equal does not hold anymore). The variance of the degree diverges, hence we have extremely heterogeneous networks, not homogeneous ones.
+
+The last thing we need is an algorithm to create them, we have the Barabasi-Albert model. This is the second paper which starts the field. We have to rethink all the models we have been used right now and include this things.
+The idea behind this paper is extremely simple. They analized thesen etworks and the assumed \( P(K) \sim k^{-3} \) and the create a model to reproduce thsi behavior. We start with a small number of nodes and we connect the links at random but which follow a preperential attachmenet. At each step the network growth.
+
+The principle behind the preferintial attatchement is very simple: rich get richer. In the case of influentials, if I have a lot of followers the probability of increase my connection is increasing too. Actually, this idea is not even so new. It is something we have been known. This model hence is just a modification of the Price model. I publushed a paper, someone think that it is interesting and more attention I get more attention I will get in the future.
+
+So, I am drawing the link at random but not uniformely. In the basic algorithm, we start with a small number of nodes connected in a link. In the first time step I am gonna adding a new node, and I am gonna connectecting to the other nodes. Let us assume that every time I add a node, I am adding two links. I calculate the probability of getting a new node which in this case is equal for all the nodes. Then I pick up one at random and I connect to it. Then I have to update the probabilities. We see that the node on the left got an higher probability of gwtting new connections. Then I start with a ned node untile size \( N \) is reached. This algorithm is able to create netowrks with some interesting properties. The simple idea is that:
+\begin{equation*}
+  P(k) = \frac{2 m (m +1)}{k(k+1)(k+2)} \sim k^{-3}
+\end{equation*}
+for large \( k \). 
+
+
+
+\end{document}

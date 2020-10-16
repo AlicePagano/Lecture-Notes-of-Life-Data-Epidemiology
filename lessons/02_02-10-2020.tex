@@ -15,7 +15,6 @@ Some models are wrong, but most of them are useful.
 \end{chapquote}
 
 
-
 \marginpar{ \textbf{Lecture 2.} \\  \displaydate{date}. \\ Compiled:  \today.}
 
 Models in science have two different roles: \textbf{understanding} what happens and \textbf{prediction}.
@@ -38,13 +37,13 @@ Let us consider a population of any individuals and try to characterize them. Fo
 The only problems it is that this approximation is quite strong, because by fixing the rates we are assuming that the process underlying is a Markovian one. In reality, you do not have a exponential distribution but a decay. This will be seen in the course when we will talk about “non-Markovian” epidemics. For instance the \( \beta  \) can be the “per contact” infectous rate, so you are just counting the number of contacts.
 As examples we can consider different models which depend on the type of disease as SI, SIS, SIR and so on and so forth.
 
-There are difference between medical status and infection status. We do not care about medical status but only about the disease and how the immuning system is reacting. We have four main stages: starting from a helthy state, the individual contract the disease and then it become infectious until it recover. The most important things is that the compartments are not the same of the medical status.
+There are difference between medical status and infection status. We do not care about medical status but only about the disease and how the immuning system is reacting.
+We have four main stages of the disease: starting from a helthy state, the individual can contract the disease and then it become infectious until it recover (Fig. \ref{fig:2_5}). The most important things is that the compartments are not the same of the medical status.
 
-
-\begin{figure}[t!]
+\begin{figure}[h!]
 \centering
-\includegraphics[width=0.8\textwidth]{../lessons/image/02/2_R_0.png}
-\caption{\label{fig:2_R_0.png} Fraction of infected vs basic Reproductive Ratio, \( R_0 \).}
+\includegraphics[width=0.7\textwidth]{../lessons/image/02/5.png}
+\caption{\label{fig:2_5} A caracature of the time-line of infection, showing the dynamics of the pathogen (gray area) and the host immune response (black line) as well as labeling the various infection classes: susceptible, exposed, infectious, and recovered. Note that the diseased period, when symptoms are experienced, is not necessarily correlated with any particular infection class.}
 \end{figure}
 
 Now, let us introduce the \textbf{Basic Reproductive Number} \( R_0 \) (pronunced \( R \) naught) which is a measure of the infection of the population. We put one guy inside a group for instance for three days and at the end of these days we count the number of secondary cases that we have. This is the main idea of \( R_0 \). This number determines wheter a disease will spread or not:
@@ -64,24 +63,30 @@ The COVID-19 is most likely somewhere in the middle.
 
 \begin{figure}[h!]
 \centering
+\includegraphics[width=0.7\textwidth]{../lessons/image/02/2_R_0.png}
+\caption{\label{fig:2_R_0.png} Fraction of infected vs basic Reproductive Ratio, \( R_0 \).}
+\end{figure}
+
+\begin{figure}[h!]
+\centering
 \includegraphics[width=0.6\textwidth]{../lessons/image/02/3_outbreaks.png}
 \caption{\label{fig:3_outbreaks} Figure from: Lloyd-Smith et al. Nature 438, 355–359 (2005).}
 \end{figure}
 
-Now, we introduce the \textbf{Effective Reproductive Number} \( R(t) \), which is the same of \( R_0 \) but it varies in time. Hence, it is the average number of secondary cases a case produces in a population at time \( t \).
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.6\textwidth]{../lessons/image/02/4_TOST.png}
+\caption{\label{fig:4_TOST} Figure from: Ferretti et al. \url{https://www.medrxiv.org/content/10.1101/2020.09.04.20188516v1}}
+\end{figure}
 
+Now, we introduce the \textbf{Effective Reproductive Number} \( R(t) \), which is the same of \( R_0 \) but it varies in time. Hence, it is the average number of secondary cases a case produces in a population at time \( t \).
 Another important quantity is the \textbf{Infectious period}:
 \begin{equation}
   \tau = \frac{1}{\mu }, \quad \tau = \frac{1}{(\alpha + \mu )}
 \end{equation}
-
 Other relevant quantities are the \textbf{Incubation period} (from infection to symptoms), the \textbf{Generation time} (from infection to infection), the \textbf{Serial interval} (from symptoms to symptoms) or the \textbf{TOST} (measures from symptoms to infection). The problems is that TOST in many cases can be negative (see Fig. \ref{fig:4_TOST} for more details).
 
-\begin{figure}[h!]
-\centering
-\includegraphics[width=0.7\textwidth]{../lessons/image/02/4_TOST.png}
-\caption{\label{fig:4_TOST} Figure from: Ferretti et al. \url{https://www.medrxiv.org/content/10.1101/2020.09.04.20188516v1}}
-\end{figure}
+
 
 
 

@@ -1,0 +1,98 @@
+\documentclass[../main/main.tex]{subfiles}
+
+\newdate{date}{15}{10}{2020}
+
+
+\begin{document}
+
+\marginpar{ \textbf{Lecture 6.} \\  \displaydate{date}. \\ Compiled:  \today.}
+
+\section{SIRS Model}
+
+The idea is that you assume that you are in the steady state and so all the derivatives goes to zero.
+
+This model allows to interpolate between SIR (\( w=0 \)) and SIS (\( w \rightarrow \infty  \)).
+
+\begin{equation*}
+  \dv{s}{t} = \alpha + w r - \beta  s i - \alpha s, \qquad \dv{i}{t} = \beta s i - \mu i - \alpha i, \qquad \dv{r}{t} = \mu i - w r - \alpha r
+\end{equation*}
+The endemic state can be found by putting the derivatives equal to zero.
+
+In reality people do not become instantaneously infectious, but there is a \textbf{latent period} which is the time between infection and becoming infectious. Indeed, the pathogen replication takes time i.e. viral load too low to transmit the infection.
+
+It is important to remind that the latent period is not the same of the incubation period. An individual can be infectiuous before symptoms. For instance it has a pre-syntomatic infection as in the case of Covid-19.
+
+The simplest idea
+
+\section{SEIR Model}
+The equations are the same of before.
+
+If you estimate the time evolution of the SEIR model and SIR model there is a huge difference. For instance we can approximate for the SEIR:
+\begin{equation*}
+  i_{SEIR} (t) \approx e^{\qty(\sqrt{4(R_0-1)\sigma \mu  + (\sigma + \mu )^2} -(\sigma +\mu ))t/2 } \approx i_0 e^{\qty(\sqrt{R_0} -1 ) \mu t}
+\end{equation*}
+while for the SIR:
+\begin{equation*}
+  i_{SIR} (t) \approx i_0 e^{(R_0-1) \mu t}
+\end{equation*}
+
+Podromic state means the difference between latent period and ...
+
+
+\section{}
+We solved the SI model analitically and we observe that the growth is as a sigmoid. We have some sort of saturation at 1.
+
+In the SIS things starts to change. We have some sort of treshold phenomena (epidemic treshold).
+
+For the SIR we cannot solve the equation analitically.
+
+We have the SIRS we can interpulate between the two models.
+
+For the SEIR model we have the exposed slowing down the spreading.
+
+
+\chapter{Basics of Network Science}
+
+\section{Basics definition}
+
+The most important thing is the concept of \textbf{network} (graph), which is just an object composed by.
+The nodes represents the intities of the relationship, the entries (the people in a social network and so on...).  The other part are the links which represents the relationship between entities.
+
+The basics distinction is between \textbf{undirected} and \textbf{directed} links.
+
+We have different types of networks and another important distinction is that it can be weighted or not weighted.
+
+The real networks usually have a very low density, so are spare systems.
+
+Another things we will use a lot is the way of representing a graph in a mathematical sense. We will use the \textbf{adjacency matrix} \( A \) of the network. We have:
+\begin{itemize}
+\item \( a_{ij} = 1 \) if a link between nodes \( i \) and \( j \) exists;
+\item \( a_{ij} = 0 \) otherwise.
+\end{itemize}
+Since the networks are usually sparse...computationally
+
+The number of neigjborhood of each node is what is called the \textbf{degree} of the node. This is the basic measure that we are gonna use a lot. Once you define the degree, the next step is defining what is the average of the degree over the entire network.
+\begin{equation*}
+  \expval{k} = \frac{1}{N} \sum_{i=1}^{N} k_i, \qquad \text{or} \qquad \expval{k} = \frac{2L}{N} = d(N-1)
+\end{equation*}
+
+The next definition is the concept of \textbf{path}, which is a sequence of links which permit to go from node \( i \) to node \( j \) for instance.
+Another important part is what is called the shortest part between \( i  \) and \( j \). This gives us the idea of how big the network is.
+
+The network is connected if every possible couple of nodes is reachable trough a path. Otherwise, each connected part is defined as a connected component.
+
+Another measure that is quite important is the average path length:
+\begin{equation*}
+  \expval{I} = \frac{\sum_{ij}^{} l_{ij} }{N(N-1)}
+\end{equation*}
+To define how big the network is you have to take into account also the longest shortest path.
+
+The question is: why such short distances in such large networks?
+
+The last example is six degrees of separation. Real networks are smaller (shorter) than one would expect.
+
+This is what is called the small world phenomena. If you study the average path length which scales linearly as the scales of the network it scales as the logarithm of the network or in some case the logarithm of the logarithm of the network. This is huge important in the spreading of diseases. 
+
+
+
+\end{document}
