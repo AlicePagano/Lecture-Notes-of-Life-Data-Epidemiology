@@ -77,7 +77,58 @@ So, I am drawing the link at random but not uniformely. In the basic algorithm, 
 \begin{equation*}
   P(k) = \frac{2 m (m +1)}{k(k+1)(k+2)} \sim k^{-3}
 \end{equation*}
-for large \( k \). 
+for large \( k \). \( m \) is the number of links you are adding and this is a parameter which drives you the minimal degree of the network.
+
+
+\section{Epidemic Spreding on Networks}
+
+\subsection{SIS model in a network}
+
+The idea is that we pass from the classical well-mixed population to the contact networks. So we assume that we have some sort of connection between individuals. The idea is that:
+\begin{itemize}
+\item all individuals are equivalent;
+\item individuals do not interact at random: friends, family and so on. You have somehow constraing how the disease will spread. The fact that we have repeated contacts has strong effect on the dynamics.
+\end{itemize}
+Let us try to build a general model for a general network. For doing that the idea is, let us start with the SIS dynamics and defining a binary variables in the sense that can only have two values: 0 if it is susceptibòe and 1 if it is infected. We define another variable \( \rho (i,t) \) which represent the probability of that node \( i \) is infected at time \( t \). So from here, I can write a general equation for the SIS in a nwtork:
+\begin{equation*}
+  \dv{}{t} \rho (i,t) = \overset{\text{Recovery}}{- \mu  \rho (i,t)} + \overset{\text{Infection}}{\beta \sum_{j}^{} A_{ij} \text{Prob} [\sigma _i (t) = 0, \sigma _j (t ) =1 ]   }
+\end{equation*}
+The problematic part is the probability which is... we have to find an expression for it. Since we ae in a network, the probability of being ifnected depends on my neighbours. I have to follow the entire chain of connection. No closed form, it depends on the three nodes probability and so on... I have to follow the entire network if I want to know what is gonna happening.
+We have to write down the entire time evolution of the system.
+
+The idea is that since I will gonna have this chain of probability, I need to cut down this chain at some point. So at some point I need a closure of my equation. I am not taking into account all the structure of the network, but at some point I will the the average. We need some sort of approximation for this probability. After that we will be able to solve the problem.
+In physics this are called mean-field approximation, since I am not able to solve the many body problem at a certain point I will consider a random field which acts on the entire system and at some point I will consider the average effects on the system.
+
+What happens is that I am susbtituting in some way this probability \( \text{Prob} [\sigma _i (t) = 0, \sigma _j (t ) =1 ]  \) with some average probability.
+Obviously, depengin on the assumption we are making for this approximation we will obtain different results. If I am assuming that the network is homoegenous (all the nodes are equal) I have a mean-field, if it is heterogeneous I will have more equations but I will have a more reliable approximation of the system.
+
+Coarse graining level.
+The distinction can be also in the level I will adopt this approximation. We can have degree based mean field theories in which we assume that all the nodes of the same degree are equal. While individual bases mean field means that all the nodes are different and that I will take individual connections between individuals. The probability of having the disease for a node can be different depending on different factors...
+
+Where to cut the level? In individual level or pair approximation?
+
+Let us start with the simplest approximation.
+
+\subsection{Homogeneous networks}
+The important thing is that the variance and standard deviation is bounded. I am assuming that all the nodes are equal. I can forget about phase, the position of the node on the network does not matter anymore because the nodes are equal.
+
+I am gonna make the mean field at the individual level: I am approximation the probability \( \text{Prob} [\sigma _i (t) = 0, \sigma _j (t ) =1 ] \) (one being infected and the other one supsceptible) are statistically independent. Hence, I can decompose this one with a product of individual probability \( \text{Prob} [\sigma _i (t) = 0] \cdot \text{Prob} [\sigma _j (t ) =1 ] \).
+I define:
+\begin{equation*}
+  \rho (t) = \text{Prob} [\sigma (t)=1]
+\end{equation*}
+If we put everything togheter, we get the equation:
+\begin{equation*}
+  \dv{\rho }{t}
+\end{equation*}
+which looks quite familiar, where we have \( \sum_{j}^{} A_{ij}   \) which is the degree of the network.
+We get exactly the same expression that we got before for well-mixed population. This is important that actually what are you doing is that all the nodes are statistically independent. I am recovery exactly this result. When I was consider well-mixed population, I assumed that the probabilities where exaxtly statistically independent. Now, this is just an approximation.
+
+All the calculation that we get are gonna hold for this thing. In the labs you will see when this assumption breaks down.
+
+\subsection{Heterogenous netowrks}
+
+
 
 
 
