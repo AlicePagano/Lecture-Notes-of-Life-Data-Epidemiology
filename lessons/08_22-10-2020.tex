@@ -174,6 +174,53 @@ We need an expression for \( q_i(t) \). The basic idea is that:
 \end{equation*}
 We have the node \( i \) in green, and the infected neighbour in red. We see that \( \beta A_{ij} \rho _j (t) \) is the probability of getting infetced by node \( j \) (at least). We have that  \( [1- \beta A_{ij} \rho _j (t)] \) is the probability of NOT getting infected by node \( j \). I have to repeat this calculation for all my infected nehbours, hence \( \prod_{j=1}^{N} [1- \beta A_{ij} \rho _j (t)] \) is the probability of NOT getting infected by any neighbor.
 Finally, \(   q_i (t) \) represents the probability of getting infected by at least one neighbor.
+Hence, the probability of getting infected is 1 minus the probability of not getting infected by any neighbor.
 
+Hence, once we have this things, first of all we can solve it numerically, which means for instance by iteration. In this case we are gonna have an equation for each of the node. We have \( 2^N \) equation where \( N \) is the size of the system. The equation for \( \rho _i (t+1) \) can be solved by iteration. I am gonna repeat this equation many times until I reach the steady state.
+
+The difference with the degree based mean field theories is that actually \( A_{ij} \) we are including all the adjiacency matrix, while before only the average.
+
+We can also solve analytically the system at teh steady state to estimate the epidemic threshold.
+I am assuming that if I am in the epidemic treshold, what happens is that \( \rho  \) is very small for all the nodes. If \( \rho _i^* = \varepsilon _i^* \ll 1 \), we can use an approximation for \( q_i^* \):
+\begin{equation*}
+  q_i^* = 1 - \prod_{j=1}^{N} [1- \beta A_{ij} \varepsilon _j^*] \sim \beta \sum_{j=1}^{N} A_{ij} \varepsilon _j^*
+\end{equation*}
+Substituting we have:
+\begin{equation*}
+  \mu \varepsilon _i^* = \beta (1- \varepsilon _i^*) \sum_{j=1}^{N} A_{ij} \varepsilon _{j}^*
+\end{equation*}
+We have a linear system where the interaction is represented by the adjiacency matrix:
+\begin{equation*}
+  \frac{\mu }{\beta } \varepsilon _i^* = \sum_{j=1}^{N} A_{ij} \varepsilon _j^*
+\end{equation*}
+This linear system has solution only if \( \frac{\mu }{\beta } \) is an eigenvalue of the adjiacency matrix \( A_{ij} \). This is why last week we say that the spectrum of the adjiacency matrix was important.
+Hence:
+\begin{equation*}
+  \beta = \frac{\mu }{\Lambda _i}
+\end{equation*}
+Since, we are interested in the smallest possible value of \( \beta  \) for which we have a solution, we take the largest eigenvalue of the adjiacency matrix \( A \):
+\begin{equation*}
+  \beta _c = \frac{\mu }{\Lambda _{max}}
+\end{equation*}
+This is the expression for the epidemic treshold, and it is a general results that it is valid not only by this approxmation but for a generic case for a generic network.
+
+What is the relation between the epidemic treshold for DBMF and IBMF?
+We have that:
+\begin{equation*}
+  \beta _c^{DBMF} = \frac{\mu \expval{k} }{\expval{k^*} }, \qquad \beta _c^{IBMF} = \frac{\mu }{\Lambda _{max}}
+\end{equation*}
+The relation amogn them for scale-free networks is:
+\begin{equation*}
+  \Lambda _{max} \sim max(\sqrt{k_{max}}, \expval{k^*}/\expval{k}   )
+\end{equation*}
+Specifically:
+\begin{equation*}
+\beta _c \sim
+  \begin{cases}
+   \mu / \sqrt{k_{max}} & \gamma > 5/2  \\
+   \mu \expval{k}/\expval{k^2} & 2 < \gamma < 5/2
+  \end{cases}
+\end{equation*}
+We can conclude that IBMF is more accurate than DBMF.
 
 \end{document}
