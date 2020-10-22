@@ -129,7 +129,27 @@ where \( k_c \) is a characteristic degree. At some point the term added will be
 \begin{equation*}
   \beta _c \qty(\frac{\mu k_c}{k_{min}})^{\gamma -3 }
 \end{equation*}
-we will not show the calculation.
+we will not show the calculation. Tomorrow, we will compare the epidemic treshold in an random network and in a scale-free network to see their differences.
+This were the result for the SIS.
+
+\section{SIR model}
+We can write the same equations for the SIR model under the same assumption. We need more equations to take into account also the equation for \( R \).
+\begin{equation*}
+  \dv{}{t} \rho _k^I(t) ...
+\end{equation*}
+where we have:
+\begin{equation*}
+  \Gamma _k (t)
+\end{equation*}
+which plays exactly the same role of \( \Theta  \) of before. It represents the link from which the infection arrived at the node. We will not show its form.  It is little different because of the structure of the SIR.
+There is a neibhobour that can trasmit the infection to me, but it can recover. Hence, this individual can be suscpetible again.
+I need to take into account that the disease is coming from one side, because that side of the network for me is forbidden in the sense that I have recovered that connot be infected again.
+
+We found:
+\begin{equation*}
+  \beta _c = \frac{\mu \expval{k} }{\expval{k^2} - \expval{k} }
+\end{equation*}
+and the important things is that \( \beta _c^{SIS} \neq \beta _c^{SIR} \). This is the first time in the course that the epidemic treshold for these two models is not the same.
 
 
 \end{document}
