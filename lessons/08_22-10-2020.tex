@@ -132,7 +132,7 @@ where \( k_c \) is a characteristic degree. At some point the term added will be
 we will not show the calculation. Tomorrow, we will compare the epidemic treshold in an random network and in a scale-free network to see their differences.
 This were the result for the SIS.
 
-\section{SIR model}
+\subsection{SIR model}
 We can write the same equations for the SIR model under the same assumption. We need more equations to take into account also the equation for \( R \).
 \begin{equation*}
   \dv{}{t} \rho _k^I(t) ...
@@ -150,6 +150,30 @@ We found:
   \beta _c = \frac{\mu \expval{k} }{\expval{k^2} - \expval{k} }
 \end{equation*}
 and the important things is that \( \beta _c^{SIS} \neq \beta _c^{SIR} \). This is the first time in the course that the epidemic treshold for these two models is not the same.
+
+\section{Individual Based Mean-Field theories (IBMF)}
+
+Before we were assuming that all the nodes with the same degree were equal. Now, we are gonna studying the indivudual based mean-field theories for individuals.
+We are not consider a single network, but an average over all the possible network we can create given that degree distribution.
+
+Assuming that all the nodes with the same degree are equal, we are not looking at the single network but at their average. This is what in physics is called \textbf{annealed networks}.
+In the opposite when I called \textbf{quenched networks}, I am consider a particular realization of one network. The idea is: instead of considering the average we are considering a particular network. This is de difference in doing a degree bases or an indivudual based.
+
+Let write down the equation for the quenced mean field. We are gonna use the discrete time formulation of equation because it is a bit simpler (we can write also the same things with differential equations).
+
+We are consider \( \rho _i (t) \) as the probability of a node of being infected at time \( t \). What is my probability of being infected at time \( t+1 \) is:
+\begin{equation*}
+  \rho _i (t+1) = \rho _i(t) (1- \mu ) + (1 - \rho _i(t))q_i(t)
+\end{equation*}
+which is the probability of being infected and not get cured and the second is the normal term when I am getting the infection (the probability of being suscpetible and the probability of getting the disease).
+We have that \( q_i(t) \) is the probability of node \( i \) of getting infetced by at least one neighbour.
+
+We need an expression for \( q_i(t) \). The basic idea is that:
+\begin{equation*}
+  q_i (t) = 1 - \prod_{j=1}^{N} [1- \beta A_{ij} \rho _j (t)]
+\end{equation*}
+We have the node \( i \) in green, and the infected neighbour in red. We see that \( \beta A_{ij} \rho _j (t) \) is the probability of getting infetced by node \( j \) (at least). We have that  \( [1- \beta A_{ij} \rho _j (t)] \) is the probability of NOT getting infected by node \( j \). I have to repeat this calculation for all my infected nehbours, hence \( \prod_{j=1}^{N} [1- \beta A_{ij} \rho _j (t)] \) is the probability of NOT getting infected by any neighbor.
+Finally, \(   q_i (t) \) represents the probability of getting infected by at least one neighbor.
 
 
 \end{document}
