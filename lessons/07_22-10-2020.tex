@@ -173,73 +173,108 @@ Before we were assuming that all the nodes with the same degree were equal. Now,
 We are not considering a single network, but an average over all the possible network we can create given that degree distribution.
 Hence, under the Heterogenous Mean-Field framework we are solving the epidemics problem for an ensemble of networks whose common feature is the \( P(k) \): ensemble of networks.
 
+In the degree based approach we assumed that all the nodes with the same degree are equal, so we are not looking at the single network but at their average. This is what in physics is called \textbf{annealed networks}.
+In the opposite, we call \textbf{quenched networks} when we consider a particular realization of one network. The idea is: instead of considering the average we consider a particular network. This is the main difference between a degree based or an indivudual based approach.
 
-Assuming that all the nodes with the same degree are equal, we are not looking at the single network but at their average. This is what in physics is called \textbf{annealed networks}.
-In the opposite when I called \textbf{quenched networks}, I am consider a particular realization of one network. The idea is: instead of considering the average we are considering a particular network. This is de difference in doing a degree bases or an indivudual based.
 
-Let write down the equation for the quenced mean field. We are gonna use the discrete time formulation of equation because it is a bit simpler (we can write also the same things with differential equations).
+Let write down the equation for the \textbf{quenched mean-field}. We are gonna use the discrete time formulation of equation because it is a bit simpler (obiously, we can also write the same equations by means of  differential equations).
 
-We are consider \( \rho _i (t) \) as the probability of a node of being infected at time \( t \). What is my probability of being infected at time \( t+1 \) is:
-\begin{equation*}
-  \rho _i (t+1) = \rho _i(t) (1- \mu ) + (1 - \rho _i(t))q_i(t)
-\end{equation*}
-which is the probability of being infected and not get cured and the second is the normal term when I am getting the infection (the probability of being suscpetible and the probability of getting the disease).
-We have that \( q_i(t) \) is the probability of node \( i \) of getting infetced by at least one neighbour.
+Let us consider \( \rho _i (t) \) as the probability of a node of being infected at time \( t \). The total fraction of infected is given by \( \rho (t) = \sum_{i}^{} \rho _i (t)   \). The probability of being infected at time \( t+1 \) is:
+\begin{equation}
+  \rho _i (t+1) = \mathcolorbox{green!20}{\rho _i(t) (1- \mu )} + \mathcolorbox{yellow!40}{(1 - \rho _i(t))q_i(t)}
+\end{equation}
+which is the sum of the probability of being infected and not get cured (green term) and the probability of being suscpetible times the probability of getting the disease (yellow term).
+We have that \( q_i(t) \) is the probability of node \( i \) of getting infected by, at least, one neighbour.
 
 We need an expression for \( q_i(t) \). The basic idea is that:
-\begin{equation*}
-  q_i (t) = 1 - \prod_{j=1}^{N} [1- \beta A_{ij} \rho _j (t)]
-\end{equation*}
-We have the node \( i \) in green, and the infected neighbour in red. We see that \( \beta A_{ij} \rho _j (t) \) is the probability of getting infetced by node \( j \) (at least). We have that  \( [1- \beta A_{ij} \rho _j (t)] \) is the probability of NOT getting infected by node \( j \). I have to repeat this calculation for all my infected nehbours, hence \( \prod_{j=1}^{N} [1- \beta A_{ij} \rho _j (t)] \) is the probability of NOT getting infected by any neighbor.
+\begin{equation}
+  q_i (t) = 1 - \prod_{j=1}^{N} \qty[1- \beta A_{ij} \rho _j (t)]
+\end{equation}
+Let us consider Fig. \ref{fig:07_3}, in green we have the node \( i \), and in red the infected neighbours. We see that \( \beta A_{ij} \rho _j (t) \) is the probability of getting infected by node \( j \) (at least). We have that  \( [1- \beta A_{ij} \rho _j (t)] \) is the probability of NOT getting infected by node \( j \). I have to repeat this calculation for all my infected nehbours, hence \( \prod_{j=1}^{N} [1- \beta A_{ij} \rho _j (t)] \) is the probability of NOT getting infected by any neighbor.
 Finally, \(   q_i (t) \) represents the probability of getting infected by at least one neighbor.
-Hence, the probability of getting infected is 1 minus the probability of not getting infected by any neighbor.
+Hence, the probability of getting infected is one minus the probability of not getting infected by any neighbor.
 
-Hence, once we have this things, first of all we can solve it numerically, which means for instance by iteration. In this case we are gonna have an equation for each of the node. We have \( 2^N \) equation where \( N \) is the size of the system. The equation for \( \rho _i (t+1) \) can be solved by iteration. I am gonna repeat this equation many times until I reach the steady state.
 
+\marginpar{
+\includegraphics[width=\marginparwidth]{../lessons/image/07/3.png}
+\captionof{figure}{\label{fig:07_3} In green suscpetible nodes, while in red the infected neighbours.}
+}
+
+The system (\( \rho _i (t+1) \)) can be solved numerically by iteration. This is precise for the entire epidemic diagram, faster than numerical simulations, there is no need of averages and reproduces individual nodes probabilities.
+Indeed, in this case we are gonna have an equation for each node: we have \( 2^N \) equation where \( N \) is the size of the system.
+
+\begin{remark}
 The difference with the degree based mean field theories is that actually \( A_{ij} \) we are including all the adjiacency matrix, while before only the average.
+\end{remark}
 
-We can also solve analytically the system at teh steady state to estimate the epidemic threshold.
-I am assuming that if I am in the epidemic treshold, what happens is that \( \rho  \) is very small for all the nodes. If \( \rho _i^* = \varepsilon _i^* \ll 1 \), we can use an approximation for \( q_i^* \):
+
+We can also solve analytically the system at the steady state to estimate the epidemic threshold. Assuming the steady state:
 \begin{equation*}
-  q_i^* = 1 - \prod_{j=1}^{N} [1- \beta A_{ij} \varepsilon _j^*] \sim \beta \sum_{j=1}^{N} A_{ij} \varepsilon _j^*
+  \lim_{t \rightarrow \infty } \rho _i (t) = \rho _i ^* \quad \rightarrow \quad \rho _i (t+1) = \rho _i (t) = \rho _i^*
 \end{equation*}
+Hence:
+\begin{equation}
+  \mu \rho _i^* = (1- \rho _i^*) q_i^* \quad \rightarrow \quad q_i^* = 1 - \prod_{j=1}^{N} \qty[1- \beta A_{ij} \rho _j^*]
+\end{equation}
+
+Assuming being close to the epidemic threshold (epidemic onset) means that \( \rho _i^* \) can be assumed to be small for all the nodes \( \rho _i^* = \varepsilon _i^* \ll 1 \). This implies that the product in \( q_i^* \) can be approximated by a sum:
+\begin{equation}
+  q_i^* = 1 - \prod_{j=1}^{N} \qty[1- \beta A_{ij} \varepsilon _j^*] \simeq \beta \sum_{j=1}^{N} A_{ij} \varepsilon _j^*
+\end{equation}
 Substituting we have:
-\begin{equation*}
+\begin{equation}
   \mu \varepsilon _i^* = \beta (1- \varepsilon _i^*) \sum_{j=1}^{N} A_{ij} \varepsilon _{j}^*
-\end{equation*}
+\end{equation}
 We have a linear system where the interaction is represented by the adjiacency matrix:
 \begin{equation*}
+  \mu \varepsilon _i^* = \beta \sum_{j=1}^{N} A_{ij} \varepsilon _{j}^* - \cancel{ \beta \varepsilon _i^* \sum_{j=1}^{N} A_{ij} \varepsilon _{j}^* }
+\end{equation*}
+Neglecting second order terms we have:
+\begin{equation}
   \frac{\mu }{\beta } \varepsilon _i^* = \sum_{j=1}^{N} A_{ij} \varepsilon _j^*
-\end{equation*}
-This linear system has solution only if \( \frac{\mu }{\beta } \) is an eigenvalue of the adjiacency matrix \( A_{ij} \). This is why last week we say that the spectrum of the adjiacency matrix was important.
+\end{equation}
+This linear system has solution only if \( \frac{\mu }{\beta } \) is an eigenvalue of the adjiacency matrix \( A_{ij} \). This is why last week we say that the spectrum of the adjiacency matrix is important.
 Hence:
-\begin{equation*}
+\begin{equation}
   \beta = \frac{\mu }{\Lambda _i}
-\end{equation*}
+\end{equation}
+where \( \Lambda _i \) is an eigenvalue of the adjiacency matrix \( A_{ij} \).
+
 Since, we are interested in the smallest possible value of \( \beta  \) for which we have a solution, we take the largest eigenvalue of the adjiacency matrix \( A \):
-\begin{equation*}
+\begin{equation}
   \beta _c = \frac{\mu }{\Lambda _{max}}
-\end{equation*}
+\end{equation}
 This is the expression for the epidemic treshold, and it is a general results that it is valid not only by this approxmation but for a generic case for a generic network.
 
+
+\subsection{DBMF vs IBMF: Epidemic treshold}
 What is the relation between the epidemic treshold for DBMF and IBMF?
 We have that:
+\begin{itemize}
+\item in DBMF:
 \begin{equation*}
-  \beta _c^{DBMF} = \frac{\mu \expval{k} }{\expval{k^*} }, \qquad \beta _c^{IBMF} = \frac{\mu }{\Lambda _{max}}
+  \beta _c^{DBMF} = \frac{\mu \expval{k} }{\expval{k^*} }
 \end{equation*}
-The relation amogn them for scale-free networks is:
+
+\item in IBMF:
 \begin{equation*}
-  \Lambda _{max} \sim max(\sqrt{k_{max}}, \expval{k^*}/\expval{k}   )
+\beta _c^{IBMF} = \frac{\mu }{\Lambda _{max}}
 \end{equation*}
+\end{itemize}
+For scale-free networks \( P(k) \sim k^{-\gamma  } \) we have that:
+\begin{equation}
+  \Lambda _{max} \sim \max(\sqrt{k_{\max}}, \frac{\expval{k^*}}{\expval{k}}   )
+\end{equation}
 Specifically:
-\begin{equation*}
+\begin{equation}
 \beta _c \sim
   \begin{cases}
-   \mu / \sqrt{k_{max}} & \gamma > 5/2  \\
+   \mu / \sqrt{k_{\max}} & \gamma > 5/2  \\
    \mu \expval{k}/\expval{k^2} & 2 < \gamma < 5/2
   \end{cases}
-\end{equation*}
+\end{equation}
 We can conclude that IBMF is more accurate than DBMF.
+Due to the approximation, the DBMF is accurate only in the proximity of the epidemic threshold while IBMF is accurate for the entire epidemic diagram.
 
 
 
