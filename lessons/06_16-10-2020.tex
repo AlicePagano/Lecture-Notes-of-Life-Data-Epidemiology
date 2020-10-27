@@ -16,37 +16,37 @@ How is it possible? A paper which explain it is “Collective dynamics of small 
 
 \begin{figure}[h!]
 \centering
-\includegraphics[width=0.7\textwidth]{../lessons/image/07/1.png}
-\caption{\label{fig:07_1} Idea of Watts and Strogatz model.}
+\includegraphics[width=0.7\textwidth]{../lessons/image/06/1.png}
+\caption{\label{fig:06_1} Idea of Watts and Strogatz model.}
 \end{figure}
 
 
-Let us focus with the first regular ring in Fig. \ref{fig:07_1} in which we have each node connected with its neighbour in its left and right. The structure is totally regular. If we want to measure the longest distance that we can find in the network we have that:
+Let us focus with the first regular ring in Fig. \ref{fig:06_1} in which we have each node connected with its neighbour in its left and right. The structure is totally regular. If we want to measure the longest distance that we can find in the network we have that:
 \begin{equation*}
   \expval{l^{circle}} \sim \frac{N}{4 m}
 \end{equation*}
-What happens if we just rewire one of the connection? We connect it with a another random nodes in the network as in small-world circle in Fig. \ref{fig:07_1}. What do happen for the distance? Just rewiring one connection reduce the size in an incredible way. If we can control the number of connection with a probability \( p \), what happens is that every time we rewire the connection, the average steps is reduced by a factor 2. If we repeat this process several time we obtain a logarithmic scaling. At the end we obtain a random network which scales as:
+What happens if we just rewire one of the connection? We connect it with a another random nodes in the network as in small-world circle in Fig. \ref{fig:06_1}. What do happen for the distance? Just rewiring one connection reduce the size in an incredible way. If we can control the number of connection with a probability \( p \), what happens is that every time we rewire the connection, the average steps is reduced by a factor 2. If we repeat this process several time we obtain a logarithmic scaling. At the end we obtain a random network which scales as:
 \begin{equation*}
   \expval{l} \sim \log{N}
 \end{equation*}
-It is represented by the random circle in Fig. \ref{fig:07_1}.
+It is represented by the random circle in Fig. \ref{fig:06_1}.
 
 \section{Degree distribution over networks}
-Now the question is how degrees are distributed over the newtwork. Let us consider a small network, the plot on the left of Fig. \ref{fig:07_2} represents the distribution of the degrees in this small network. How is this quantity distributed in real networks?
+Now the question is how degrees are distributed over the newtwork. Let us consider a small network, the plot on the left of Fig. \ref{fig:06_2} represents the distribution of the degrees in this small network. How is this quantity distributed in real networks?
 
 \begin{figure}[h!]
 \begin{minipage}[c]{0.5\linewidth}
 \centering
-\includegraphics[width=0.8\textwidth]{../lessons/image/07/2.png}
+\includegraphics[width=0.8\textwidth]{../lessons/image/06/2.png}
 \end{minipage}
 \begin{minipage}[]{0.5\linewidth}
 \centering
-\includegraphics[width=0.8\textwidth]{../lessons/image/07/3.png}
+\includegraphics[width=0.8\textwidth]{../lessons/image/06/3.png}
 \end{minipage}
-\caption{\label{fig:07_2} \textbf{Left:} degree distribution in a small network. \textbf{Right:} degree distribution in a network with random connections. }
+\caption{\label{fig:06_2} \textbf{Left:} degree distribution in a small network. \textbf{Right:} degree distribution in a network with random connections. }
 \end{figure}
 
-The first assumption that we can make is building the connections at random. Hence, there is no rule behind the degree distribution but a probability distribution as the one on the right of Fig. \ref{fig:07_2}.
+The first assumption that we can make is building the connections at random. Hence, there is no rule behind the degree distribution but a probability distribution as the one on the right of Fig. \ref{fig:06_2}.
 
 \subsection{Erdös and Rényi Model: random graphs}
 Let us consider the Erdös and Rényi model which represents the evolution of a graph where links between nodes are drawn at random. In particular, the algorithm for creating such a network is:
@@ -97,21 +97,21 @@ In particular, as $p$ is increased the graph undergoes a transition from disconn
 
 \begin{figure}[h!]
 \centering
-\includegraphics[width=0.8\textwidth]{../lessons/image/07/4.png}
-\caption{\label{fig:07_4} Real network of Facebook and Twitter.}
+\includegraphics[width=0.8\textwidth]{../lessons/image/06/4.png}
+\caption{\label{fig:06_4} Real network of Facebook and Twitter.}
 \end{figure}
 
 \subsection{Scale-free networks}
 
-The point now is: what is the degree distribution of real networks? In the last decades we start to have very very complex and large networks. Their structure is nothing like the structure that you see for a random network. In Fig. \ref{fig:07_4} are shown real network of social networks as Facebook and Twitter. All this plots are in log-log scale. We can conclude that most of the networks scales in the same way.
-But, what is the form of this connection? Let us consider Fig. \ref{fig:07_4}, the black curve represents the Poissonian distribution that we saw before, and then we plot the power-law (heavy tailed distribution) \( P(k) \sim k^{- \gamma  } \). We see that the Poissonian distribution is not able to reproduce the hetherogeneity you see in the data, while the power-law it is. Hence, in most contexts real networks are highly heterogenous and degrees can vary several orders of magnitude. In particular, the \( \gamma   \) coefficient of the power-law has an important role, since it represents the slope of the curve in log-log scale.
+The point now is: what is the degree distribution of real networks? In the last decades we start to have very very complex and large networks. Their structure is nothing like the structure that you see for a random network. In Fig. \ref{fig:06_4} are shown real network of social networks as Facebook and Twitter. All this plots are in log-log scale. We can conclude that most of the networks scales in the same way.
+But, what is the form of this connection? Let us consider Fig. \ref{fig:06_4}, the black curve represents the Poissonian distribution that we saw before, and then we plot the power-law (heavy tailed distribution) \( P(k) \sim k^{- \gamma  } \). We see that the Poissonian distribution is not able to reproduce the hetherogeneity you see in the data, while the power-law it is. Hence, in most contexts real networks are highly heterogenous and degrees can vary several orders of magnitude. In particular, the \( \gamma   \) coefficient of the power-law has an important role, since it represents the slope of the curve in log-log scale.
 Thus, we have similar structures at different scales, this leads to the concept of scale-free networks. Most real networks have small values of \( \gamma   \), i.e. \( \gamma \le 3 \).
 
 
 \begin{figure}[h!]
 \centering
-\includegraphics[width=0.7\textwidth]{../lessons/image/07/5.png}
-\caption{\label{fig:07_4} Difference between random networks and scale-free networks.}
+\includegraphics[width=0.7\textwidth]{../lessons/image/06/5.png}
+\caption{\label{fig:06_4} Difference between random networks and scale-free networks.}
 \end{figure}
 
 Heterogeneous means that most of the nodes have a very low connectivity, less than a random net. However, the probability of having very large degrees is not zero (\textbf{hubs}). Even for small networks you can have large Hubs and this is something we have to take into account for the spreading of diseases since we can have shortcuts for spreading or super-spreaders.
@@ -128,7 +128,7 @@ Thus, when:
 \begin{equation}
   k_{max} = k_{min} N^{\frac{1}{\gamma -1 }}
 \end{equation}
-The most important thing is that more of the network we have \( \gamma = 2,3  \) as we can see in the previous plot of Fig. \ref{fig:07_3}.
+The most important thing is that more of the network we have \( \gamma = 2,3  \) as we can see in the previous plot of Fig. \ref{fig:06_3}.
 
 The general \( n^{th} \) moment of the distribution is:
 \begin{equation}
@@ -165,19 +165,19 @@ So, I am drawing the link at random but not uniformely. Let us briefly summarize
 \item we create $m$ (i.e. $m=2$) links between the new node and the existing ones according to the preferential attachment (remember to update the connection probability after each link);
 \item repeat until size $N$ is reached.
 \end{itemize}
-In particular, let us consider Fig. \ref{fig:07_5}. We start with a small number of nodes connected in a link. In the first time step I am gonna adding a new node, and I am gonna connectecting to the other nodes. Let us assume that every time I add a node, I am adding two links. I calculate the probability of getting a new node which in this case is equal for all the nodes. Then I pick up one at random and I connect to it. Then I have to update the probabilities. We see that the node on the left got an higher probability of getting new connections. Then I start with a ned node untile size \( N \) is reached.
+In particular, let us consider Fig. \ref{fig:06_5}. We start with a small number of nodes connected in a link. In the first time step I am gonna adding a new node, and I am gonna connectecting to the other nodes. Let us assume that every time I add a node, I am adding two links. I calculate the probability of getting a new node which in this case is equal for all the nodes. Then I pick up one at random and I connect to it. Then I have to update the probabilities. We see that the node on the left got an higher probability of getting new connections. Then I start with a ned node untile size \( N \) is reached.
 
 \begin{figure}[h!]
 \begin{minipage}[c]{0.48\linewidth}
 \centering
-\includegraphics[width=0.8\textwidth]{../lessons/image/07/6.png}
+\includegraphics[width=0.8\textwidth]{../lessons/image/06/6.png}
 \end{minipage}
 \( \longrightarrow  \)
 \begin{minipage}[]{0.48\linewidth}
 \centering
-\includegraphics[width=0.8\textwidth]{../lessons/image/07/7.png}
+\includegraphics[width=0.8\textwidth]{../lessons/image/06/7.png}
 \end{minipage}
-\caption{\label{fig:07_5} Example of Barabási-Albert algorithm.}
+\caption{\label{fig:06_5} Example of Barabási-Albert algorithm.}
 \end{figure}
 
 This algorithm is able to create netowrks with some interesting properties. The simple idea is that the degree distribution is:

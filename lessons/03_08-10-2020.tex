@@ -13,7 +13,7 @@ We are gonna introduce some of the basic models we will deal for the entire cour
 We are assuming that we are in \textbf{well-mixed populations}, or homogeneous mixing. Mathematically, it is what is called mean field approximation.
 In the well-mixed population assumptions, we are assuming that:
 \begin{itemize}
-\item All individuals are equivalent, hence every one has the same probability of getting the infection;
+\item all individuals are equivalent, hence every one has the same probability of getting the infection;
 \item every individual has the same number of contacts \( N-1 \), or on average \( \expval{k}  \);
 \item another important assumption is that we are in a closed population. Hence, the sum of the density distribution of the individuals is 1 and we have no deaths or births. In practice, we are assuming that our time scale is so little that we can consider the population constant.
 \end{itemize}
@@ -22,26 +22,38 @@ In the well-mixed population assumptions, we are assuming that:
 
 This simple model is the \textbf{SI} (susceptible infected). You can get the infection and once you get it you cannot recover (you stay infected forever).
 The transition is:
-\begin{equation*}
+\begin{equation}
   S + I \overset{\beta }{\rightarrow} I + I
-\end{equation*}
+\end{equation}
 The \( \beta  \) is the “per contact” infection rate and dictates the speed of the spreading. We can write down the equation and solve it deterministically:
-\begin{equation*}
-  \dv{s}{t} = - \beta \expval{k} s i, \qquad \dv{i}{t} = \beta \expval{k} s i
-\end{equation*}
+\begin{equation}
+\begin{split}
+  \dv{s}{t} &= - \beta \expval{k} s i \\ \dv{i}{t} &= \beta \expval{k} s i
+\end{split}
+\end{equation}
 where \( \expval{k}  \) represents the contacts, the \( i \) means the fraction of infected in the population (\( i=I/N \)), while \( s \) the fraction of susceptible in the population (\( s=S/N \)).
 The product \( s i \) is the probability of contacts, and \( \beta  s i \) is the proabability of having one more infected.
 
-To solve it analitically, we should remember that our population is closed hence \( s+i=1 \). See the calculus in Fig. \ref{fig:3_1}.
-\begin{figure}[h!]
-\centering
-\includegraphics[width=0.9\textwidth]{../lessons/image/03/1.png}
-\caption{\label{fig:3_1} Calculation of the analitic solution for the SI model.}
-\end{figure}
-The result is:
+To solve it analitically, we should remember that our population is closed hence \( s+i=1 \), we only have one equation with \( s=1-i \).
+We have that:
 \begin{equation*}
-  i(t) = \frac{i_0 e^{\beta t} }{1-i_0 + i_0 e^{\beta t} }
+  \dv{i}{t} = \beta i (1-i) \quad \rightarrow \frac{1}{\beta i (1-i)} \dd[]{i} = \dd[]{t} \quad \rightarrow \frac{1}{\beta (1-i)} \dd[]{i} + \frac{1}{\beta i} \dd[]{i} = \dd[]{t}
 \end{equation*}
+Integrating both sides:
+\begin{equation*}
+  - \log \abs{1-i} + \log \abs{i} = \beta (t+C) \rightarrow \frac{i}{1-i} = e^{\beta (t+C)} = A e^{\beta t}
+\end{equation*}
+with \( A = i_0/(1-i_0) \).
+% See the calculus in Fig. \ref{fig:3_1}.
+% \begin{figure}[h!]
+% \centering
+% \includegraphics[width=0.9\textwidth]{../lessons/image/03/1.png}
+% \caption{\label{fig:3_1} Calculation of the analitic solution for the SI model.}
+% \end{figure}
+The result is:
+\begin{equation}
+  i(t) = \frac{i_0 e^{\beta t} }{1-i_0 + i_0 e^{\beta t} }
+\end{equation}
 which is a sigmoid function (Fig. \ref{fig:3_2}) which always saturates at 1. We have the first part where we have the exponential growth (which is the one we have seen in the media for covid-19), then at a certain point you are slowing down. The reason of slowing down is because of the term \( s i \), the probability of funding new supsceptible is going down. Finally, you reach 1 after a very long time. The value of \( \beta  \) is the one which drives the spreading. Increasing \( \beta  \) we have a faster exponential growth.
 This was the simplest model.
 
@@ -57,22 +69,28 @@ In the course we are gonna use capital letter for integer numbers and small lect
 
 \subsection{SIS model}
 Now, let us go to the \textbf{SIS} model. This model starts to be more complicated. We have two different transitions:
-\begin{equation*}
-  S + I \overset{\beta }{\rightarrow } I + I, \qquad I \overset{\mu }{\rightarrow } S
-\end{equation*}
+\begin{equation}
+\begin{split}
+  S + I &\overset{\beta }{\rightarrow } I + I \\
+  I &\overset{\mu }{\rightarrow } S
+\end{split}
+\end{equation}
 whose second one is spontaneous.
 This model is used for diseases that do not confer immunity. \textbf{Endemic state} means that the disease circulates in the population for very large times.
 The important things is that it is the simplest models in which a dynamical equilibrium can be reached. An individual could recover after the disease but it do not get immunity, indeed there are always people infected that can propagate the disease. The \( \mu  \) is the recovery rate which determines the time-scale of the infection.
 Dividing \( \beta  \) by \( \mu  \) you can rescale all the dynamics.
 The equations are exactly the same of before except for a term:
-\begin{equation*}
-  \dv{s}{t} = - \beta \expval{k} si + \mathcolorbox{green!20}{\mu i}, \qquad \dv{i}{t} = \beta \expval{k} si - \mathcolorbox{green!20}{\mu i}
-\end{equation*}
+\begin{equation}
+\begin{split}
+  \dv{s}{t} &= - \beta \expval{k} si + \mathcolorbox{green!20}{\mu i}  \\
+  \dv{i}{t} &= \beta \expval{k} si - \mathcolorbox{green!20}{\mu i}
+\end{split}
+\end{equation}
 and you can solve them in the way of before.
 Also the shape of the solution is exactly the same:
-\begin{equation*}
+\begin{equation}
   i(t) = i_0 \frac{(\beta - \mu ) e^{(\beta - \mu )t} }{\beta - \mu  + \beta i_0 e^{(\beta - \mu )t} }
-\end{equation*}
+\end{equation}
 If we plot it we have the same form but with the difference that we are not reaching one, but \( \frac{\beta - \mu }{\beta } \). Hence, as said, we have some sort of dynamical equilibrium: the new infected are the same of the new recovery that you are getting. The population will fluctuate around this value \( \frac{\beta - \mu }{\beta } \) and enlarging \( \mu  \) will give to larging fluctuations (Fig. \ref{fig:3_3}).
 \begin{figure}[h!]
 \centering
@@ -101,9 +119,9 @@ The very important thing is that if I consider what it is happening I have two c
   \end{cases}
 \end{equation*}
 and we have that:
-\begin{equation*}
+\begin{equation}
   i>0 \iff \beta > \beta_c = \frac{\mu }{ \expval{k} }
-\end{equation*}
+\end{equation}
 which is the \textbf{epidemic threshold}. This is telling you if the disease is gonne spread.
 The epidemic threshold is the minimum value of the infection probability for which the disease survives. This is what in physics is called a second order phase transition (Fig. \ref{fig:3_5}). In this case the critical exponents are the same of the Ising model (they are in the same class of universality).
 This is one of the most important quantities we are gonna study.
@@ -116,21 +134,28 @@ This is one of the most important quantities we are gonna study.
 
 What is the relation between \( R_0 \) and the epidemic threshold? Obviously, they are strongly correlated. We are saying that we have a critical value and below it we have no spreading, while above we have a fraction of infected people.
 The epidemic threshold is given you the condition under which you have the spreading. Mathematically, giving a speficic model, its critical version is giving the value for which \( R_0=1 \), which means that if you are above the threshold you need a minimum of infected people which is 1.  In the case of the SIS model:
-\begin{equation*}
+\begin{equation}
   R_0 = \frac{\beta \expval{k} }{\mu } = 1
-\end{equation*}
+\end{equation}
 
 
 \subsection{SIR model}
 The idea is the same of the SIS, but we are adding a new state which accounts for long lasting immunity. Hence, once you got the disease you can have a long immunity. However, the density of the population is still fixed to 1. The transitions of this model are:
-\begin{equation*}
-  S + I \overset{\beta }{\rightarrow } I + I, \qquad I \overset{\mu }{\rightarrow } R
-\end{equation*}
+\begin{equation}
+\begin{split}
+  S + I &\overset{\beta }{\rightarrow } I + I  \\
+  I &\overset{\mu }{\rightarrow } R
+\end{split}
+\end{equation}
 and we have no endemic state.
 The differential equations are:
-\begin{equation*}
-  \dv{s}{t} = - \beta \expval{k} si, \qquad \dv{i}{t} = \overbrace{\beta \expval{k} si}^{\text{New infections}}  - \overbrace{\mu i}^{\text{Recovery}}, \qquad  \dv{r}{t} = \mu i
-\end{equation*}
+\begin{equation}
+\begin{split}
+  \dv{s}{t} &= - \beta \expval{k} si  \\
+  \dv{i}{t} &= \overbrace{\beta \expval{k} si}^{\text{New infections}}  - \overbrace{\mu i}^{\text{Recovery}} \\
+  \dv{r}{t} &= \mu i
+\end{split}
+\end{equation}
 
 \begin{figure}[h!]
 \centering
@@ -146,9 +171,9 @@ To calculate the epidemic threshold in the case of the SIR the calculations are 
   \dv{i}{t} = \beta \expval{k} s i - \mu i \sim \beta \expval{k} i - \mu i \rightarrow i(t) \sim i_0 e^{(\beta \expval{k} - \mu  )t}
 \end{equation*}
 and the result is again:
-\begin{equation*}
+\begin{equation}
   \beta > \beta _c = \frac{\mu }{\expval{k} }
-\end{equation*}
+\end{equation}
 
 Since we can get an analitic expression for S and I in this SIR model, we want to study what is the behavior at the end for \( t = \infty  \). We get that:
 \begin{equation*}
@@ -164,42 +189,71 @@ As said, we cannot solve this equation directly, but we can study the behavior i
 \end{equation*}
 This is a transcendental equation which cannot be solved analytically but it gives important hints on the behavior of the disease.
 Note that \( R_0 = \beta \expval{k} / \mu   \) and this explains why \( R_0 \) drives the exponential growth of the disease. Moreover, we note that the initial fraction \( s_0 \) of susceptible plays a role in shaping the final fraction of recovered.
-In particular, if \( s_0 \ll 1 \) the disease cannot spread.
+In particular, if \( s_0 \ll 1 \) the disease cannot spread. We can obtain herd immunity.
 
 
 
 
 \section{Extensions of the SIR model}
-We want to modify the SIR to include something that we want in our model. We were assuming that the population was totally closed and so it always sum up to 1. This is one thing that we want to remove because it is unrealistic. We will assume that there could be births and deaths.
+We want to modify the SIR to include something that we want in our model.
 
+\subsection{SIR with Demography}
+In the last models, we were assuming that the population was totally closed and so it always sum up to 1. This is one thing that we want to remove because it is unrealistic. We will assume that there could be births and deaths.
 If we consider the demography, we see that every year there are new child that are infected by disease as Measles and Chickenpox. We expect that usually they die out over weeks.
 
-We are assuming that \( \alpha  \) is the death rate in all the classes (deaths are not due to the disease).
+Hence, the simplest assumption is: similar to the infectious period, individuals have a lifespan \( 1/\alpha  \) years (where lifespan is much greater than the infectious period, deaths are not due to the disease).
+We are assuming that \( \alpha  \) is the death rate in all the classes. Moreover, \( \alpha  \) is also the crude birth rate and we assume that births happens only in suscpetible individuals.
 
-We are assuming also constant population:
-\begin{equation*}
+To have a constant population, we need to assume:
+\begin{equation}
   \dv{s}{t} + \dv{i}{t} + \dv{r}{t} = 0
-\end{equation*}
+\end{equation}
 
-We change our equation as:
-\begin{equation*}
-  \dv{s}{t} = \alpha - \beta s i - \alpha s, \qquad \dv{i}{t} = \beta s i - \mu i - \alpha i, \qquad \dv{r}{t} = \mu i - \alpha r
-\end{equation*}
-This complicates the study of the dynamic and for solving it you are assuming that the population is constant, hence at the equilibrium state:
+Our equations become:
+\begin{equation}
+\begin{split}
+  \dv{s}{t} &= \alpha - \beta s i - \alpha s  \\
+  \dv{i}{t} &= \beta s i - \mu i - \alpha i \\
+  \dv{r}{t} &= \mu i - \alpha r
+\end{split}
+\end{equation}
+The infectious period is:
+\begin{equation}
+  \tau = \frac{1}{\alpha + \mu }
+\end{equation}
+on average, individuals spend less infected because some of them die while infected. However, it is a small change since lifespan is much greater than the infectious period.
+
+Also \( R_0 \) is reduced due to mortality:
+\begin{equation}
+  R_0 = \frac{\beta }{\alpha + \mu }
+\end{equation}
+
+
+We want to study the equilibrium points of the dynamic. Assuming:
 \begin{equation*}
   \dv{s}{t} = \dv{i}{t} = \dv{r}{t} = 0
 \end{equation*}
-We obtain the equation:
+we want to find the equilibrium values  \( s^* \), \( i^* \) and \( r^* \).
+We have that:
 \begin{equation*}
+  \dv{i}{t} = 0 = \beta s i - \mu i - \alpha i \quad \rightarrow   \beta s^* i^* - (\mu + \alpha ) i^* = 0
+\end{equation*}
+and finally we obtain the equation:
+\begin{equation}
   i^* \qty[\beta s^* - (\mu + \alpha )] = 0
-\end{equation*}
-which is not differential anymore. The two solutions are \( i^* = 0 \) (\textbf{disease free state}) or \( s^* = \frac{\alpha + \mu }{\beta } = \frac{1}{R_0} \) which is the \textbf{endemic state}.
+\end{equation}
+which is not differential anymore.
+The two solutions are \( i^* = 0 \) (\textbf{disease free state}) or \( s^* = \frac{\alpha + \mu }{\beta } = \frac{1}{R_0} \) which is the \textbf{endemic state}. Hence, the important result is that the SIR model with demography shows an endemic state.
 
-We can also calculate of the three values of the fraction of infected in the endemic state:
+Substituting \( s^* = \frac{1}{R_0} \) in \( \dv{s}{t} = \alpha - \beta s i - \alpha w  \), we get:
 \begin{equation*}
-  (s^*, i^*, r^*) = \qty( \frac{1}{R_0}, \frac{\alpha }{\beta } (R_0 -1 ), 1- \frac{1}{R_0} - \frac{\alpha }{\beta } (R_0-1))
+  i^* = \frac{\alpha }{\mu } \qty(1 - \frac{1}{R_0}) = \frac{\alpha }{\beta } (R_0 -1)
 \end{equation*}
-This exists only if \( R_0>1 \).
+Finally, the three values of the fraction of infected, suscpetible and recovered in the endemic state are:
+\begin{equation}
+  (s^*, i^*, r^*) = \qty( \frac{1}{R_0}, \frac{\alpha }{\beta } (R_0 -1 ), 1- \frac{1}{R_0} - \frac{\alpha }{\beta } (R_0-1))
+\end{equation}
+This exists only if \( R_0>1 \). Moreover, via linear stability analysis it can be demonstrated that this equilibrium is stable and is reached through damped oscillations
 
 
 \end{document}
