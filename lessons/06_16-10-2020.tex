@@ -203,51 +203,96 @@ hence we have small-world.
 
 \chapter{Epidemic Spreding on Networks}
 
-\subsection{SIS model in a network}
-
 The idea is that we pass from the classical well-mixed population to the contact networks. So we assume that we have some sort of connection between individuals. The idea is that:
 \begin{itemize}
 \item all individuals are equivalent;
-\item individuals do not interact at random: friends, family and so on. You have somehow constraing how the disease will spread. The fact that we have repeated contacts has strong effect on the dynamics.
+\item we remove the assumption tha all individuals have the same number of contacts and we assume that individuals do not interact at random: friends, family and so on. You have somehow constraing how the disease will spread. The fact that we have repeated contacts has strong effect on the dynamics.
 \end{itemize}
-Let us try to build a general model for a general network. For doing that the idea is, let us start with the SIS dynamics and defining a binary variables in the sense that can only have two values: 0 if it is susceptibòe and 1 if it is infected. We define another variable \( \rho (i,t) \) which represent the probability of that node \( i \) is infected at time \( t \). So from here, I can write a general equation for the SIS in a nwtork:
+
+\section{SIS model in a network}
+Let us try to build a general model for a general network. For doing that the idea is, let us start by writing down the equations for an SIS dynamics on a general network. First of all, we define a binary variable for each node \( i \): \( \sigma _i (t) \). This variable can only have two values:
+\begin{itemize}
+\item \( \sigma _i (t) = 0 \), if the individual is susceptible;
+\item \( \sigma _i (t) = 1 \), if the individual is infected.
+\end{itemize}
+We define another variable \( \rho (i,t) \):
 \begin{equation*}
-  \dv{}{t} \rho (i,t) = \overset{\text{Recovery}}{- \mu  \rho (i,t)} + \overset{\text{Infection}}{\beta \sum_{j}^{} A_{ij} \text{Prob} [\sigma _i (t) = 0, \sigma _j (t ) =1 ]   }
+  \rho (i,t) \equiv \text{Prob} \qty[\sigma _i (t) = 1]
 \end{equation*}
-The problematic part is the probability which is... we have to find an expression for it. Since we ae in a network, the probability of being ifnected depends on my neighbours. I have to follow the entire chain of connection. No closed form, it depends on the three nodes probability and so on... I have to follow the entire network if I want to know what is gonna happening.
-We have to write down the entire time evolution of the system.
+which represent the probability of that node \( i \) is infected at time \( t \).
+So from here, we can write a general equation for the SIS in a nwwtork:
+\begin{equation}
+  \dv{}{t} \rho (i,t) = \overset{\text{Recovery}}{- \mu  \rho (i,t)} + \overset{\text{Infection}}{\beta \sum_{j}^{} A_{ij} \mathcolorbox{green!20}{\text{Prob} [\sigma _i (t) = 0, \sigma _j (t ) =1 ]   }}
+\end{equation}
+The problematic part is that we have to find an expression for the two nodes infection probability (in green). Since we are in a network, the probability of being infected depends on my neighbours: the \( (i,j) \) infection probability depends on the status of all the other neighbors \( l \) of \( j \) and \( i \) and so on.
+Hence, we have to follow the entire chain of connection, so we cannot obtain a closed form for this probability, since it depends on the three nodes probability and so on.
+Again we repeat that we have to follow the entire network if we want to know what is gonna happening and we have to write down the entire time evolution of the system. This approach is feasible only for small graphs (i.e. 4/5 nodes) and few compartments.
 
-The idea is that since I will gonna have this chain of probability, I need to cut down this chain at some point. So at some point I need a closure of my equation. I am not taking into account all the structure of the network, but at some point I will the the average. We need some sort of approximation for this probability. After that we will be able to solve the problem.
-In physics this are called mean-field approximation, since I am not able to solve the many body problem at a certain point I will consider a random field which acts on the entire system and at some point I will consider the average effects on the system.
+The idea is that we need to cut down this probability chain at some point.
+So at some point we need a closure of our equation, by means of approximations.
+We are going to not taking into account all the structure of the network, but at some point we will take the average.
+After that we will be able to solve the problem.
+In physics this are called \textbf{mean-field approximations}. Since we are not able to solve many body problems at a certain point, we will consider a random field which acts on the entire system and at some point we will consider the average effects on the system.
 
-What happens is that I am susbtituting in some way this probability \( \text{Prob} [\sigma _i (t) = 0, \sigma _j (t ) =1 ]  \) with some average probability.
-Obviously, depengin on the assumption we are making for this approximation we will obtain different results. If I am assuming that the network is homoegenous (all the nodes are equal) I have a mean-field, if it is heterogeneous I will have more equations but I will have a more reliable approximation of the system.
+What happens in our problem is that we are susbtituting in some way this probability \( \text{Prob} \qty[\sigma _i (t) = 0, \sigma _j (t ) =1 ]  \) with some average probability.
+Obviously, depenging on the assumption we are making for this approximation we will obtain different results.
+We have different types of approximations based on:
+\begin{itemize}
+\item Network structure:
+    \begin{itemize}
+    \item Homogeneous mean-field (all the nodes are equal);
+    \item Heterogeneous mean-field;
+    \end{itemize}
+\item Coarsening level:
+    \begin{itemize}
+    \item Degree-based mean-field theories (DBMF) in which we assume that all the nodes of the same degree are equal;
+    \item Individual-based mean-field theories (IBMF) in which we assume that all the nodes are different and that we will take individual connections between individuals;
+    \end{itemize}
+\item Where to cut the chain:
+    \begin{itemize}
+    \item Individual level;
+    \item Pair approximations;
+    \item Triangles, etc...;
+    \end{itemize}
+\end{itemize}
 
-Coarse graining level.
-The distinction can be also in the level I will adopt this approximation. We can have degree based mean field theories in which we assume that all the nodes of the same degree are equal. While individual bases mean field means that all the nodes are different and that I will take individual connections between individuals. The probability of having the disease for a node can be different depending on different factors...
 
-Where to cut the level? In individual level or pair approximation?
+\section{Homogeneous networks}
+Let us start with the simplest approximation. We assume homogeneous networks, DBMF and we cut the chain at an individual level.
 
-Let us start with the simplest approximation.
+We are considering networks where nodes's degree is bounded, hence:
+\begin{itemize}
+\item we have that \( k_i \simeq \expval{k}  \);
+\item we have also that the standard deviation is bounded \( \frac{\sigma _k}{\expval{k} } = \sqrt{ \frac{1-p}{p(N-1)} } \overset{N \rightarrow \infty }{\longrightarrow} 0\).
+\end{itemize}
+All the nodes can be assumed to be equal, so their position on the network does not matter anymore. The spatial homogeneity becomes \( \rho (i,t) \equiv \rho (t) \).
 
-\subsection{Homogeneous networks}
-The important thing is that the variance and standard deviation is bounded. I am assuming that all the nodes are equal. I can forget about phase, the position of the node on the network does not matter anymore because the nodes are equal.
-
-I am gonna make the mean field at the individual level: I am approximation the probability \( \text{Prob} [\sigma _i (t) = 0, \sigma _j (t ) =1 ] \) (one being infected and the other one supsceptible) are statistically independent. Hence, I can decompose this one with a product of individual probability \( \text{Prob} [\sigma _i (t) = 0] \cdot \text{Prob} [\sigma _j (t ) =1 ] \).
-I define:
+Cutting at the individual level means that \( \text{Prob} [\sigma _i (t) = 0, \sigma _j (t ) =1 ] \) (one being infected and the other one supsceptible) are statistically independent. Hence, we can decompose this one with a product of individual probability:
+\begin{equation*}
+  \text{Prob} [\sigma _i (t) = 0, \sigma _j (t ) =1 ] \qquad \rightarrow \qquad \text{Prob} [\sigma _i (t) = 0] \cdot \text{Prob} [\sigma _j (t ) =1 ]
+\end{equation*}
+Remembering that:
 \begin{equation*}
   \rho (t) = \text{Prob} [\sigma (t)=1]
 \end{equation*}
+is the density of infected at time \( t \).
 If we put everything togheter, we get the equation:
 \begin{equation*}
-  \dv{\rho }{t}
+  \dv{\rho }{t} = - \mu \rho  + \beta \sum_{j}^{} A_{ij} (1- \rho ) \rho \qquad \rightarrow \qquad
+   \dv{\rho }{t} = - \mu \rho  + \beta (1- \rho ) \rho \sum_{j}^{} A_{ij}
 \end{equation*}
-which looks quite familiar, where we have \( \sum_{j}^{} A_{ij}   \) which is the degree of the network.
-We get exactly the same expression that we got before for well-mixed population. This is important that actually what are you doing is that all the nodes are statistically independent. I am recovery exactly this result. When I was consider well-mixed population, I assumed that the probabilities where exaxtly statistically independent. Now, this is just an approximation.
+If we remember that:
+\begin{equation}
+  \sum_{j}^{} A_{ij} = k_i \simeq \expval{k}
+\end{equation}
+is the degree of the network, we get exactly the same expression that we got before for SIS model in a well-mixed population:
+\begin{equation}
+  \dv{\rho }{t} = \beta \expval{k} (1- \rho ) \rho - \mu \rho
+\end{equation}
+This is a very important result. Actually, we are considering all the nodes statistically independent and we are recovering exactly the same result of well-mixed population. The only difference is that when we were considering well-mixed population, we assumed that the probabilities where \emph{exactly} statistically independent. Now, this is just an approximation.
 
 All the calculation that we get are gonna hold for this thing. In the labs you will see when this assumption breaks down.
 
-\subsection{Heterogenous netowrks}
 
 
 
