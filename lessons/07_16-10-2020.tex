@@ -7,14 +7,36 @@
 
 \marginpar{ \textbf{Lecture 7.} \\  \displaydate{date}. \\ Compiled:  \today.}
 
-Let us start from the definition of small world networks. We have seen tha the average path length scales with the logarithm of the number of nodes in the network, not just with the number of nodes. How is it possible? A paper which explain it is “collective dynamics of small world networks”. Their idea is what is called the Watss and Strogatz model. Let us focus with the first regular ring in which we have each connected connected with the neighbour in their left and right. The structure is totally regular. If we want to measure the longest distance that we can find in the network we have that:
+To summarize, we have seen that for most real networks it has been showed that the average path length scales as:
+\begin{equation*}
+  \expval{l} \approx \ln{N}
+\end{equation*}
+with the logarithm of the number of nodes in the network, not just with the number of nodes. Or in some cases as \( \expval{l} \approx \ln(\ln(N))  \).
+How is it possible? A paper which explain it is “Collective dynamics of small world networks” of Watts and Strogatz. Their idea is what is called the \textbf{ Watss and Strogatz model}.
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.7\textwidth]{../lessons/image/07/1.png}
+\caption{\label{fig:07_1} Idea of Watts and Strogatz model.}
+\end{figure}
+
+
+Let us focus with the first regular ring in Fig. \ref{fig:07_1} in which we have each node connected with its neighbour in its left and right. The structure is totally regular. If we want to measure the longest distance that we can find in the network we have that:
 \begin{equation*}
   \expval{l^{circle}} \sim \frac{N}{4 m}
 \end{equation*}
-What happens if we just rewire one of the connection? We connect it with a another random nodes in the network (small-world). What do happen for the distance? Just rewiring one connection reduce the size in an incredible way. If we can control the number of connection with a probability \( p \), what happens is that every time I am rewiring the connection the average steps is reduced by a factor 2. If we repeat this process several time we obtain a logarithmic scaling. At the end we obtain a random network which scales as:
+What happens if we just rewire one of the connection? We connect it with a another random nodes in the network as in small-world circle in Fig. \ref{fig:07_1}. What do happen for the distance? Just rewiring one connection reduce the size in an incredible way. If we can control the number of connection with a probability \( p \), what happens is that every time we rewire the connection, the average steps is reduced by a factor 2. If we repeat this process several time we obtain a logarithmic scaling. At the end we obtain a random network which scales as:
 \begin{equation*}
   \expval{l} \sim \log{N}
 \end{equation*}
+It is represented by the random circle in Fig. \ref{fig:07_1}.
+
+
+
+
+
+
+
 
 Now the question is: how degrees are distributed over the newtork? Let us consider a small network, the plot on the right represent the distribution of the degrees in this small network. How this quantity is distributed in real networks?
 The first assumption that we can make is what happens if the connection are built at random. So there is no rule behind it, but a certain probability.
