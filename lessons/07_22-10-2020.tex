@@ -9,108 +9,110 @@
 
 \marginpar{ \textbf{Lecture 8.} \\  \displaydate{date}. \\ Compiled:  \today.}
 
-\section{Summary}
 
-Let us recap what we saw at the end of the last lecture. We moved from well-mixed populations to contact networks, so we add more complexity and the model is more realistic.
-We also wrote down what is a generic model for SIS dynamics on a general network. We consider the adjiacency matrix and so on. We cannot write down a closed equation for this, because we have two nodes infection probability. The problem is that we do not have an exact expression for this probability. The expression for this probability take into account the probability of three nodes \( i j k \). This is unfeasible for all the models and all the possible graph, in the literature we have just 4/5 nodes. The idea is that we ned a way to approximate this probability, to cut this infinite chain to a certain value. We will use mean-field approximation. We have a quantity that depends on all different quantities but which in this approximation is reduced to its average. We are switching from a many body problem to a one body problem.
+\subsection{Heterogeneous Networks}
 
-Today, we will see different ways to deals with the probability \( Prob[\sigma _i = 0, \sigma _j=1] \).
+What is the effect of heterogeneity in the spread of the disease? This assumption \( k_i \sim \expval{k}  \) does not hold anymore, so we cannot assume that all the nodes are equal.
 
-We start to see a model of SIS for homogeneous network in which all the nodes are equal. There is the same probability of getting infection and we can consider the probabilityies statistically independent.
-We derived all the equations. The solutions we found are the same of before, the difference is that now it is not exact.
+\subsubsection{Degree-based Mean-Field theories (DBMF)}
 
+Let us consider heteroegeneous mean-field approximation, suppose a DBMF model and let us cut the chain at an individual level (we consider the individual probability of getting the infection).
 
-\chapter{Epidemic Spreading on Networks}
+Let us start with the paper “Epidemic Spreading in Scale-Free Networks”. It provides a SIS model on scale-free networks.
+The idea is that since nodes are not equal anymore, the probability of getting the infection strongly depends on their position (i.e. degree) in the network. The Pastor-Satorras and Vespignani's intuition is that nodes with the same degree behave in the same way.
+We are gonna divide the network in degree classes: we group togheter all the nodes with the same degree.
 
-Today we are going start to analyze what happens when we consider hetherogeneous networks.
-
-What is the effect of hetherogeneity in the spread of the disease? This assumption \( k_i \sim \expval{k}  \) does not hold, so we cannot assume that all the nodes are equal.
-
-\section{Degree-based Mean-Field theories (DBMF)}
-
-We start with the simple level which is the individual one, in which we consider the individual probability of getting the infection.
-
-Let us start with the paper “Epidemic Spreading in Scale-Free Networks”. They provide a model for SIS on scale-free networks. We cannot use the homogeneous approximation, because the network is hethereogeneous. The intuition of this paper are:
-\begin{itemize}
-\item the nodes are not equal. The probability of getting the infection strongly depends on their position (i.e. degree) in the network;
-\item nodes with the same degree behave in the same way;
-\end{itemize}
-We are gonna divide the network in degree classes. We are grouping togheter all the nodes with the same degree. To write down the equation we need to multiply the number of compartments:
+To write down the equation we need to multiply the number of compartments:
 \begin{equation*}
   s_k = \frac{S_k}{N_k}, \qquad \rho _k = \frac{I_k}{N_k}
 \end{equation*}
 where \( s_k \) and \( \rho _k \) are the fraction of suscpetible/infected nodes of degree \( k \) in the network. We have that \( N_k \) represent the number of nodes with degree \( k \) in the network. So, we are defined as before the number at degree \( k \) of suscpetible and infected in the system.
+The total fraction of \( \rho  \) and \( s \) in the system is given by:
+\begin{equation}
+  \rho = \sum_{k}^{} P(k) \rho _k, \qquad s = \sum_{k}^{} P(k) s_k
+\end{equation}
 
-From that we can write the equation:
-\begin{equation*}
-  \frac{}{t} \rho _k (t) = - \mu \rho _k (t) + \beta k \mathcolorbox{green!20}{(1- \rho _k (t)) \Theta _k (t)}
-\end{equation*}
-we have as usual a recovery and infection part. In particular, we have the probability of a contact between a suscpetible of degree \( k \) and an infected represented in green.
+Now, we write the equation for each degree class:
+\begin{equation}
+  \dv{}{t}  \rho _k (t) = - \mu \rho _k (t) + \beta k \mathcolorbox{green!20}{(1- \rho _k (t)) \Theta _k (t)}
+\end{equation}
+where we have as usual a recovery and infection part.
+In particular, we the probability of a contact between a suscpetible of degree \( k \) and an infected is represented in green.
 The idea behind it is that we have the probability of being infected \( (1- \rho _k (t)) \) and the probability of having contact with an infected \( \Theta _k (t) \).
-We have that:
-\begin{equation*}
+In particular, the probability that a node with dehree \( k \) has an infected neighbor can be expressed as:
+\begin{equation}
   \Theta _k(t) = \sum_{k'}^{} P(k'|k)\rho _{k'}
-\end{equation*}
-is the probability that a node with degree \( k \) as an infected neighbor. We want to sum over all the possibile degree classes and we are gonna see the probability of connecting with one of them, hence this is the probability that another node is infected.
+\end{equation}
+where we  sum over all the possibile degree classes and we are gonna see the probability of connecting with one of them, hence this is the probability that another node is infected.
+Note that we are making no assumption about the function \(  P(k'|k) \) which will change with \( k \). It could be in principle anything, in the sense that it depends on the structure of the networ. However, there are some cases in which we can do some assumptions on the structure of the network.
 
-Note that we are making no assumption about the function \(  P(k'|k) \) which will change with \( k \).
-We are gonna make an assumption about the structure of this thing.
-It could be in principle anything, in the sense that it depends on the structure of the network. However, there are some cases in which we can do some assumptions on the structure of the network.
-
-We can assume that network are hethereogenous but I am making connection at random. Hence:
-\begin{equation*}
+For random networks, e.g. picking a node at random:
+\begin{equation}
   P(k'|k) = \frac{k'P(k')}{\sum_{k'}^{} k' P(k')  } = \frac{k'P(k')}{\expval{k}  }
-\end{equation*}
-where \( P(k') \) is the probability of getting a connection at random. Then, we multiply it by \( k' \) which is the number of connection that I pick up. Then we normalize over the average degree of the network.  Hence, at the end it is the probability that a point in the network points to \( k' \).
+\end{equation}
+where \( P(k') \) is the probability of getting a connection at random. Then, we multiply it by \( k' \) which is the number of connection that we pick up. Then we normalize over the average degree of the network.  Hence, at the end it is the probability that a point in the network points to \( k' \).  Note that \( P(k'|k) \) does not depend on \( k \).
 
-Hence:
+We obtain:
 \begin{equation*}
   \Theta _k (t) = \frac{\sum_{k'}^{} P(k') \rho _{k'} (t)  }{\expval{k} } = \Theta (t)
 \end{equation*}
-In the numerator: we take the probability that a link taken at random points to \( k' \), then I am multiplying by the probability of being infected and then I am summing to all the possible degree.
-We note that this probability does not depend on \( k \) anymore. We are just picking up at random, so it should be the same for all the nodes.
+In the numerator: we take the probability that a link taken at random points to \( k' \), then we multiply by the probability of being infected and then we sum over all the possible degrees.
+We note that \( \Theta _k (t) \) does not depend on \( k \) anymore. We are just picking up at random, so it should be the same for all the nodes.
 
-The method that we are gonna used to solve the differential equation of \( \rho _k (t) \) is pretty similar to the ones used before. First of all, we assume that we are in the steady state:
+The method that we are gonna use to solve the differential equation \( \dv{}{t} \rho _k (t) \) is similar to the ones used before for the other models. First of all, we assume that we are in the steady state:
 \begin{equation*}
-  \dv{}{t} \rho _k (t) \rightarrow  \rho _k \frac{\beta k \Theta }{\mu + \beta k \Theta }
+  \dv{}{t} \rho _k (t) = 0 \qquad \rightarrow  \qquad \rho _k = \frac{\beta k \Theta }{\mu + \beta k \Theta }
 \end{equation*}
-The next step is to substitute the expression obtained inside \( \Theta  \):
+The next step is to substitute the expression for \( \rho _k  \) obtained inside \( \Theta  \):
 \begin{equation*}
-    \Theta _k (t) = \frac{\sum_{k'}^{} P(k') \rho _{k'} (t)  }{\expval{k} } = \Theta (t) \rightarrow  \Theta = \frac{1}{\expval{k} } \sum_{k}^{} \frac{k^2 P(k) \beta \Theta }{\mu + \beta k \Theta }
+    \Theta _k (t) = \frac{\sum_{k'}^{} k' P(k') \rho _{k'} (t)  }{\expval{k} } = \Theta (t) \qquad \rightarrow \qquad \Theta = \frac{1}{\expval{k} } \sum_{k}^{} \frac{k^2 P(k) \beta \Theta }{\mu + \beta k \Theta }
 \end{equation*}
-The point is: if we want to solve this expression, we need some sort of trick. First of all, what happens is that as usual this expression as different solution. The first one is the trivial solution \( \Theta =0 \), but we are interested in the non trivial one. Note that:
+this is the self consistent equation for \( \Theta  \).
+
+The point is: if we want to solve this expression, we need some sort of trick. First of all, what happens is that as usual this expression has different solutions:
+\begin{itemize}
+\item the first one is the trivial solution \( \Theta =0 \), but we are interested in the non trivial one;
+\item to obtain the non trivial solution let us note that:
 \begin{equation*}
    \Theta = \frac{1}{\expval{k} } \sum_{k}^{} \frac{k^2 P(k) \beta \Theta }{\mu + \beta k \Theta } = f(\Theta )
 \end{equation*}
-Hence, the solution are the values of \( \Theta  \) were the two values are equal. This is the interception between the line \( \Theta  \) and the function \( f(\Theta ) \). We want that since \( \Theta  \) is a probability \( 0<\Theta \le 1 \). This means that the slope of \( f(\Theta ) \) should be greater than 1.
+Hence, the solution are the values of \( \Theta  \) equal to \( f(\Theta ) \). This is the interception between the line \( \Theta  \) and the function \( f(\Theta ) \). Since \( \Theta  \) is a probability, we have that \( 0<\Theta \le 1 \). This means that the slope of \( f(\Theta ) \) should be greater than 1.
+Mathematically, it menas that:
+\begin{equation*}
+  \dv{}{\Theta }  \qty[ \frac{1}{\expval{k} } \sum_{k}^{} \frac{k^2 P(k) \beta \Theta }{\mu + \beta k \Theta } ]_{\Theta =0} \ge 1
+\end{equation*}
+leading to the condition:
+\begin{equation}
+\frac{\beta }{\mu \expval{k} } \sum_{k}^{}k^2 P(k) \ge 1 \qquad \rightarrow  \qquad \frac{\beta \expval{k^2} }{\mu \expval{k} } \ge 1
+\end{equation}
+which is the condition for an endemic state. Since the network has becoming more complex, also the structure for the condition of the endemic state is becoming complex. For the epidemic treshold:
+\begin{equation}
+ \frac{\beta \expval{k^2} }{\mu \expval{k} } = 1 \qquad \rightarrow \qquad \beta _c = \frac{\mu \expval{k} }{\expval{k^2} }
+\end{equation}
+which is pretty similar to the one found before but has a term which increase its complexity.
 
-The next step, is seeing what means mathematically that we want a slope larger than one:
-\begin{equation*}
-  \dv{}{\Theta }  \qty( \frac{1}{\expval{k} } \sum_{k}^{} \frac{k^2 P(k) \beta \Theta }{\mu + \beta k \Theta } )_{\Theta =0} \ge 1
-\end{equation*}
-which means
-\begin{equation*}
-\frac{\beta }{\mu \expval{k} } \sum_{k}^{}k^2 P(k) \ge 1 \qquad \rightarrow  \frac{\beta \expval{k^2} }{\mu \expval{k} } \ge 1
-\end{equation*}
-this is the condition for an endemic state. Since the network has becoming more complex, also the structure for the condition of the endemic state is becoming complex.
-If we assume that:
-\begin{equation*}
- \frac{\beta \expval{k^2} }{\mu \expval{k} } = 1 \rightarrow \beta _c = \frac{mu \expval{k} }{\expval{k^2} }
-\end{equation*}
-which is pretty similar to the one found before but has a term which increase is complexity.
-
-We have to check if it works also for an homogeneous network. This is the first check that we can make. In homogeneous netowrks \( \expval{k^2} = \expval{k}^2   \), recovering:
+We have to check if it works also for an homogeneous network: this is the first check that we can make. For an homogeneous network \( \expval{k^2} = \expval{k}^2   \), recovering:
 \begin{equation*}
   \beta _c = \frac{mu \expval{k} }{\expval{k^2} } = \frac{\mu }{\expval{k} }
 \end{equation*}
-this is exactly the expression that we saw before. Things are working well.
+which is exactly the expression that we saw before, so things are working well.
 
-Recalling what we say last week, in scale-free networks with \( 2 < \gamma \le 3  \), we have \( \expval{k} \rightarrow c  \) and \( \expval{k^2}  \rightarrow \infty  \) as \( N \rightarrow \infty  \). As the netowork is becoming larger, also its variance is becoming larger. This means that:
+\end{itemize}
+
+Recalling what we say last week, in scale-free networks with \( 2 < \gamma \le 3  \), we have \( \expval{k} \rightarrow c  \) and \( \expval{k^2}  \rightarrow \infty  \) as \( N \rightarrow \infty  \).
+As the netowork is becoming larger, also its variance is becoming larger. This means that:
 \begin{equation*}
   \beta _c = \frac{\mu \expval{k} }{\expval{k^2} } \rightarrow 0
 \end{equation*}
-the epidemic threshold is going to zero.
-Obviously, this is quite important because if my network is big enough, every disease will spread, no matter its infectivity!
+so the epidemic threshold vanishes for \( N \rightarrow \infty  \).
+Obviously, this is a quite important because, if our network is big enough, every disease will spread, no matter its infectivity (see Fig. \ref{fig:07_1}).
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.6\textwidth]{../lessons/image/07/1.png}
+\caption{\label{fig:07_1} In scale-free networks (and many heavy-tailed distributions) the epidemic threshold vanishes in the thermodynamic limit.}
+\end{figure}
+
 When we have disease with a very low infection in a little part of population, they do not disappear because we are in a large network!
 Hence, we have no more an endemic state and the epidem threshold is really really small for most real epidemic network.
 This result work as in a thermodynamic limit.

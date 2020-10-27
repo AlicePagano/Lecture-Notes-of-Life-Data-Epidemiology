@@ -257,7 +257,7 @@ We have different types of approximations based on:
 \end{itemize}
 
 
-\section{Homogeneous networks}
+\subsection{Homogeneous Networks}
 Let us start with the simplest approximation. We assume homogeneous networks, DBMF and we cut the chain at an individual level.
 
 We are considering networks where nodes's degree is bounded, hence:
@@ -291,8 +291,13 @@ is the degree of the network, we get exactly the same expression that we got bef
 \end{equation}
 This is a very important result. Actually, we are considering all the nodes statistically independent and we are recovering exactly the same result of well-mixed population. The only difference is that when we were considering well-mixed population, we assumed that the probabilities where \emph{exactly} statistically independent. Now, this is just an approximation.
 
-All the calculation that we get are gonna hold for this thing. In the labs you will see when this assumption breaks down.
+Obviously, all the results for SIS in well-mixed populations are valid, as the epidemic treshold.
 
+\begin{remark}
+Let us recap what we saw at the end of this lecture. We moved from well-mixed populations to contact networks, so we add more complexity and the model is more realistic. We also wrote down what is a generic model for SIS dynamics on a general network. We consider the adjiacency matrix and so on. We cannot write down a closed equation for this, because we have two nodes infection probability. The problem is that we do not have an exact expression for this probability. The expression for this probability take into account the probability of three nodes \( i j k \). This is unfeasible for all the models and all the possible graph, in the literature we have just 4/5 nodes. The idea is that we ned a way to approximate this probability, to cut this infinite chain to a certain value. We will use mean-field approximation. We have a quantity that depends on all different quantities but which in this approximation is reduced to its average. We are switching from a many body problem to a one body problem.
+We start to see a model of SIS for homogeneous network in which all the nodes are equal. There is the same probability of getting infection and we can consider the probabilities statistically independent.
+We derived all the equations. The solutions we found are the same of before for well-mixed population, the difference is that now it is not exact but only an approximation.
+\end{remark}
 
 
 
