@@ -12,7 +12,7 @@ To summarize, we have seen that for most real networks it has been showed that t
   \expval{l} \approx \ln{N}
 \end{equation*}
 with the logarithm of the number of nodes in the network, not just with the number of nodes. Or in some cases as \( \expval{l} \approx \ln(\ln(N))  \).
-How is it possible? A paper which explain it is “Collective dynamics of small world networks” of Watts and Strogatz. Their idea is what is called the \textbf{ Watss and Strogatz model}.
+How is it possible? A paper which explain it is “Collective dynamics of small world networks” of Watts and Strogatz. Their idea is what is called the \textbf{Watss and Strogatz model}.
 
 \begin{figure}[h!]
 \centering
@@ -31,78 +31,177 @@ What happens if we just rewire one of the connection? We connect it with a anoth
 \end{equation*}
 It is represented by the random circle in Fig. \ref{fig:07_1}.
 
+\section{Degree distribution over networks}
+Now the question is how degrees are distributed over the newtwork. Let us consider a small network, the plot on the left of Fig. \ref{fig:07_2} represents the distribution of the degrees in this small network. How is this quantity distributed in real networks?
 
+\begin{figure}[h!]
+\begin{minipage}[c]{0.5\linewidth}
+\centering
+\includegraphics[width=0.8\textwidth]{../lessons/image/07/2.png}
+\end{minipage}
+\begin{minipage}[]{0.5\linewidth}
+\centering
+\includegraphics[width=0.8\textwidth]{../lessons/image/07/3.png}
+\end{minipage}
+\caption{\label{fig:07_2} \textbf{Left:} degree distribution in a small network. \textbf{Right:} degree distribution in a network with random connections. }
+\end{figure}
 
+The first assumption that we can make is building the connections at random. Hence, there is no rule behind the degree distribution but a probability distribution as the one on the right of Fig. \ref{fig:07_2}.
 
-
-
-
-
-Now the question is: how degrees are distributed over the newtork? Let us consider a small network, the plot on the right represent the distribution of the degrees in this small network. How this quantity is distributed in real networks?
-The first assumption that we can make is what happens if the connection are built at random. So there is no rule behind it, but a certain probability.
-Let us consider Erdos and Renyi model. In their paper we have the evolution of a graph where links between nodes are drawn at random. What are the properties of this graph?
-Let us call a graph \( G \) with \( G(N,p) \) where \( N \) are the number of nodes and \( p \) is the probability of connection.
-Before 1959 people assumed that connection were regular, but this is the first paper in which random connections are been considered.
-
-Given that we are drawing connection at random? What is the degree distribution at the end? Each link is drawed with a probability \( p \). What is the probability that a node has \( k \) connections?
+\subsection{Erdös and Rényi Model: random graphs}
+Let us consider the Erdös and Rényi model which represents the evolution of a graph where links between nodes are drawn at random. In particular, the algorithm for creating such a network is:
+\begin{itemize}
+\item create an empty graph with $N$ nodes;
+\item connect each possible couple of nodes with probability $p$;
+\item avoid self-loops and multiple edges.
+\end{itemize}
+What are the properties of this graph?
+Let us consider a graph \( G(N,p) \) where \( N \) are the number of nodes and \( p \) is the probability of connection.
+Before 1959 (the year of the publication of Erdös and Rényi's paper) people assumed that connection were regular, hence this is the first time in which random connections are been considered.
+If links are drawn at random with probability $p$, the probability that a node has $k$ neighbors $p_k$ is given by a binomial distribution:
+\begin{equation}
+  p_k = \binom{N-1}{k} p^k (1-p)^{N-1-k}
+\end{equation}
+The average and variance of such a distribution are:
+\begin{equation}
+  \expval{k} = p(N-1), \qquad \sigma _k^2 = p(1-p)(N-1)
+\end{equation}
+As we can see, the average and the variance scales in the same way with the size of the network.
+The problem of the last distribution is that it is difficult to be treated analitically when \( N \) increases, indeed:
 \begin{equation*}
-  p_k = \qty(\substack{N-1 \\ k} ) p^k (1-p)^{N-1-k}
+  \frac{\sigma _k}{\expval{k} } = \sqrt{\frac{1-p}{p(N-1)}} \overset{N \rightarrow \infty }{\longrightarrow } 0
 \end{equation*}
-From that we can reocver that \( \expval{k} = p(N-1)  \) and variance \( \sigma _k^2 = p(1-p)(N-1) \). As we can see, the average and the variance scales in the same way with the size of the network.
+which is very narrow as \( N \) increases, so we need a kind of approximation.
 
-The problem of the last distribution is that it is difficult to be treated analitically and we need an approximation. Fortunately, we have that for sparse networks we have \( k \ll N \), the binomial \( (N,p) \) distribution can be approximated by a Poisson distribution with \( \lambda = p N \). Hence:
+Fortunately, for sparse networks we have \( k \ll N \), hence the binomial \( (N,p) \) distribution can be approximated by a Poisson distribution with \( \lambda = p N \). Indeed, since  \( \expval{k} = p(N-1)  \), having \( k \ll N \) implies \( p \ll N \) and thus:
 \begin{equation*}
+  (1-p)^{N-1-k} \approx e^{(N-1-k) \log (1- \expval{k}/(N-1) )} \overset{N \rightarrow \infty }{\longrightarrow } e^{- \expval{k} }
+\end{equation*}
+and
+\begin{equation*}
+  \binom{N-1}{k} \approx \frac{(N-1)^k}{k!}
+\end{equation*}
+Obtaining:
+\begin{equation}
   p_k = e^{- \expval{k} } \frac{\expval{k} }{k!}
-\end{equation*}
+\end{equation}
 As before, the average and the variance scales in the same way with the size of the network. This is telling us that all the nodes more or less are the same. If we have a bounded variance means that all the nodes have more or less the same degree. That is the point.
-
+In particular, as $p$ is increased the graph undergoes a transition from disconnected to fully connected:
 \begin{itemize}
 \item if \( N p < 1 \), the graph will almost surely have no connected compontens of size larger than \( O(\log(N)) \);
-\item if \( N p = 1 \) the graph will almost surely have a giant component of size \( O(N^{2/3}) \);
+\item if \( N p = 1 \), the graph will almost surely have a giant component of size \( O(N^{2/3}) \);
+\item if \( N p \rightarrow c > 1 \), the graph will almost surely have a giant component comprising a large fraction of the nodes;
+\item if \( p < \frac{(1- \varepsilon )\ln N}{N} \), the graph will almost surely contain isolated vertices;
+\item if \( p > \frac{(1- \varepsilon )\ln N}{N} \),  the graph will almost surely be connected.
 \end{itemize}
 
-The idea is: what is the degree distribution of real networks? In the last decades we start to have very very complex and large networks. Their structure is nothing like the structure that you see for a random network. This are examples of social networks as Facebook and Twitter. All this plots are in log-log scale. We have a lot of networks that scales in the same way.
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.8\textwidth]{../lessons/image/07/4.png}
+\caption{\label{fig:07_4} Real network of Facebook and Twitter.}
+\end{figure}
 
-What is the form of this connection? In black we see the Poissonian distribution that we saw before, and then we plot the function \( P(k) \sim k^{- \gamma  } \). We see that the Poissonian distribution is not able to reproduce the hetherogeneity you see in the data.
+\subsection{Scale-free networks}
 
-The power low have an important role, in particular \( \gamma   \) is the slope of the curve in log-log scale.
-?? Another important thing is that if you look at the distribution  is that assuming that these two distributions have the same number of degree, the hetherogenity is much larger ??
-The functional form is the same at all scales for scale-free network, but it is not the same for Poissonian distributions. These are the main characteristics.
-
-The most important thing is that the probability of having large Hubs is not zero. Even for small networks you can have large Hubs and this is something we have to take into account for the spreading of diseases.
+The point now is: what is the degree distribution of real networks? In the last decades we start to have very very complex and large networks. Their structure is nothing like the structure that you see for a random network. In Fig. \ref{fig:07_4} are shown real network of social networks as Facebook and Twitter. All this plots are in log-log scale. We can conclude that most of the networks scales in the same way.
+But, what is the form of this connection? Let us consider Fig. \ref{fig:07_4}, the black curve represents the Poissonian distribution that we saw before, and then we plot the power-law (heavy tailed distribution) \( P(k) \sim k^{- \gamma  } \). We see that the Poissonian distribution is not able to reproduce the hetherogeneity you see in the data, while the power-law it is. Hence, in most contexts real networks are highly heterogenous and degrees can vary several orders of magnitude. In particular, the \( \gamma   \) coefficient of the power-law has an important role, since it represents the slope of the curve in log-log scale.
+Thus, we have similar structures at different scales, this leads to the concept of scale-free networks. Most real networks have small values of \( \gamma   \), i.e. \( \gamma \le 3 \).
 
 
-We can study the limiting cases of this scale-free networks. We can study some of the properties we have seen before, as the average degrees or we can prove how the largest degree scales as the size of the network.
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.7\textwidth]{../lessons/image/07/5.png}
+\caption{\label{fig:07_4} Difference between random networks and scale-free networks.}
+\end{figure}
+
+Heterogeneous means that most of the nodes have a very low connectivity, less than a random net. However, the probability of having very large degrees is not zero (\textbf{hubs}). Even for small networks you can have large Hubs and this is something we have to take into account for the spreading of diseases since we can have shortcuts for spreading or super-spreaders.
+
+We can study the limiting cases of this scale-free networks. For instance, we can study some of the properties we have seen before, as the average degrees or we can prove how the largest degree scales as the size of the network. Let us consider the power-law:
+\begin{equation}
+  P(k) = C_0 k^{-\gamma } \qquad \text{with} \quad C_0 = (\gamma -1  ) k_{min}^{\gamma -1 }
+\end{equation}
+To know how \( k_{max} \) scales with \( N \), we have to study when:
 \begin{equation*}
   \int_{k_{max}}^{\infty } P(k) \dd[]{k}  = \frac{1}{N} \quad \rightarrow  \qty(\frac{k_{min}}{k_{max}})^{\gamma -1 } = N
 \end{equation*}
-The most important thing is that more of the network we have \( \gamma =2,3  \) (plots of before).
+Thus, when:
+\begin{equation}
+  k_{max} = k_{min} N^{\frac{1}{\gamma -1 }}
+\end{equation}
+The most important thing is that more of the network we have \( \gamma = 2,3  \) as we can see in the previous plot of Fig. \ref{fig:07_3}.
 
-The general moments of the distribution are:
-...
-The moment converges only if \( \gamma -1 > n  \). This gives an hint on how the average of the degree scales as the size of the network.
-
+The general \( n^{th} \) moment of the distribution is:
+\begin{equation}
+  \expval{k^n} = \int_{k_{min}}^{\infty } k^n P(k) \dd[]{k} = \int_{k_{min}}^{\infty }  C_0 k^{n- \gamma  }\dd[]{k}
+\end{equation}
+It converges only if \( \gamma -1 > n  \). This gives an hint on how the average of the degree scales as the size of the network. This is a very important result. Considering \( \sigma ^2  = \expval{k^2} - \expval{k}^2  \), we have that:
 \begin{itemize}
-\item if \( \gamma <2  \) both \( \expval{k}  \) and \( \expval{k^2}  \) diverge with \( N \rightarrow  \infty  \);
+\item if \( \gamma <2  \), both \( \expval{k}  \) and \( \expval{k^2}  \) diverge with \( N \rightarrow  \infty  \);
 
-\item if \( 2 < \gamma < 3  \) the average degree \( \expval{k}  \rightarrow c \) but \( \expval{k^2}  \rightarrow \infty \) as \( N \rightarrow  \infty  \) and \( \sigma ^2 \rightarrow \infty  \).
+\item if \( 2 < \gamma < 3  \), the average degree \( \expval{k}  \rightarrow c \) but \( \expval{k^2}  \rightarrow \infty \) as \( N \rightarrow  \infty  \) and \( \sigma ^2 \rightarrow \infty  \).
 \end{itemize}
+Remember that most real networks have \( \gamma \le 3 \), hence the variance of the degree also diverges and so we have extremely heterogeneous networks not homogeneous ones.
+This means that all the models we have been used before in which we assumed that all the people in the population were equal, does not hold anymore.
 
-This means that all the models we have been used before (where we assumed that all the people in the population are equal does not hold anymore). The variance of the degree diverges, hence we have extremely heterogeneous networks, not homogeneous ones.
+\subsection{Barabási-Albert Model}
+The last thing we need is an algorithm to create a random scale-free network. We can realy on the Barabasi-Albert model. This is the second paper which starts the field. We have to rethink all the models we have been used right now and include these things.
 
-The last thing we need is an algorithm to create them, we have the Barabasi-Albert model. This is the second paper which starts the field. We have to rethink all the models we have been used right now and include this things.
-The idea behind this paper is extremely simple. They analized thesen etworks and the assumed \( P(K) \sim k^{-3} \) and the create a model to reproduce thsi behavior. We start with a small number of nodes and we connect the links at random but which follow a preperential attachmenet. At each step the network growth.
+The idea behind this paper is extremely simple. They analized real networks and then they assumed \( P(K) \sim k^{-3} \) in order to create a model to reproduce this behavior.
+Their model is based on the concept of growing random networks.
+We start with a small number of nodes, at each time-step a new node enters the network and connects with pre-existing nodes but with a preferential attachment.
+Hence, at each step the network growth.
 
-The principle behind the preferintial attatchement is very simple: rich get richer. In the case of influentials, if I have a lot of followers the probability of increase my connection is increasing too. Actually, this idea is not even so new. It is something we have been known. This model hence is just a modification of the Price model. I publushed a paper, someone think that it is interesting and more attention I get more attention I will get in the future.
+The principle behind the preferintial attatchement which is based on a very simple concept: rich get richer. The more connected a node is, the more likely it is to receive new links. The probability to attract a new link at time $t$ proportional to degree at time $t$:
+\begin{equation}
+  \Pi (k_i) = \frac{k_i}{\sum_{j}^{} k_j }
+\end{equation}
+In the case of influencers, if I have a lot of followers the probability of increase my connections is increasing too. Actually, this idea is not even so new and it is something we have been known. This model hence is just a modification of the Price model: if I published a paper and someone think that it is interesting, more attention I get more attention I will get in the future.
 
-So, I am drawing the link at random but not uniformely. In the basic algorithm, we start with a small number of nodes connected in a link. In the first time step I am gonna adding a new node, and I am gonna connectecting to the other nodes. Let us assume that every time I add a node, I am adding two links. I calculate the probability of getting a new node which in this case is equal for all the nodes. Then I pick up one at random and I connect to it. Then I have to update the probabilities. We see that the node on the left got an higher probability of gwtting new connections. Then I start with a ned node untile size \( N \) is reached. This algorithm is able to create netowrks with some interesting properties. The simple idea is that:
+
+So, I am drawing the link at random but not uniformely. Let us briefly summarize the main steps of the algorithm:
+\begin{itemize}
+\item we start with a clique of \( m_0 \) nodes;
+\item at each time step \( t \), we add a new node to the network;
+\item we create $m$ (i.e. $m=2$) links between the new node and the existing ones according to the preferential attachment (remember to update the connection probability after each link);
+\item repeat until size $N$ is reached.
+\end{itemize}
+In particular, let us consider Fig. \ref{fig:07_5}. We start with a small number of nodes connected in a link. In the first time step I am gonna adding a new node, and I am gonna connectecting to the other nodes. Let us assume that every time I add a node, I am adding two links. I calculate the probability of getting a new node which in this case is equal for all the nodes. Then I pick up one at random and I connect to it. Then I have to update the probabilities. We see that the node on the left got an higher probability of getting new connections. Then I start with a ned node untile size \( N \) is reached.
+
+\begin{figure}[h!]
+\begin{minipage}[c]{0.48\linewidth}
+\centering
+\includegraphics[width=0.8\textwidth]{../lessons/image/07/6.png}
+\end{minipage}
+\( \longrightarrow  \)
+\begin{minipage}[]{0.48\linewidth}
+\centering
+\includegraphics[width=0.8\textwidth]{../lessons/image/07/7.png}
+\end{minipage}
+\caption{\label{fig:07_5} Example of Barabási-Albert algorithm.}
+\end{figure}
+
+This algorithm is able to create netowrks with some interesting properties. The simple idea is that the degree distribution is:
 \begin{equation*}
   P(k) = \frac{2 m (m +1)}{k(k+1)(k+2)} \sim k^{-3}
 \end{equation*}
-for large \( k \). \( m \) is the number of links you are adding and this is a parameter which drives you the minimal degree of the network.
+for large \( k \), where \( m \) is the number of links you are adding at each step (this is a parameter which drives you the minimal degree of the network).
+We obtained that we obtained \( \gamma =3  \) independent from \( m \) and \( m_0 \). Hence, the maximum degree of the network scales as \( k_{max} \sim N^{1/2} \). Moreover, we have that \( \expval{k} \rightarrow c \), but \( \expval{k^2} \rightarrow \infty   \) with \( N \), as before.
+The length of the network is:
+\begin{equation*}
+  \expval{l} \sim \frac{\ln (N)}{\ln (\ln (N))}
+\end{equation*}
+hence we have small-world.
 
 
-\section{Epidemic Spreding on Networks}
+
+
+
+
+
+
+
+
+\chapter{Epidemic Spreding on Networks}
 
 \subsection{SIS model in a network}
 
