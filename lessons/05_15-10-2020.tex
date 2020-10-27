@@ -8,8 +8,52 @@
 \marginpar{ \textbf{Lecture 5.} \\  \displaydate{date}. \\ Compiled:  \today.}
 
 
+RISCRIVERE (ERO ARRIVATA IN RITARDO)
 
 
+
+\section{SIRS Model}
+
+The idea is that you assume that you are in the steady state and so all the derivatives goes to zero.
+
+This model allows to interpolate between SIR (\( w=0 \)) and SIS (\( w \rightarrow \infty  \)).
+
+\begin{equation*}
+  \dv{s}{t} = \alpha + w r - \beta  s i - \alpha s, \qquad \dv{i}{t} = \beta s i - \mu i - \alpha i, \qquad \dv{r}{t} = \mu i - w r - \alpha r
+\end{equation*}
+The endemic state can be found by putting the derivatives equal to zero.
+
+In reality people do not become instantaneously infectious, but there is a \textbf{latent period} which is the time between infection and becoming infectious. Indeed, the pathogen replication takes time i.e. viral load too low to transmit the infection.
+
+It is important to remind that the latent period is not the same of the incubation period. An individual can be infectiuous before symptoms. For instance it has a pre-syntomatic infection as in the case of Covid-19.
+
+The simplest idea
+
+\section{SEIR Model}
+The equations are the same of before.
+
+If you estimate the time evolution of the SEIR model and SIR model there is a huge difference. For instance we can approximate for the SEIR:
+\begin{equation*}
+  i_{SEIR} (t) \approx e^{\qty(\sqrt{4(R_0-1)\sigma \mu  + (\sigma + \mu )^2} -(\sigma +\mu ))t/2 } \approx i_0 e^{\qty(\sqrt{R_0} -1 ) \mu t}
+\end{equation*}
+while for the SIR:
+\begin{equation*}
+  i_{SIR} (t) \approx i_0 e^{(R_0-1) \mu t}
+\end{equation*}
+
+Podromic state means the difference between latent period and ...
+
+
+\section{}
+We solved the SI model analitically and we observe that the growth is as a sigmoid. We have some sort of saturation at 1.
+
+In the SIS things starts to change. We have some sort of treshold phenomena (epidemic treshold).
+
+For the SIR we cannot solve the equation analitically.
+
+We have the SIRS we can interpulate between the two models.
+
+For the SEIR model we have the exposed slowing down the spreading.
 
 
 
