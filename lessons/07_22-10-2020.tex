@@ -14,9 +14,7 @@
 
 What is the effect of heterogeneity in the spread of the disease? This assumption \( k_i \sim \expval{k}  \) does not hold anymore, so we cannot assume that all the nodes are equal.
 
-\subsubsection{Degree-based Mean-Field theories (DBMF)}
-
-Let us consider heteroegeneous mean-field approximation, suppose a DBMF model and let us cut the chain at an individual level (we consider the individual probability of getting the infection).
+Let us consider \textbf{heteroegeneous mean-field approximation}, suppose a \textbf{ DBMF model} and let us cut the chain at an \textbf{individual level} (we consider the individual probability of getting the infection).
 
 Let us start with the paper “Epidemic Spreading in Scale-Free Networks”. It provides a SIS model on scale-free networks.
 The idea is that since nodes are not equal anymore, the probability of getting the infection strongly depends on their position (i.e. degree) in the network. The Pastor-Satorras and Vespignani's intuition is that nodes with the same degree behave in the same way.
@@ -105,7 +103,9 @@ As the netowork is becoming larger, also its variance is becoming larger. This m
   \beta _c = \frac{\mu \expval{k} }{\expval{k^2} } \rightarrow 0
 \end{equation*}
 so the epidemic threshold vanishes for \( N \rightarrow \infty  \).
-Obviously, this is a quite important because, if our network is big enough, every disease will spread, no matter its infectivity (see Fig. \ref{fig:07_1}).
+Obviously, this is a quite important because, if our network is big enough, every disease will spread, no matter its infectivity (see Fig. \ref{fig:07_1}). When we have disease with a very low infection in a little part of population, they do not disappear because we are in a large network!
+Hence, we have no more an endemic state and the epidemic threshold is really really small for most real epidemic network.
+This result work as in a thermodynamic limit.
 
 \begin{figure}[h!]
 \centering
@@ -113,50 +113,66 @@ Obviously, this is a quite important because, if our network is big enough, ever
 \caption{\label{fig:07_1} In scale-free networks (and many heavy-tailed distributions) the epidemic threshold vanishes in the thermodynamic limit.}
 \end{figure}
 
-When we have disease with a very low infection in a little part of population, they do not disappear because we are in a large network!
-Hence, we have no more an endemic state and the epidem threshold is really really small for most real epidemic network.
-This result work as in a thermodynamic limit.
-
 Obviously, this cannot happen in real network. What happens is that we need some finite-size correction. For example, an expression for epidemic thresold when size cannot reach infinity.
+If we use scale free distribution, at some point since the degree cannot go to infinity, it is convenient to introduce an exponential cut-off.
 
-If we use scale free distribution, at some point since the degree cannot go to infity, we introduce a cut-off. For instance, for a social network we can reach some number of followers but the system will have a cut off.
+For instance, let us consider an air trasportation network, we see that until a certain point we have a line, then the curve start to change. We cannot have an infinite number of connection. we have a line and then we will see some sort of exponential degree. The behavior is similar to the one in Fig. \ref{fig:07_2}.
 
- We intdroduce an exponential cut-off for this distribution. For instance in an air trasportation network, we see that until a certain point we have a line, then the curve start to change. We cannot have an infinite number of connection. we have a line and then we will see some sort of exponential degree.
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.7\textwidth]{../lessons/image/07/2.png}
+\caption{\label{fig:07_2} Power-law with an exponential cut-off.}
+\end{figure}
 
- We can model this kind of things by adding an expoential term:
- \begin{equation*}
-   P(K) \sim k^{- \gamma   e^{-k/k_c} }
- \end{equation*}
-where \( k_c \) is a characteristic degree. At some point the term added will becomes the dominant term. What happens? For large \( k_c \) and \( 2 < \gamma < 3  \) the epidemic threshold reads as:
-\begin{equation*}
-  \beta _c \qty(\frac{\mu k_c}{k_{min}})^{\gamma -3 }
-\end{equation*}
-we will not show the calculation. Tomorrow, we will compare the epidemic treshold in an random network and in a scale-free network to see their differences.
-This were the result for the SIS.
 
-\subsection{SIR model}
-We can write the same equations for the SIR model under the same assumption. We need more equations to take into account also the equation for \( R \).
-\begin{equation*}
-  \dv{}{t} \rho _k^I(t) ...
-\end{equation*}
-where we have:
-\begin{equation*}
-  \Gamma _k (t)
-\end{equation*}
-which plays exactly the same role of \( \Theta  \) of before. It represents the link from which the infection arrived at the node. We will not show its form.  It is little different because of the structure of the SIR.
-There is a neibhobour that can trasmit the infection to me, but it can recover. Hence, this individual can be suscpetible again.
-I need to take into account that the disease is coming from one side, because that side of the network for me is forbidden in the sense that I have recovered that connot be infected again.
+We can model this kind of things by adding an exponential term:
+ \begin{equation}
+   P(K) \sim k^{- \gamma}   e^{-k/k_c}
+ \end{equation}
+where \( k_c \) is a characteristic degree.
+At some point the term added will becomes the dominant term. What happens? For large \( k_c \) and \( 2 < \gamma < 3  \) the epidemic threshold reads as:
+\begin{equation}
+  \beta _c \simeq \qty(\frac{\mu k_c}{k_{min}})^{\gamma -3 }
+\end{equation}
+we will not show the calculation. In the lab, we will compare the epidemic treshold in an random network and in a scale-free network to see their differences. This were the results for the SIS model in a network.
 
-We found:
-\begin{equation*}
+
+
+
+
+
+\section{SIR model in a network}
+
+\subsection{Degree-based mean-field theories (DBMF)}
+
+We can write the same equations for the SIR model under the same assumption of heteroegeneous mean-field.
+The difference is that we need one more equation to take into account also the equation for recovered individuals. The densities are \( \rho _k^S(t) \), \( \rho _k^I (t) \) and \( \rho _k^R (t) \) with \( \rho _ \infty ^R = \lim_{t \rightarrow \infty } \sum_{k}^{} P(k) \rho _k^R (t) \). We have that:
+\begin{equation}
+\begin{split}
+  \dv{}{t} \rho _k^I (t) &= - \mu \rho _k^I (t) + \beta k \rho _k^S (t) \Gamma _k(t)  \\
+  \dv{}{t} \rho _k^R (t) &= \mu \rho _k^I (t)
+\end{split}
+\end{equation}
+with \( \rho _k^S (t) = 1 - \rho _k^I (t) - \rho _k^R (t)\) and where:
+\begin{equation}
+  \Gamma _k (t) = \sum_{k'}^{} \frac{k'-1}{k'} P(k'|k) \rho _{k'}
+\end{equation}
+is the probability of a contact with an infected node and plays exactly the same role of \( \Theta  \) of before.
+It represents the link from which the infection arrived at the node. We will not show how to obtain its form.  It is little different with respect of the SIS model because of the structure of the SIR.
+There is a neibhobour that can trasmit the infection to me, but it can recover. We need to take into account that the disease is coming from one side, because that side of the network for us is forbidden in the sense that we have recovered that cannot be infected again.
+
+The epidemic treshold for random networks results:
+\begin{equation}
   \beta _c = \frac{\mu \expval{k} }{\expval{k^2} - \expval{k} }
-\end{equation*}
+\end{equation}
 and the important things is that \( \beta _c^{SIS} \neq \beta _c^{SIR} \). This is the first time in the course that the epidemic treshold for these two models is not the same.
 
-\section{Individual Based Mean-Field theories (IBMF)}
+\subsection{Individual-based mean-field theories (IBMF)}
 
-Before we were assuming that all the nodes with the same degree were equal. Now, we are gonna studying the indivudual based mean-field theories for individuals.
-We are not consider a single network, but an average over all the possible network we can create given that degree distribution.
+Before we were assuming that all the nodes with the same degree were equal. Now, we are gonna studying the individual based mean-field theories for individuals.
+We are not considering a single network, but an average over all the possible network we can create given that degree distribution.
+Hence, under the Heterogenous Mean-Field framework we are solving the epidemics problem for an ensemble of networks whose common feature is the \( P(k) \): ensemble of networks.
+
 
 Assuming that all the nodes with the same degree are equal, we are not looking at the single network but at their average. This is what in physics is called \textbf{annealed networks}.
 In the opposite when I called \textbf{quenched networks}, I am consider a particular realization of one network. The idea is: instead of considering the average we are considering a particular network. This is de difference in doing a degree bases or an indivudual based.
