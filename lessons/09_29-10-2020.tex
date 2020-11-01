@@ -1,0 +1,195 @@
+\documentclass[../main/main.tex]{subfiles}
+
+\newdate{date}{29}{10}{2020}
+
+
+\begin{document}
+
+\marginpar{ \textbf{Lecture 9.} \\  \displaydate{date}. \\ Compiled:  \today.}
+
+The most important result was that the epidemic treshold vanishes for \( N \rightarrow \infty  \), very very large networks.
+The epidemic treshold for IBMF depends on the largest eigenvalue of the adjiacency matrix.
+
+
+
+
+The last elation which comparses \( \beta _c \) for IBMF and DCBMF, can give us the accuracy. The DBMF is accurate only in the proximity of the epidemic treshold while IBMF is accurate for the entire epidemic diagram. See the plot.
+The quenched mean field follow exactly the simulation, while the DBMF only around the epidemic treshold.
+
+What is the reasone behind this result? Since we know the strong connection between the two theories, now we want to derive DBMF from IBMF. We repeat that in annealed networks we are not considering a single netwrok but an average of all the possible random netwrok that you can generate from a degree distribution. Instead, in the quenched network we take a particular one and we want the result for this specific network. Then, I can run my model there and repeat this multiple times.
+
+How the adjiacency matrix of an annealed network looks like? The adjiancency matrix is a weighted matrix, its general form is:
+\begin{equation*}
+  \bar{A}_{ij} = \frac{k_j P(k_i|k_j)}{N P (k_i)}
+\end{equation*}
+which for random networks becomes:
+\begin{equation*}
+  \bar{A}_{ij} = \frac{k_i k_j}{N \expval{k} } = \frac{k_i k_j}{2 L}
+\end{equation*}
+where the probability  \(  P(k_i|k_j) \) of picking a random node becomes \( k_j \). The number of trials that I have to create this connections over all the possibile in the network.
+
+After that, we have just to substitute the last result in the expression of \( q_i \):
+\begin{equation*}
+  q_i = 1 - \prod_{j=1}^{N} \qty[1 - \beta \frac{k' P(k'|k)}{N_{k'}} \rho _j]
+\end{equation*}
+From individual nodes to degree classes:
+\begin{equation*}
+  \dot{\rho }_k = - \mu \rho _k + (1- \rho _k)....
+\end{equation*}
+this is the most general expression that we can obtain for DBMF.
+We can approximate the productory with a sum, by assuming that \( \beta \rho _k \ll 1 \):
+\begin{equation*}
+  \dot{\rho }_ k = - \mu ...
+\end{equation*}
+Remembering that ....
+\begin{equation*}
+   \dot{\rho }_ k = - \mu
+\end{equation*}
+this things is accurate only if the assumption \( \beta \rho _k \ll 1 \) holds. But actually, this is exactly what we saw in the first plot of above. Hence, we are able to pass from IBMF to DBMF and actually we are explaining the difference in the accuracy between the two models.
+
+\subsection{IBMF and pair approximation}
+ Let us make a very brief introduction in what it means cut down the chaing to pair approximation.
+ Until now, all the models that we saw where cutted at the individual level. Now, we are considering the joint probability of being infectected if suscpetible is approximated to the next step. We have an expression also for the probability of the links.
+How expression changes?
+We have:
+\begin{equation*}
+  \dv{}{t} \rho (i,t) = - \mu \rho (i,t) + \beta \sum_{j}^{} A_{ij} \rho (j,t) - \beta \sum_{j}^{} A_{ij} E \qty[X_i (t) X_j (t)]
+\end{equation*}
+where \(  E \qty[X_i (t) X_j (t)] \) is the two nodes expectation of being infected.
+
+We need an expression for the ... equations for .... .
+The idea is:
+...
+
+The most closer used in the literature are:
+
+where the second is similar to the first but we are considering the two extremes and then the probability that \( j \) is infected.
+
+
+
+\chapter{Epidemic spreading on networks: advanced models}
+
+\section{Non-Markovian Epidemic Spreading}
+
+In the literature it is not seen, but if you want a realistic model is important. We are gonna assume that both the infection process and the recovery process have a costant rate.
+Infectius a costant rate means that at each time step the probability of being recovered is always the same.
+We have a memoryless process.
+The jump are memoryless, we have running a Markov chain. Markov property: the jump probability does not depend on time. I do not have to take into account the time that I spent there.
+It means that the time spent inside each compartment follow an exponential distribution.
+The average time that I spent there is \( \tau = \frac{1}{\mu }\) and:
+\begin{equation*}
+  P(x) = \tau e^{- \tau x}
+\end{equation*}
+What are the implication of this things? The most probable duration of the disease is 0. It depends on the mean, but in any case the most probable jump (time in which I am making the jump) is at the beginning. It is something that is not realistic. If you got influenza at least you will spend some time infected. Actually, if you are looking how infectius period are distributed in real life, it is something which is quite different. For a disease, you know exactly when it starts but do you know when it ends.
+For instance, let us consider the plot for 2009 H1N1 Influenza.
+For this strain of influenza this is the distribtuion of the infectious period, which is 2 days and an half. The most impoartant things is that it is not 0.
+Then, we have also the estimates for Covid-19.
+One process we use to measure these things  are the \textbf{serial interval}, from sumptoms to symptom. Obviously, this is an approximation but can give you some means.
+
+
+The problem is that, all these results demonstrate that these kind of diseases are not markovian. Hence, the recovery times depends on the time you spend in that compartment. How are we gonna model this non markovianity?
+What are the distribution that better describe what we saw in the data? The gamma distribution:
+\begin{equation*}
+  P(x) = \frac{1}{\Gamma (k) \theta ^k} x^{k-1} e^{- \frac{x}{\theta }}
+\end{equation*}
+this shape start to be somehow what we saw in the data. What is similar is the Erlang distribution, where we have the factorial instead of the Gamma function.
+All of this are able to reproduce real histogram.
+
+How to include non-markovian elements in classical epidemiological models (with the assumption of markovian...)?
+We use a trick for the ifnectious period. We sum expoential random variables obeys a gamma distribution.
+How we are gonna incorporate that in our model? Instead of having just one transition at a coastant rate (expoential distribution), what I need to have to have a gamma distribution here ?
+
+The trick is the fact that instead of having just one transition, we are gonan include more and more transitions. Instead of having just one single infectious state, individuals move from one I compartment to the other, they spend at least some time infectious before starting the recovery. Hence, we obtain a Markovian model.
+
+If I want to get recovered I need to spent some times infectious, but the model is still markovian!
+We are imposing that these stages are sequential.
+
+
+This are the expression (formulation):
+....
+We have to adjust the transition rate of each I transition which is \( K \mu  \).
+We got that this is the infectious period distribution:
+..
+which is the gamma function.
+We have special cases:
+\begin{itemize}
+\item if \( K=1 \), we obtain an expoential distribution;
+\item if \( K \rightarrow \infty  \) fixed, we obtain a delta distribution.
+\end{itemize}
+
+This was teh first solution.
+
+
+Now, we are going to present something which is more general where we can include non-markovian both in recovery and infections.
+Is it possible to write down a general model on networks?
+
+The answer is yes, it is a bit more complicated and we still needs some kind of approximation at some point. We have to slightly change our point of view. We are gonna use a slightly different approach, instead of probabilities we are gonna talk about events. The idea is that we are gonna modelling in this case the infection and recoveries with two random numbers which we extract from distribution and are as general as possible.
+We extrat every time the random number and it represent the time in which it is gonna recovery (the time I am gonna spend infected).
+This is what we call \( R_i (t) \). Then, the other random number we are gonna extract is \( M_{ij} (t) \) which reprsenets the number of trials that \( i \) try to infect node \( j \). I am gonna repeat it for all my neighbours. We are gonna generate this sequence:
+\begin{equation*}
+  T_{ij} ...
+\end{equation*}
+where \(  T_{ij}^{(1)} \) is the first time that node i try to infect node j, then we have the second time and so on. Hence, the trasmitibility of the diesease is seen as how many trials I am gonna make to infect.
+
+We extract the number, then we do not need to exctract another number for \( i \) at time \( t + 1 \). At the beginning we extract \( R_i \), we extarct 3 hence we infect at time 3. Then we extract M ... and so on.
+
+
+Once you have extracted the number of times, we are to extract at random the value of \( T \)... for instance we are going to extract as number 5 and then 5 random numbers. So we do not only have to extract the number of times but the number itself so many times.
+
+One important thins is that \( R \) and \( M \) can follow any distribution and not only the exponential one.
+
+
+I get the infection at time t. Then, I extract the time in which I will recovery. Then, I extract the number of attempts. After that, we are gonna extract for instance 5 different numbers different time. For instance, I am gonna infect node j 3 times. The first at time 2, the second at time 4 and the third at time 7... and so on.
+
+How do you extract the T is not important at this point, because we are only gonna focus on the distribution of  R and M.
+
+
+Now, let us make some assumptions to make it reasonable and then treat it analytically. This number should not depend on time, for instance their are tipical of the disease. It is valid both for the recovery and for the infections. If we consider lockdown etc... these number changes, but for now let us consider this model without such a restrictions.
+
+We are just reducing the complexity by bassing from \( R_i  \) to \( R \) and from \( M_i \) to \( M \).
+
+Then I am gonna call the probability that node \( i \) is infected in the steady state: \( v_i \).
+
+
+Now, let us build the model. Let us suppose that we are in the steady state of the system (all the transient are passed). In a large time interval the number of times node \( j \) has been infected is proportional to \( S \). The number of times that I am getting the infection is linear in \( S \).
+
+Since the length of each infected period is on average the number of infected periods experienced by a node j can be written as:
+\begin{equation*}
+  v_j S/ E[R]
+\end{equation*}
+
+
+Every time time I am being infected I try to contact my neighbours for example \( M \) times. This is the number of attempts that I am gonna try to make.
+
+
+We can write the total number of successful infection attempts for \(
+j \) to \( i \) as....
+
+The  number of times which \( i \) receved the infection from \( j \). The total number of time which \( i \) has been infected is:
+\begin{equation*}
+  S \sum_{j=1}^{N}  a_{ij} \frac{E[M]}{E[R]} v_{j} (1-v_i) = v_i \frac{S}{E[R]}
+\end{equation*}
+...
+Then we got:
+\begin{equation*}
+  v_i = E[M] (1- v_i) \sum_{j=1}^{N} A_{ij} v_j
+\end{equation*}
+hence the probability of i being infected depends by the sum over all my neighbours, times the term \( E[M] \) which is the average ifnection attempts that I am gonna experience during the evolution.
+Have you notice somethign strange? DOes it sound familiar this expression? This is exactly the linearization of the quenched mean field approach. The only difference is that before we have:
+\begin{equation*}
+  \mu \varepsilon _i^* = \beta ....
+\end{equation*}
+Same expression of the IBMF but with a generic infection term \( E[M] \). This expression encodes all the distribution that I can have in my equations.
+
+Let us see the implications of this thigns. This is also the solution of the linear system of equation that we saw before. Hence, this is the form in which we can generate a generic model from this. We can put the distribution that we like and we can obtain the expression.
+
+
+
+
+
+
+
+
+
+
+\end{document}
