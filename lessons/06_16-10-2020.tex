@@ -5,7 +5,7 @@
 
 \begin{document}
 
-\marginpar{ \textbf{Lecture 7.} \\  \displaydate{date}. \\ Compiled:  \today.}
+\marginpar{ \textbf{Lecture 6.} \\  \displaydate{date}. \\ Compiled:  \today.}
 
 To summarize what we have seen last lecture: it holds for most real networks that the average path length scales as:
 \begin{equation*}
@@ -104,7 +104,7 @@ In particular, as $p$ increases the graph undergoes a \textbf{transition} from d
 
 However, so far we have not discussed how real networks look like, in particular what is their degree distribution. In the last decades we started to have really complex and large networks, whose structure really differs from the structure we usually see for a random network. In Fig. \ref{fig:06_4}, as an example, we shown two real social networks we know pretty well: Facebook and Twitter. Note that both plots are in log-log scale. Generalizing, we can say that most of the real networks scales in the same way.
 
-We now want to understand how the \textbf{degree distribution} looks like. Let us consider Fig. \ref{fig:06_4}: black dots follow the Poissonian distribution that we were mentioning before, while the squares follow a power-law \( P(k) \sim k^{- \gamma  } \), which is \textbf{heavy tailed distribution}, in the sense that possibility for large degrees is not null. One should note that the Poissonian distribution is not able to reproduce the heterogeneity we can see in the data, while the power-law is. Hence, in most contexts real networks are \textbf{highly heterogeneous} and degrees can span \textbf{several orders of magnitude}. In particular, the \( \gamma   \) coefficient of the power-law has an important role, since it represents the \textbf{slope} of the curve in log-log scale.\\
+We now want to understand how the \textbf{degree distribution} looks like. Let us consider Fig. \ref{fig:06_4}: black dots follow the Poissonian distribution that we were mentioning before, while the squares follow a power-law \( P(k) \sim k^{- \gamma  } \), which is \textbf{heavy tailed distribution}, in the sense that possibility for large degrees is not null. One should note that the Poissonian distribution is not able to reproduce the heterogeneity we can see in the data, while the power-law is. Hence, in most contexts real networks are \textbf{highly heterogeneous} and degrees can span \textbf{several orders of magnitude}. In particular, the \( \gamma   \) coefficient of the power-law has an important role, since it represents the \textbf{slope} of the curve in log-log scale.
 Since we observe similar structures for different scales, these networks are said to be \textbf{scale-free} networks. In most real networks $\gamma$ has small values, i.e. \( \gamma \le 3 \).
 
 
@@ -182,7 +182,7 @@ This algorithm is indeed able to create networks with some \textbf{interesting p
   P(k) = \frac{2 m (m +1)}{k(k+1)(k+2)} \sim k^{-3}
 \end{equation*}
 where $m$ is the number of links we are adding at each step. Note that $m$ is a parameter that is related the minimal degree of the network. However, this approximation is valid for \textbf{large} \( k \).\\
-An important result is that \( \gamma =3  \) and it is \textbf{independent} of \( m \) and \( m_0 \).\\
+An important result is that \( \gamma =3  \) and it is \textbf{independent} of \( m \) and \( m_0 \).
 Hence, the \textbf{maximum degree} of the network scales as \( k_{max} \sim N^{1/2} \). Moreover, it holds that \( \expval{k} \rightarrow c \), but \( \expval{k^2} \rightarrow \infty   \) with \( N \), as we have seen before.
 Finally, the \textbf{average length} of the network is:
 \begin{equation*}
@@ -216,7 +216,7 @@ The first step is to define a \textbf{binary variable} for each node \( i \): \(
 \item \( \sigma _i (t) = 0 \), if the individual is \textbf{susceptible};
 \item \( \sigma _i (t) = 1 \), if the individual is \textbf{infected}.
 \end{itemize}
-As one can easily see, this variable describes the state of a generic $i$-th node at time $t$.\\
+As one can easily see, this variable describes the state of a generic $i$-th node at time $t$.
 Defining another variable \( \rho (i,t) \):
 \begin{equation*}
   \rho (i,t) \equiv \text{Prob} \qty[\sigma _i (t) = 1]
@@ -232,7 +232,8 @@ Therefore we would have to follow the entire \textbf{chain of connections}, but 
 We want to stress one more time that if we want to predict what is going to happen in the system, we would need to consider the entire network and the time evolution for all the nodes. This approach however is \textbf{feasible} only for \textbf{small graphs} (i.e. 4/5 nodes) and \textbf{few compartments}.
 
 This argument reminds us that we may need some sort of an \textbf{approximation}: indeed we need to \textbf{cut down} this \textbf{probability chain}. That is to say that, at some point, we require a closure of our equations, by the mean of approximation: we are not going to take into account the entire structure of the network. At some point we will take the \textbf{average}, and after that we will be able to solve the problem.
-In physics this kind of arguments are called \textbf{mean-field approximations}. Since we are not able to solve many body problems, at a certain point we will consider a \textbf{random field} which \textbf{acts on the entire system} and we will consider its average effects on the system.\\
+In physics this kind of arguments are called \textbf{mean-field approximations}. Since we are not able to solve many body problems, at a certain point we will consider a \textbf{random field} which \textbf{acts on the entire system} and we will consider its average effects on the system.
+
 Tailoring this procedure to our specific problem, we are substituting in some way the probability \( \text{Prob} \qty[\sigma _i (t) = 0, \sigma _j (t ) =1 ]  \) with some average probability. Obviously, depending on the assumption we are making for this approximation, we will obtain different results.
 
 There are actually many different types of approximations based on different features:
@@ -264,7 +265,8 @@ It means that we are considering networks where \textbf{nodes degree} is \textbf
 \item we have that \( k_i \simeq \expval{k}  \);
 \item we have also that the standard deviation is bounded \( \frac{\sigma _k}{\expval{k} } = \sqrt{ \frac{1-p}{p(N-1)} } \overset{N \rightarrow \infty }{\longrightarrow} 0\).
 \end{itemize}
-All the \textbf{nodes} can \textbf{be assumed to be equal}, so their position on the network does not matter anymore. This implies the \textbf{spatial homogeneity} it holds that: \( \rho (i,t) \equiv \rho (t) \).\\
+All the \textbf{nodes} can \textbf{be assumed to be equal}, so their position on the network does not matter anymore. This implies the \textbf{spatial homogeneity} it holds that: \( \rho (i,t) \equiv \rho (t) \).
+
 In addition, cutting at the individual level means that the two terms of the \textbf{joint probability} of one being infected and the other one being susceptible \( \text{Prob} [\sigma _i (t) = 0, \sigma _j (t ) =1 ] \) are \textbf{statistically independent}. This implies that the joint probability can be factorized as follows:
 \begin{equation*}
   \text{Prob} [\sigma _i (t) = 0, \sigma _j (t ) =1 ] \qquad \rightarrow \qquad \text{Prob} [\sigma _i (t) = 0] \cdot \text{Prob} [\sigma _j (t ) =1 ]
@@ -294,7 +296,7 @@ Obviously, all the results derived for SIS model in well-mixed populations are s
 
 \begin{remark}
 Let us recap what we have seen at the end of this lecture.
-We moved from well-mixed populations to contact networks, so we added more complexity in order to make the model is more realistic. We also derived the equations for SIS dynamics on a generic network and then considered its adjacency matrix. Since for us was impossible to write down a closed equation for this model, given the expression for the infection joint probability that involves two nodes, we were not able to compute exactly the probability for a single node of being infected ($\rho_i$). It would take into account the probability of three nodes \( i j k \) at the same time. This is actually unfeasible for all the models and all the possible graphs: it has been done in the literature up to only 4/5 nodes. Hence we end to somehow approximate this probability, in order to cut this infinite chain to a certain value. This is exactly why we introduce mean-field approximation: in this way we take into account the effects of all terms on a specific quantity, not individually, but on average therefore reducing the complexity of our problem. We are switching from a many body problem to a one body problem.
+We moved from well-mixed populations to contact networks, so we added more complexity in order to make the model is more realistic. We also derived the equations for SIS dynamics on a generic network and then considered its adjacency matrix. Since for us was impossible to write down a closed equation for this model, given the expression for the infection joint probability that involves two nodes, we were not able to compute exactly the probability for a single node of being infected ($\rho_i$). It would take into account the probability of three nodes $i$, $j$, $k$ at the same time. This is actually unfeasible for all the models and all the possible graphs: it has been done in the literature up to only 4/5 nodes. Hence we end to somehow approximate this probability, in order to cut this infinite chain to a certain value. This is exactly why we introduce mean-field approximation: in this way we take into account the effects of all terms on a specific quantity, not individually, but on average therefore reducing the complexity of our problem. We are switching from a many body problem to a one body problem.
 The simplest approximation we have seen is the one of homogeneous network in which all the nodes are equal, used on SIS model. According to this argument, for each node there is the same probability of getting infected, so we can approximate the probabilities to be statistically independent. After, we derived all the equations. Their solutions were the same as the ones we had found for well-mixed population. However, in that case the solutions found were \textit{exact}, while now are the result of an approximation.
 \end{remark}
 
