@@ -38,7 +38,6 @@ Let us consider a population of individuals and try to characterize it. Note as 
 This approximation, on the other hand, is quite strong: by keeping the rates fixed we are assuming that the process underlying the spreading of the disease is a \textbf{Markovian}. In reality, we do not see exponential distributions, but a decay. \hl{previous sentence not clear} This last point will be discussed during the course when we will deal with \textbf{“non-Markovian”} epidemics. The interpretation we may give to $\beta$ is the \textit{“per contact” infectious rate}, in this way we only need to count the number of contacts.
 Different models can be introduced according to the type of the disease: for instance \textbf{SI}, \textbf{SIR}, \textbf{SIS}, \textbf{SEIR} and so forth.
 
-\medskip
 
 One should note that medical status is actually different from infectious status. In the latter we do not care about medical status of the person, but only about the disease and how the immune system reacts against it.
 
@@ -63,6 +62,8 @@ Note that $R_0$ for the SARS is higher than the one of COVID-19. However, we did
 
 Since we are doing a \textbf{coarse-graining} of the dynamics, this number represents the average of all possible different distributions. A wrong argument is to think that similar $R_0$ lead to similar outbreaks. The distribution of infections can be quite heterogeneous: the mean could be quite representative only if we are dealing with homogeneous populations, that is not the case for real networks. For instance, let us consider the plot in Fig. \ref{fig:3_outbreaks}. We see that SARS is heterogeneous, while Spanish Flu was more a homogeneous one. COVID-19 is most likely somewhere in the middle.
 
+Let us now introduce the \textbf{Effective Reproductive Number} \pmb{R(t)}, which is the same of $R_0$ but varying wrt time. Hence, it is the average number of secondary cases that a single case produces in a population at time $t$.
+
 \begin{figure}[h!]
 \centering
 \includegraphics[width=0.7\textwidth]{../lessons/image/02/2_R_0.png}
@@ -81,7 +82,7 @@ Since we are doing a \textbf{coarse-graining} of the dynamics, this number repre
 \caption{\label{fig:4_TOST} Figure from: Ferretti et al. \url{https://www.medrxiv.org/content/10.1101/2020.09.04.20188516v1}}
 \end{figure}
 
-Let us now introduce the \textbf{Effective Reproductive Number} \mathbf{R(t)}, which is the same of $R_0$ but varying wrt time. Hence, it is the average number of secondary cases that a single case produces in a population at time $t$.
+
 
 Other important quantities we may want to introduce are:
 

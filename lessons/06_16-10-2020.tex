@@ -32,7 +32,7 @@ But what actually happens if we rewire only a single link? We therefore want to 
 And it is represented by the random circle in Fig. \ref{fig:06_1}.
 
 \section{Degree distribution over networks}
-Now the question is how degrees are distributed for different type of networks.\\
+Now the question is how degrees are distributed for different type of networks.
 Let us consider a \textbf{small network}, its degree distribution will be really resembling to the plot on the left of Fig. \ref{fig:06_2}. However, now we want to understand how this quantity distributes in \textbf{real networks}. In order to build a real network, the first assumption that we can make is building the connections \textit{at random}, so with a probability $p$. Consequently the degree distribution is one of the kind as in the right of Fig. \ref{fig:06_2}.
 
 \begin{figure}[h!]
@@ -48,7 +48,7 @@ Let us consider a \textbf{small network}, its degree distribution will be really
 \end{figure}
 
 \subsection{Erdös and Rényi Model: random graphs}
-Let us consider the Erdös and Rényi model which represents the evolution of a graph where links between nodes are drawn at random, according to a predefined probability $p$. Before 1959 (the year of the publication of Erdös and Rényi's paper) people were actually assuming that connections were regular, so no randomness at all. However, since randomness in real world is a deal, thanks to E.R. random connections were taken into account for the first time.\\
+Let us consider the Erdös and Rényi model which represents the evolution of a graph where links between nodes are drawn at random, according to a predefined probability $p$. Before 1959 (the year of the publication of Erdös and Rényi's paper) people were actually assuming that connections were regular, so no randomness at all. However, since randomness in real world is a deal, thanks to E.R. random connections were taken into account for the first time.
 In particular, the algorithm for creating such a network is:
 \begin{itemize}
 \item create an empty graph with $N$ nodes;
@@ -70,7 +70,7 @@ The problem of this distribution is that it is difficult to be dealt with analyt
 \begin{equation*}
   \frac{\sigma _k}{\expval{k} } = \sqrt{\frac{1-p}{p(N-1)}} \overset{N \rightarrow \infty }{\longrightarrow } 0
 \end{equation*}
-which becomes narrower as \( N \) becomes larger, therefore some sort of \textbf{approximation} needs to be introduced.\\
+which becomes narrower as \( N \) becomes larger, therefore some sort of \textbf{approximation} needs to be introduced.
 
 Fortunately, since for sparse networks we have \( k \ll N \), the binomial \( (N,p) \) distribution can be approximated by a \textbf{Poisson distribution} with parameter \( \lambda = p N \). Indeed, given that  \( \expval{k} = p(N-1)  \), if we have \( k \ll N \) then it implies that \( p \ll N \). Hence we can write the following:
 \begin{equation*}
@@ -84,7 +84,7 @@ Obtaining the \textbf{Poisson distribution} we were looking for:
 \begin{equation}
   p_k = e^{- \expval{k} } \frac{\expval{k} }{k!}
 \end{equation}
-As before, the average and the variance scale exactly in the same way with the size of the network ($\sim \lambda = Np$). This actually tells us that \textbf{all} the \textbf{nodes are} more or less \textbf{the same}. Indeed when we observe a bounded variance, it means that all the nodes more or less have the same degree.\\
+As before, the average and the variance scale exactly in the same way with the size of the network ($\sim \lambda = Np$). This actually tells us that \textbf{all} the \textbf{nodes are} more or less \textbf{the same}. Indeed when we observe a bounded variance, it means that all the nodes more or less have the same degree.
 In particular, as $p$ increases the graph undergoes a \textbf{transition} from disconnected to fully connected one:
 \begin{itemize}
 \item if \( N p < 1 \), the graph will almost surely have no connected components of size larger than \( O(\log(N)) \);
@@ -102,7 +102,8 @@ In particular, as $p$ increases the graph undergoes a \textbf{transition} from d
 
 \subsection{Scale-free networks}
 
-However, so far we have not discussed how real networks look like, in particular what is their degree distribution. In the last decades we started to have really complex and large networks, whose structure really differs from the structure we usually see for a random network. In Fig. \ref{fig:06_4}, as an example, we shown two real social networks we know pretty well: Facebook and Twitter. Note that both plots are in log-log scale. Generalizing, we can say that most of the real networks scales in the same way.\\ 
+However, so far we have not discussed how real networks look like, in particular what is their degree distribution. In the last decades we started to have really complex and large networks, whose structure really differs from the structure we usually see for a random network. In Fig. \ref{fig:06_4}, as an example, we shown two real social networks we know pretty well: Facebook and Twitter. Note that both plots are in log-log scale. Generalizing, we can say that most of the real networks scales in the same way.
+
 We now want to understand how the \textbf{degree distribution} looks like. Let us consider Fig. \ref{fig:06_4}: black dots follow the Poissonian distribution that we were mentioning before, while the squares follow a power-law \( P(k) \sim k^{- \gamma  } \), which is \textbf{heavy tailed distribution}, in the sense that possibility for large degrees is not null. One should note that the Poissonian distribution is not able to reproduce the heterogeneity we can see in the data, while the power-law is. Hence, in most contexts real networks are \textbf{highly heterogeneous} and degrees can span \textbf{several orders of magnitude}. In particular, the \( \gamma   \) coefficient of the power-law has an important role, since it represents the \textbf{slope} of the curve in log-log scale.\\
 Since we observe similar structures for different scales, these networks are said to be \textbf{scale-free} networks. In most real networks $\gamma$ has small values, i.e. \( \gamma \le 3 \).
 
@@ -113,7 +114,7 @@ Since we observe similar structures for different scales, these networks are sai
 \caption{\label{fig:06_4} Difference between random networks and scale-free networks.}
 \end{figure}
 
-\textbf{Heterogeneity} means that almost all nodes have a very low connectivity, way less than a random net. However, the probability of having very large degrees is not zero (\textbf{hubs}): even for relatively small networks we can observe large hubs. One should take into account that this is something really important for the spreading of diseases: thanks to these large hubs we can see shortcuts for spreading, or the so called \textbf{super-spreaders}.\\
+\textbf{Heterogeneity} means that almost all nodes have a very low connectivity, way less than a random net. However, the probability of having very large degrees is not zero (\textbf{hubs}): even for relatively small networks we can observe large hubs. One should take into account that this is something really important for the spreading of diseases: thanks to these large hubs we can see shortcuts for spreading, or the so called \textbf{super-spreaders}.
 
 We want now to study the \textbf{limiting cases} of these scale-free networks. For instance, we want to see how the \textbf{average degree} behaves, or prove that the \textbf{largest degree} scales with the size of the network. Let us consider the power-law:
 \begin{equation}
@@ -127,7 +128,8 @@ Thus, when:
 \begin{equation}
   k_{max} = k_{min} N^{\frac{1}{\gamma -1 }}
 \end{equation}
-Since in most of networks \( \gamma \sim 2-3  \), so it is easily to understand that $k_max$ scales \textbf{sub-linearly} with N, but still way faster than random graphs. This is valid for previous plots, such as in Fig. \ref{fig:06_3} as well.\\
+Since in most of networks \( \gamma \sim 2-3  \), so it is easily to understand that $k_max$ scales \textbf{sub-linearly} with N, but still way faster than random graphs. This is valid for previous plots, such as in Fig. \ref{fig:06_3} as well.
+
 Recalling the definition for the general \( n^{th} \) moment of a distribution: 
 \begin{equation}
   \expval{k^n} = \int_{k_{min}}^{\infty } k^n P(k) \dd[]{k} = \int_{k_{min}}^{\infty }  C_0 k^{n- \gamma  }\dd[]{k}
@@ -142,14 +144,17 @@ Remembering that most real networks have \( \gamma \le 3 \), hence the \textbf{v
 It has indeed a very strong \textbf{implication}: all the models we have been using before, in which we assumed that \textbf{all the people} in the population were \textbf{equal}, does \textbf{not hold} anymore.
 
 \subsection{Barabási-Albert Model}
-So far we have discussed about scale-free networks, but actually we have not created a single one yet. Therefore, an \textbf{algorithm} to create such network we can rely on, is the \textbf{Barabasi-Albert model}. This topic is discussed in a paper that is the second, chronologically speaking, that gave birth to modern Network Science. \\
-The \textbf{idea} behind this paper is extremely simple: once some real networks had been analyzed they assumed that the degree distribution \( P(K) \sim k^{-3} \), in order to create a model to reproduce the behaviors observed.\\
-Moreover, their model was based on the concept of \textbf{growing} for random networks. We start with a small number of nodes, named \textbf{clique}, and, at each time-step, a new node enters the network and connects with pre-existing nodes but according to a \textbf{preferential attachment}. Therefore, at each step the network grows in size.\\
+So far we have discussed about scale-free networks, but actually we have not created a single one yet. Therefore, an \textbf{algorithm} to create such network we can rely on, is the \textbf{Barabasi-Albert model}. This topic is discussed in a paper that is the second, chronologically speaking, that gave birth to modern Network Science. 
+
+The \textbf{idea} behind this paper is extremely simple: once some real networks had been analyzed they assumed that the degree distribution \( P(K) \sim k^{-3} \), in order to create a model to reproduce the behaviors observed.
+Moreover, their model was based on the concept of \textbf{growing} for random networks. We start with a small number of nodes, named \textbf{clique}, and, at each time-step, a new node enters the network and connects with pre-existing nodes but according to a \textbf{preferential attachment}. Therefore, at each step the network grows in size.
+
 The principle on which \textbf{preferential attachment} is based on is a very simple concept: \textit{rich gets richer}. That is to say: the more connected a node is, the more likely it is for it to receive new links. The probability for a node $i$ to attract a new link at time $t$, is proportional to its degree $k_i$ at time $t$:
 \begin{equation}
   \Pi (k_i) = \frac{k_i}{\sum_{j}^{} k_j }
 \end{equation}
-If we speak about \textbf{influencers}, having them a lot of followers, the probability for them to increase their connections is very high. Actually, this idea is not even new, and it is something already known. Indeed this model is just a modification of the \textit{Price model}: if we published a paper and more than someone has found it interesting, it will be more likely for it to receive much more attention in the future.\\
+If we speak about \textbf{influencers}, having them a lot of followers, the probability for them to increase their connections is very high. Actually, this idea is not even new, and it is something already known. Indeed this model is just a modification of the \textit{Price model}: if we published a paper and more than someone has found it interesting, it will be more likely for it to receive much more attention in the future.
+
 Specifically for this model, we are drawing links at random, according to some probability that indeed is not uniform. Let us briefly summarize the\textbf{main steps} of the algorithm:
 \begin{itemize}
 \item we start with a clique of \( m_0 \) nodes;
@@ -196,7 +201,7 @@ which tells us that the small-world property holds as well.
 
 \chapter{Epidemic Spreading on Networks}
 
-Now it is time to drop the assumption of the well-mixed population, and start taking into account \textbf{contact networks}. In other words we are considering that \textbf{individuals can be connected in different ways} one another.\\
+Now it is time to drop the assumption of the well-mixed population, and start taking into account \textbf{contact networks}. In other words we are considering that \textbf{individuals can be connected in different ways} one another.
 The main idea is that:
 \begin{itemize}
 \item \textbf{all} individuals are \textbf{equivalent};
@@ -204,7 +209,8 @@ The main idea is that:
 \end{itemize}
 
 \section{SIS model in a network}
-Let us try to build a general model for a general network, without making any assumption on the latter. In order to do that, we start by introducing the equations of SIS model for a generic network.\\
+Let us try to build a general model for a general network, without making any assumption on the latter. In order to do that, we start by introducing the equations of SIS model for a generic network.
+
 The first step is to define a \textbf{binary variable} for each node \( i \): \( \sigma _i (t) \). This variable can only take two values:
 \begin{itemize}
 \item \( \sigma _i (t) = 0 \), if the individual is \textbf{susceptible};
@@ -215,17 +221,20 @@ Defining another variable \( \rho (i,t) \):
 \begin{equation*}
   \rho (i,t) \equiv \text{Prob} \qty[\sigma _i (t) = 1]
 \end{equation*}
-which represents the \textbf{probability} of that node \( i \) is infected at time \( t \).\\
+which represents the \textbf{probability} of that node \( i \) is infected at time \( t \).
 Using this formalism, we can recall the general equation for the SIS in a network:
 \begin{equation}
   \dv{}{t} \rho (i,t) = \overset{\text{Recovery}}{- \mu  \rho (i,t)} + \overset{\text{Infection}}{\beta \sum_{j}^{} A_{ij} \mathcolorbox{green!20}{\text{Prob} [\sigma _i (t) = 0, \sigma _j (t ) =1 ]   }}
 \end{equation}
-The most problematic part is to compute the two nodes infection probability (in green). Since we are in a network, the probability of being infected depends on my neighbours: the \( (i,j) \) infection probability depends on the status of all the other neighbors \( l \) of \( j \) and \( i \) and so forth.\\
-Therefore we would have to follow the entire \textbf{chain of connections}, but this would turn out to be a problem: we cannot obtain a closed form for this expression, since it actually depends on the probabilities of all its neighbors. In turn, they would depend on their neighbors probability and so and so forth.\\
-We want to stress one more time that if we want to predict what is going to happen in the system, we would need to consider the entire network and the time evolution for all the nodes. This approach however is \textbf{feasible} only for \textbf{small graphs} (i.e. 4/5 nodes) and \textbf{few compartments}.\\
-This argument reminds us that we may need some sort of an \textbf{approximation}: indeed we need to \textbf{cut down} this \textbf{probability chain}. That is to say that, at some point, we require a closure of our equations, by the mean of approximation: we are not going to take into account the entire structure of the network. At some point we will take the \textbf{average}, and after that we will be able to solve the problem.\\
+The most problematic part is to compute the two nodes infection probability (in green). Since we are in a network, the probability of being infected depends on my neighbours: the \( (i,j) \) infection probability depends on the status of all the other neighbors \( l \) of \( j \) and \( i \) and so forth.
+Therefore we would have to follow the entire \textbf{chain of connections}, but this would turn out to be a problem: we cannot obtain a closed form for this expression, since it actually depends on the probabilities of all its neighbors. In turn, they would depend on their neighbors probability and so and so forth.
+
+We want to stress one more time that if we want to predict what is going to happen in the system, we would need to consider the entire network and the time evolution for all the nodes. This approach however is \textbf{feasible} only for \textbf{small graphs} (i.e. 4/5 nodes) and \textbf{few compartments}.
+
+This argument reminds us that we may need some sort of an \textbf{approximation}: indeed we need to \textbf{cut down} this \textbf{probability chain}. That is to say that, at some point, we require a closure of our equations, by the mean of approximation: we are not going to take into account the entire structure of the network. At some point we will take the \textbf{average}, and after that we will be able to solve the problem.
 In physics this kind of arguments are called \textbf{mean-field approximations}. Since we are not able to solve many body problems, at a certain point we will consider a \textbf{random field} which \textbf{acts on the entire system} and we will consider its average effects on the system.\\
-Tailoring this procedure to our specific problem, we are substituting in some way the probability \( \text{Prob} \qty[\sigma _i (t) = 0, \sigma _j (t ) =1 ]  \) with some average probability. Obviously, depending on the assumption we are making for this approximation, we will obtain different results.\\
+Tailoring this procedure to our specific problem, we are substituting in some way the probability \( \text{Prob} \qty[\sigma _i (t) = 0, \sigma _j (t ) =1 ]  \) with some average probability. Obviously, depending on the assumption we are making for this approximation, we will obtain different results.
+
 There are actually many different types of approximations based on different features:
 \begin{itemize}
 \item \textbf{Network structure}:
@@ -248,7 +257,7 @@ There are actually many different types of approximations based on different fea
 
 
 \subsection{Homogeneous Networks}
-Let us start by taking the simplest approximation: we assume \textbf{homogeneous network}, \textbf{DBMF} and we cut the chain at an \textbf{individual} level.\\
+Let us start by taking the simplest approximation: we assume \textbf{homogeneous network}, \textbf{DBMF} and we cut the chain at an \textbf{individual} level.
 
 It means that we are considering networks where \textbf{nodes degree} is \textbf{bounded}, hence:
 \begin{itemize}
@@ -278,13 +287,14 @@ and by replacing it, we can obtain the same expression that we derived before fo
 \begin{equation}
   \dv{\rho }{t} = \beta \expval{k} (1- \rho ) \rho - \mu \rho
 \end{equation}
-This is a very important result.\\
-One should keep in mind that now we are considering all the \textbf{nodes statistically independent} and we are back again to exactly the same result of well-mixed population. The only \textbf{difference} is that when we were considering well-mixed population, we assumed that the \textbf{probabilities} where \emph{exactly} \textbf{statistically independent}. Now, this is just an \textbf{approximation}.\\
+This is a very important result.
+One should keep in mind that now we are considering all the \textbf{nodes statistically independent} and we are back again to exactly the same result of well-mixed population. The only \textbf{difference} is that when we were considering well-mixed population, we assumed that the \textbf{probabilities} where \emph{exactly} \textbf{statistically independent}. Now, this is just an \textbf{approximation}.
+
 Obviously, all the results derived for SIS model in well-mixed populations are still valid, for instance the epidemic threshold.
 
 \begin{remark}
-Let us recap what we have seen at the end of this lecture.\\
-We moved from well-mixed populations to contact networks, so we added more complexity in order to make the model is more realistic. We also derived the equations for SIS dynamics on a generic network and then considered its adjacency matrix. Since for us was impossible to write down a closed equation for this model, given the expression for the infection joint probability that involves two nodes, we were not able to compute exactly the probability for a single node of being infected ($\rho_i$). It would take into account the probability of three nodes \( i j k \) at the same time. This is actually unfeasible for all the models and all the possible graphs: it has been done in the literature up to only 4/5 nodes. Hence we end to somehow approximate this probability, in order to cut this infinite chain to a certain value. This is exactly why we introduce mean-field approximation: in this way we take into account the effects of all terms on a specific quantity, not individually, but on average therefore reducing the complexity of our problem. We are switching from a many body problem to a one body problem.\\
+Let us recap what we have seen at the end of this lecture.
+We moved from well-mixed populations to contact networks, so we added more complexity in order to make the model is more realistic. We also derived the equations for SIS dynamics on a generic network and then considered its adjacency matrix. Since for us was impossible to write down a closed equation for this model, given the expression for the infection joint probability that involves two nodes, we were not able to compute exactly the probability for a single node of being infected ($\rho_i$). It would take into account the probability of three nodes \( i j k \) at the same time. This is actually unfeasible for all the models and all the possible graphs: it has been done in the literature up to only 4/5 nodes. Hence we end to somehow approximate this probability, in order to cut this infinite chain to a certain value. This is exactly why we introduce mean-field approximation: in this way we take into account the effects of all terms on a specific quantity, not individually, but on average therefore reducing the complexity of our problem. We are switching from a many body problem to a one body problem.
 The simplest approximation we have seen is the one of homogeneous network in which all the nodes are equal, used on SIS model. According to this argument, for each node there is the same probability of getting infected, so we can approximate the probabilities to be statistically independent. After, we derived all the equations. Their solutions were the same as the ones we had found for well-mixed population. However, in that case the solutions found were \textit{exact}, while now are the result of an approximation.
 \end{remark}
 

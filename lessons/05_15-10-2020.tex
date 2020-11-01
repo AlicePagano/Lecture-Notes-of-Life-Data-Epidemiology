@@ -43,8 +43,10 @@ In addition, the equilibrium values \( s^* \), \( i^* \) and \( r^* \) can be ea
 
 \subsection{SEIR Model}
 
-In reality people do not become instantaneously infectious, but there is a \textbf{latent period} which is the time between infection and becoming infectious. Indeed, the pathogen replication takes time, i.e. viral load is too low to be able to transmit the infection. This argument leads us to introduce the \textbf{S}\textit{usceptible},  \textbf{E}\textit{xposed}, \textbf{I}\textit{nfected}, \textbf{R}\textit{ecovered} model, where the class \textbf{E} takes into account that a person has already contracted the disease, hence is not susceptible anymore, but is not able to spread it yet.\\
-Moreover, this period can be extremely heterogeneous depending on the disease: it can take from few hours to years, such as the case for $HIV$ or, even longer, $TBC$. In the latter, latent periods might appear to be even longer than an individual's lifespan, with the result that he may have contracted the disease, but the death occurs for other causes before the onset of any symptom.\\
+In reality people do not become instantaneously infectious, but there is a \textbf{latent period} which is the time between infection and becoming infectious. Indeed, the pathogen replication takes time, i.e. viral load is too low to be able to transmit the infection. This argument leads us to introduce the \textbf{S}\textit{usceptible},  \textbf{E}\textit{xposed}, \textbf{I}\textit{nfected}, \textbf{R}\textit{ecovered} model, where the class \textbf{E} takes into account that a person has already contracted the disease, hence is not susceptible anymore, but is not able to spread it yet.
+
+Moreover, this period can be extremely heterogeneous depending on the disease: it can take from few hours to years, such as the case for $HIV$ or, even longer, $TBC$. In the latter, latent periods might appear to be even longer than an individual's lifespan, with the result that he may have contracted the disease, but the death occurs for other causes before the onset of any symptom.
+
 It is important to remind that the \textbf{latent period} is \textbf{not the same} of the \textbf{incubation period} (see Fig. \ref{fig:05_1}). An individual can be infectiuous before symptoms. For instance, there might be a \textbf{pre-syntomatic infection period} as it occurs in the case of COVID-19! This explains, once again, why medical status is different from the infection status.
 
 \begin{figure}[h!]
@@ -95,7 +97,7 @@ One may object that, given that the infectious period and $R_0$ are similar betw
     i_{SIR} (t) &\approx i_0 e^{(R_0-1) \mu t}
 \end{split}
 \end{equation}
-Even if the behavior at the steady state is similar, the temporal evolution of the prevalence of SEIR model is actually slower than the one using SIR. This has surely to be taken into account in policy making, given its important implications.\\
+Even if the behavior at the steady state is similar, the temporal evolution of the prevalence of SEIR model is actually slower than the one using SIR. This has surely to be taken into account in policy making, given its important implications.
 
 The SEIR can be the starting point for modeling realistic diseases: i.e. Covid-19 (see Fig. \ref{fig:05_2}).
 \begin{figure}[h!]
@@ -157,7 +159,7 @@ and the Exposed class has the effect to slow down the spreading.
 
 \section{Main definitions}
 
-When we talk about Network Science, as the name would suggest, we study \textbf{Networks} that, in math, are also known as graph.\\
+When we talk about Network Science, as the name would suggest, we study \textbf{Networks} that, in math, are also known as graph.
 A \textbf{Graph} $G(V,E)$ is simply an object that is composed by a set of \textbf{nodes} (vertices) \( V \) and a set of \textbf{links} (edges) \( E \):
 \begin{itemize}
 \item \textbf{nodes} represent the \emph{entities} \( V=[\dots,i,j,k,\dots] \) involved in some relationship. These might be entries, people belonging to a social network and so forth. The \textbf{number of nodes} is \( N= \abs{V}  \);
@@ -172,7 +174,7 @@ Another important quantity is the \textbf{network density} (connectance), that i
 \begin{equation}
   d = \frac{L}{N(N-1)}
 \end{equation}
-\textbf{Real networks} usually have a very low density, so are \textbf{sparse systems} (\( L \ll N^2 \)).\\
+\textbf{Real networks} usually have a very low density, so are \textbf{sparse systems} (\( L \ll N^2 \)).
 
 A graph, mathematically, can be represented by the mean of a matrix. It is the so called \textbf{adjacency matrix} \( A \) of the network, where:
 \begin{itemize}
@@ -180,7 +182,7 @@ A graph, mathematically, can be represented by the mean of a matrix. It is the s
 \item \( a_{ij} = 0 \) otherwise.
 \end{itemize}
 Many mathematical tools can be used to determine the properties of the system alongside with this matrix, as an example we may want to compute its spectrum in order to obtain the largest eigenvalue. Moreover, one should note that the matrix is symmetrical for undirected and unweighted graphs, i.e. \( a_{ij} = a_{ji} \).
-However, as we already told, real networks are usually sparse, therefore the adjacency matrix will be filled for large part by zeros. Hence in order to store graphs in a computer efficiently, it is better to use other tools such as adjacency lists, etc.\\
+However, as we already told, real networks are usually sparse, therefore the adjacency matrix will be filled for large part by zeros. Hence in order to store graphs in a computer efficiently, it is better to use other tools such as adjacency lists, etc.
 
 Two nodes that share a link are defined "connected", "adjacent", "neighbors". In particular, the \textbf{neighborhood} of node \( i \) is the set of nodes connected to \( i \).
 The number of neighbors \( k_i \) of each node \( i \) is what is called the \textbf{degree} of the node $i$. This is the basic measure that we are going to encounter so many times. Once we have defined the degree, the next step is to define what is the \textbf{average degree} over the entire network:
@@ -188,7 +190,7 @@ The number of neighbors \( k_i \) of each node \( i \) is what is called the \te
   \expval{k} = \frac{1}{N} \sum_{i=1}^{N} k_i, \qquad \text{or} \qquad \expval{k} = \frac{2L}{N} = d(N-1)
 \end{equation}
 
-The next definition is the one of \textbf{path}, which is a sequence of links which permits to go from node \( i \) to node \( j \) following edges. Another relevant quantity is the so called \textbf{shortest path} between \( i \) and \( j \), it is important since it gives us the idea of how big the network is. In particular, the \textbf{distance} \( l_{ij} \) represents the length of the shortest path between \( i \) and \( j \). There could be multiple shortest paths between \( i \) and \( j \).\\
+The next definition is the one of \textbf{path}, which is a sequence of links which permits to go from node \( i \) to node \( j \) following edges. Another relevant quantity is the so called \textbf{shortest path} between \( i \) and \( j \), it is important since it gives us the idea of how big the network is. In particular, the \textbf{distance} \( l_{ij} \) represents the length of the shortest path between \( i \) and \( j \). There could be multiple shortest paths between \( i \) and \( j \).
 The shortest path of maximum length in the network is defined as \textbf{diameter}:
 \begin{equation*}
   l_{max} = \max_{ij} l_{ij}
@@ -200,10 +202,10 @@ Another measure we may want to introduce is the \textbf{average} (shortest) \tex
 
 The network is said to be \textbf{connected} if every possible couple of nodes is reachable trough a path. Otherwise, each connected part is defined as a \textbf{connected component}.
 
-\medskip
 
-Now, let us see some examples of networks, such as “The Oracle of Bacon”, or the so called “Erdos Number”. The first one is a site that, given the name of an actor, returns the distance between this actor and Kevin Bacon,  in unit of costarring movies. This quantity is indeed computed by taking into account the network of actors, linked by common movies in which they starred. The \textbf{Erdos Number} instead is the "academical version" for the "Oracle of Bacon": we compute the distance, in terms of collaborations in publications, between a given researcher and the mathematician Paul Erdos through the publications network. The most surprising fact is that, for both examples, the distance is very low! Therefore a question arises: why such short distances in such large networks?\\
-In particular, real networks are smaller (i.e. shorter) than one would expect. This is pointed out by the idea of the “Six degrees of separation”. It refers to an experiment that was run in the '60s by Stanley Milgram: he gave a postcard to a person on the West Coast, with the instructions that it had to be delivered to a place situated in the East Coast. The main goal was to count how many people would receive that postcard, given the rule that it was allowed to give the postcard to acquaintances of the actual possessor. It was discovered that this postcard actually was delivered to 6 people before reaching the destination.\\
-This is what is called the \textbf{small world phenomena}. When we study the average path length, for some networks we may find that $\expval(I) \sim ln(N)$ or, in some cases even $\expval(I) \sim ln(ln(N))$. This is extremely important in the spreading of diseases, since we are able to cover the whole system in few steps.
+
+Now, let us see some examples of networks, such as “The Oracle of Bacon”, or the so called “Erdos Number”. The first one is a site that, given the name of an actor, returns the distance between this actor and Kevin Bacon,  in unit of costarring movies. This quantity is indeed computed by taking into account the network of actors, linked by common movies in which they starred. The \textbf{Erdos Number} instead is the "academical version" for the "Oracle of Bacon": we compute the distance, in terms of collaborations in publications, between a given researcher and the mathematician Paul Erdos through the publications network. The most surprising fact is that, for both examples, the distance is very low! Therefore a question arises: why such short distances in such large networks?
+In particular, real networks are smaller (i.e. shorter) than one would expect. This is pointed out by the idea of the “Six degrees of separation”. It refers to an experiment that was run in the '60s by Stanley Milgram: he gave a postcard to a person on the West Coast, with the instructions that it had to be delivered to a place situated in the East Coast. The main goal was to count how many people would receive that postcard, given the rule that it was allowed to give the postcard to acquaintances of the actual possessor. It was discovered that this postcard actually was delivered to 6 people before reaching the destination.
+This is what is called the \textbf{small world phenomena}. When we study the average path length, for some networks we may find that $\expval{I} \sim ln(N)$ or, in some cases even $\expval{I} \sim ln(ln(N))$. This is extremely important in the spreading of diseases, since we are able to cover the whole system in few steps.
 
 \end{document}

@@ -9,7 +9,8 @@
 
 \section{Basic models}
 
-In this lecture we are going to introduce some of the basic models we will use for the entire course. The first assumption we make is that we are in \textbf{well-mixed populations}, or in other words \textit{homogeneous mixing}. Mathematically, it is what is called \textbf{mean field approximation}.\\
+In this lecture we are going to introduce some of the basic models we will use for the entire course. The first assumption we make is that we are in \textbf{well-mixed populations}, or in other words \textit{homogeneous mixing}. Mathematically, it is what is called \textbf{mean field approximation}.
+
 In the well-mixed population assumptions, it holds that that:
 \begin{itemize}
 \item all individuals are \textbf{equivalent}, hence every one has the same probability of being infected;
@@ -19,7 +20,8 @@ In the well-mixed population assumptions, it holds that that:
 
 \subsection{SI model}
 
-The simplest model one can think of is the \textbf{SI} (\textbf{S}\textit{usceptible} \textbf{I}\textit{nfected}). In this model one can get the infection and, once we have got, we cannot recover, that is to say we stay infected forever.\\
+The simplest model one can think of is the \textbf{SI} (\textbf{S}\textit{usceptible} \textbf{I}\textit{nfected}). In this model one can get the infection and, once we have got, we cannot recover, that is to say we stay infected forever.
+
 The \textbf{transition diagram} that describes this model is the following:
 \begin{equation}
   S + I \overset{\beta }{\rightarrow} I + I
@@ -31,9 +33,11 @@ where $\beta$ is the \textit{“per contact” infection rate} and dictates the 
 \end{split}
 \end{equation}
 where $\expval{k}$ represents the average contacts, while $i$ stands for the fraction of infected people in the entire population ($i=I/N$), and $s$ is the fraction of susceptible people in the population ($s=S/N$).
-The product $s i$ is the probability of having a contact between an infected and a susceptible, and $\beta  s i$ is the probability of having a contact between an infected and a susceptible which in turns leads to an infection.\\
-One of the most important quantity we may want to introduce in our lexicon is the so called \textit{prevalence} $i = \frac{I}{N}$, that is another way to define the density of infected people wrt the entire population.\\
-In order to solve it analytically, we recall that our population is closed. Therefore $s+i=1$, and it follows that we only have one equation to be solved since $s=1-i$.\\
+The product $s i$ is the probability of having a contact between an infected and a susceptible, and $\beta  s i$ is the probability of having a contact between an infected and a susceptible which in turns leads to an infection.
+
+One of the most important quantity we may want to introduce in our lexicon is the so called \textit{prevalence} $i = \frac{I}{N}$, that is another way to define the density of infected people wrt the entire population.
+
+In order to solve it analytically, we recall that our population is closed. Therefore $s+i=1$, and it follows that we only have one equation to be solved since $s=1-i$.
 We have that:
 \begin{equation*}
   \dv{i}{t} = \beta i (1-i) \quad \rightarrow \frac{1}{\beta i (1-i)} \dd[]{i} = \dd[]{t} \quad \rightarrow \frac{1}{\beta (1-i)} \dd[]{i} + \frac{1}{\beta i} \dd[]{i} = \dd[]{t}
@@ -53,7 +57,7 @@ The result is:
 \begin{equation}
   i(t) = \frac{i_0 e^{\beta t} }{1-i_0 + i_0 e^{\beta t} }
 \end{equation}
-which is a sigmoid function (Fig. \ref{fig:3_2}) that always saturates at 1. One should note that after the first part, wherethe growth is actually exponential \footnote{it is the one we have seen in the media for COVID-19}, then at a certain point the slope starts to decrease. The reason for this is that the contribution given by the term $s i$, namely the probability of funding new susceptible people, decrease. Finally, we saturates at 1 after some. As can be clearly seen from Fig. \ref{fig:3_2}, it is the value of $\beta$ that drives the spreading. By increasing it, we obtain a faster exponential growth.
+which is a sigmoid function (Fig. \ref{fig:3_2}) that always saturates at 1. One should note that after the first part, where the growth is actually exponential \footnote{It is the one we have seen in the media for COVID-19.}, then at a certain point the slope starts to decrease. The reason for this is that the contribution given by the term $s i$, namely the probability of funding new susceptible people, decrease. Finally, we saturates at 1 after some. As can be clearly seen from Fig. \ref{fig:3_2}, it is the value of $\beta$ that drives the spreading. By increasing it, we obtain a faster exponential growth.
 This actually was the simplest model one can think of.
 
 \begin{figure}[h!]
@@ -74,8 +78,10 @@ Now, let us introduce a slightly more complicated model, that is the \textbf{SIS
   I &\overset{\mu }{\rightarrow } S
 \end{split}
 \end{equation}
-where the first transition is mediated by $I$, that is to say we need to encounter another infected to contract the disease, while the second one occurs \textbf{spontaneously} according to the rate $\mu$.\\
-This model is used for diseases that do not confer immunity. When we use the expression \textbf{endemic state} it means that the disease keeps on circulating in the population for very large times.\\
+where the first transition is mediated by $I$, that is to say we need to encounter another infected to contract the disease, while the second one occurs \textbf{spontaneously} according to the rate $\mu$.
+
+This model is used for diseases that do not confer immunity. When we use the expression \textbf{endemic state} it means that the disease keeps on circulating in the population for very large times.
+
 The most important feature about this model is that it is the simplest one where \textbf{dynamical equilibrium} can be reached. Therefore an individual may recover from the disease, but he does not get immunity. Indeed there are always people infected that can propagate the disease. The $ \mu  $ is the \textbf{recovery rate} which determines the \textit{time-scale of the infection}. Dividing \( \beta  \) by \( \mu  \) you can \textbf{rescale} all the \textbf{dynamics}.
 The \textbf{equations} are exactly the same as before, except for a term:
 \begin{equation}
@@ -84,7 +90,8 @@ The \textbf{equations} are exactly the same as before, except for a term:
   \dv{i}{t} &= \beta \expval{k} si - \mathcolorbox{green!20}{\mu i}
 \end{split}
 \end{equation}
-and in addition can solved in the very same way we previously did.\\
+and in addition can solved in the very same way we previously did.
+
 Also, the shape of the \textbf{solution} is a sigmoid as before:
 \begin{equation}
   i(t) = i_0 \frac{(\beta - \mu ) e^{(\beta - \mu )t} }{\beta - \mu  + \beta i_0 e^{(\beta - \mu )t} }
@@ -120,7 +127,8 @@ and we have that:
 \begin{equation}
   i>0 \iff \beta > \beta_c = \frac{\mu }{ \expval{k} }
 \end{equation}
-where $\beta_c$ is known as the \textbf{epidemic threshold}. This tells us whether the disease is going to spread.\\
+where $\beta_c$ is known as the \textbf{epidemic threshold}. This tells us whether the disease is going to spread.
+
 In addition the epidemic threshold is the minimum value of the infection probability for which the disease survives. This is what in physics is called a \textbf{second order phase transition} (Fig. \ref{fig:3_5}). In this case the \textbf{critical exponents} are the same of the Ising model, since they belong to the same class of universality. $\beta_c$ is one of the most important quantities we are going to study.
 
 \begin{figure}[h!]
@@ -129,7 +137,8 @@ In addition the epidemic threshold is the minimum value of the infection probabi
 \caption{\label{fig:3_5} Epidemic diagram.}
 \end{figure}
 
-One may ask what is the relation between \( R_0 \) and the epidemic threshold. Obviously, they are strongly correlated. We actually say that given a \textbf{critical value}, below it we have no spreading, while above we have a fraction of infected people.\\
+One may ask what is the relation between \( R_0 \) and the epidemic threshold. Obviously, they are strongly correlated. We actually say that given a \textbf{critical value}, below it we have no spreading, while above we have a fraction of infected people.
+
 The epidemic threshold is given by the condition under which we observe the spreading. Mathematically, given a specific model, its critical version will return the values of the parameters for which $ R_0 = 1 $. If we are slightly above this threshold, we need a minimum of infected people and the disease is going to spread. Considering for instance the case of the SIS model:
 \begin{equation}
   R_0 = \frac{\beta \expval{k} }{\mu } = 1
@@ -137,7 +146,8 @@ The epidemic threshold is given by the condition under which we observe the spre
 
 
 \subsection{SIR model}
-We now discuss the so called $SIR$ model, whose compartments are \textbf{S}\textit{usceptible}, \textbf{I}\textit{nfected} and \textbf{R}\textit{ecovered}. The idea behind is the same one of the SIS, but we are now adding a new state which accounts for long lasting immunity (\textbf{R}). Hence, once a person has got the disease and has recovered, he obtains a long \textbf{immunity}. Recall that, since we assumed that the population is closed, its density is still fixed to 1.\\
+We now discuss the so called $SIR$ model, whose compartments are \textbf{S}\textit{usceptible}, \textbf{I}\textit{nfected} and \textbf{R}\textit{ecovered}. The idea behind is the same one of the SIS, but we are now adding a new state which accounts for long lasting immunity (\textbf{R}). Hence, once a person has got the disease and has recovered, he obtains a long \textbf{immunity}. Recall that, since we assumed that the population is closed, its density is still fixed to 1.
+
 The transitions for this model are:
 \begin{equation}
 \begin{split}
@@ -145,7 +155,8 @@ The transitions for this model are:
   I &\overset{\mu }{\rightarrow } R
 \end{split}
 \end{equation}
-and one should note that we cannot have any endemic state. For large times all individuals will have been infected, and recovered, so the disease will be spreading no more.\\
+and one should note that we cannot have any endemic state. For large times all individuals will have been infected, and recovered, so the disease will be spreading no more.
+
 The differential equations that describe this model are:
 \begin{equation}
 \begin{split}
@@ -161,8 +172,9 @@ The differential equations that describe this model are:
 \caption{\label{fig:3_6} Epidemic regimes.}
 \end{figure}
 
-This is actually a good point to introduce the \textbf{different regimes} we may encounter during a spreading, which are represented in Fig. \ref{fig:3_6} for the SIS and SIR models.\\
-Initially, at the beginning of each spreading, we see the so called \textbf{noisy phase} where the numbers are too small to cause a large spreading. Here we can observe only some sort of stochastic fluctuations. In many cases, we can end up without any spreading: if we are able to stop the infected people in this noisy phase, we stop the disease (assuming it is heterogeneous \hl{not clear}). If it is not the case, the disease starts spreading according to the characteristic \textbf{exponential growth}. Later, the slope slows down until we reach the \textbf{steady state}: for the SIS the disease keeps circulating among the individuals \textit{(endemic state)}, while for the SIR it disappears \textit{(absorbing state)}.\\
+This is actually a good point to introduce the \textbf{different regimes} we may encounter during a spreading, which are represented in Fig. \ref{fig:3_6} for the SIS and SIR models.
+
+Initially, at the beginning of each spreading, we see the so called \textbf{noisy phase} where the numbers are too small to cause a large spreading. Here we can observe only some sort of stochastic fluctuations. In many cases, we can end up without any spreading: if we are able to stop the infected people in this noisy phase, we stop the disease (assuming it is heterogeneous \hl{not clear}). If it is not the case, the disease starts spreading according to the characteristic \textbf{exponential growth}. Later, the slope slows down until we reach the \textbf{steady state}: for the SIS the disease keeps circulating among the individuals \textit{(endemic state)}, while for the SIR it disappears \textit{(absorbing state)}.
 
 In order to compute the \textbf{epidemic threshold} for the SIR model, the path to follow is the same as before. In particular, we assume that, at the starting point, $ r \ll 1 $ so that:
 \begin{equation*}
@@ -193,9 +205,9 @@ One may note that \( R_0 = \beta \expval{k} / \mu   \), and this should make us 
 We want now to modify the SIR to take into account some more features we want to implement our model with.
 
 \subsection{SIR with Demography}
-So far we have assumed that the population was totally closed, and so densities always sum up to 1. This is actually unrealistic, so our next step will be to \textbf{drop} the \textbf{closed population} assumptions: we will now introduce births and deaths. This reasoning is justified from what we observe in real world: considering the demography, we note as every year there are new children that are infected by diseases such as Measles and Chickenpox. Anyway, we do not expect that they will die out over weeks, but still it tells us that newborns increase the populations to the susceptible compartment.\\ 
+So far we have assumed that the population was totally closed, and so densities always sum up to 1. This is actually unrealistic, so our next step will be to \textbf{drop} the \textbf{closed population} assumptions: we will now introduce births and deaths. This reasoning is justified from what we observe in real world: considering the demography, we note as every year there are new children that are infected by diseases such as Measles and Chickenpox. Anyway, we do not expect that they will die out over weeks, but still it tells us that newborns increase the populations to the susceptible compartment.
 
-The simplest assumption we can make is: similar to the infectious period, individuals can have a \textbf{lifespan}, denoted as \( 1/\alpha  \) years$^{-1}$. Note as in this approximations lifespan is much greater than the infectious period, so deaths are not due to the disease. In this way we assume that \( \alpha  \) is the death rate, common to all classes. Moreover, \( \alpha  \) is also the crude birth rate, and in addition we assume that births occur only for susceptible individuals and therefore increase its density.\\
+The simplest assumption we can make is: similar to the infectious period, individuals can have a \textbf{lifespan}, denoted as \( 1/\alpha  \) years$^{-1}$. Note as in this approximations lifespan is much greater than the infectious period, so deaths are not due to the disease. In this way we assume that \( \alpha  \) is the death rate, common to all classes. Moreover, \( \alpha  \) is also the crude birth rate, and in addition we assume that births occur only for susceptible individuals and therefore increase its density.
 
 In order to keep the population constant, we need to assume:
 \begin{equation}
@@ -214,7 +226,7 @@ where the \textbf{infectious period} is:
 \begin{equation}
   \tau = \frac{1}{\alpha + \mu }
 \end{equation}
-on average, individuals spend less time infected because some of them may die while infected. However, it is a small change compared to before, since lifespan is much greater than the infectious period.\\
+on average, individuals spend less time infected because some of them may die while infected. However, it is a small change compared to before, since lifespan is much greater than the infectious period.
 
 Also, \( \mathbf{R_0} \) is reduced due to mortality:
 \begin{equation}
@@ -234,9 +246,9 @@ and, collecting $i^*$, we obtain the following equation:
 \begin{equation}
   i^* \qty[\beta s^* - (\mu + \alpha )] = 0
 \end{equation}
-which is not differential anymore.\\
+which is not differential anymore.
 
-There are two different solutions for this equation: the one for which \( i^* = 0 \) (\textbf{disease free state}) and the one for \( s^* = \frac{\alpha + \mu }{\beta } = \frac{1}{R_0} \), which is the \textbf{endemic state}. Here, the most important result is that the \textbf{SIR} model \textbf{with demography} can actually \textbf{show} an \textbf{endemic state}.\\
+There are two different solutions for this equation: the one for which \( i^* = 0 \) (\textbf{disease free state}) and the one for \( s^* = \frac{\alpha + \mu }{\beta } = \frac{1}{R_0} \), which is the \textbf{endemic state}. Here, the most important result is that the \textbf{SIR} model \textbf{with demography} can actually \textbf{show} an \textbf{endemic state}.
 
 Replacing \( s^* = \frac{1}{R_0} \) in \( \dv{s}{t} = \alpha - \beta s i - \alpha w  \), we obtain:
 \begin{equation*}
