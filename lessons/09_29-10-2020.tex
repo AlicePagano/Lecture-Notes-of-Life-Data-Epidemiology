@@ -301,34 +301,26 @@ Summing over all the neighbors of $i$ we have the the \textbf{total number of su
 
 \item in the \emph{steady state} the number of successful infections (\(  S \sum_{j=1}^{N}  a_{ij} \frac{E[M]}{E[R]} v_{j} (1-v_i) \)) is asymptotically equal to the number of infected periods experienced by \( i \): \( v_i S / E[R] \). Thus we have:
 \begin{equation}
-  S \sum_{j=1}^{N}  a_{ij} \frac{E[M]}{E[R]} v_{j} (1-v_i) = v_i \frac{S}{E[R]}
+  \cancel{S} \sum_{j=1}^{N}  a_{ij} \frac{E[M]}{\cancel{E[R]}} v_{j} (1-v_i) = v_i \frac{\cancel{ S}}{\cancel{E[R]}} \qquad \rightarrow \qquad  v_i = E[M] (1- v_i) \sum_{j=1}^{N} a_{ij} v_j
 \end{equation}
-
-
-
-
+hence the probability of \( i \) being infected depends by the sum over all its neighbours, times the term \( E[M] \) which is the average infection attempts that it is gonna experience during the evolution.
 \end{enumerate}
 
-
-
-
-The  number of times which \( i \) receved the infection from \( j \). The total number of time which \( i \) has been infected is:
+Do the last expression sound familiar? This is exactly the same expression of the IBMF but with a generic infection term \( E[M] \):
 \begin{equation*}
-  S \sum_{j=1}^{N}  a_{ij} \frac{E[M]}{E[R]} v_{j} (1-v_i) = v_i \frac{S}{E[R]}
+  \mu \varepsilon _i^* = \beta ( 1 - \varepsilon _i^*) \sum_{j=1}^{N} a_{ij} \varepsilon _j^*
 \end{equation*}
-...
-Then we got:
-\begin{equation*}
-  v_i = E[M] (1- v_i) \sum_{j=1}^{N} A_{ij} v_j
-\end{equation*}
-hence the probability of i being infected depends by the sum over all my neighbours, times the term \( E[M] \) which is the average ifnection attempts that I am gonna experience during the evolution.
-Have you notice somethign strange? DOes it sound familiar this expression? This is exactly the linearization of the quenched mean field approach. The only difference is that before we have:
-\begin{equation*}
-  \mu \varepsilon _i^* = \beta ....
-\end{equation*}
-Same expression of the IBMF but with a generic infection term \( E[M] \). This expression encodes all the distribution that I can have in my equations.
 
-Let us see the implications of this thigns. This is also the solution of the linear system of equation that we saw before. Hence, this is the form in which we can generate a generic model from this. We can put the distribution that we like and we can obtain the expression.
+The implications are:
+\begin{itemize}
+\item the definition of \( M \) implicitly includes the recovery term: \( T_{ij}^{(1)} \le \dots \le T_{ij}^{(M_{ij}(t))} \le \mathcolorbox{green!20}{R_i (t)} \);
+\item exponential case: \( E[M] \) is the expected number of infection events in a Poisson preocess with intensity \( \beta  \) within an exponential recovery time with expectation \( 1/ \mu  \). Thus: \( E[M] = \beta / \mu  \).
+\item epidemic treshold (lower bound):
+\begin{equation*}
+  m_c = E[M_c] = \frac{1}{\Lambda _{max}}
+\end{equation*}
+\end{itemize}
+Hence, this is the form in which we can generate a generic model from. 
 
 
 
