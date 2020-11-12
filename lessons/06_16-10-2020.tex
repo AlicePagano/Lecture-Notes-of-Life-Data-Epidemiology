@@ -100,6 +100,10 @@ In particular, as $p$ increases the graph undergoes a \textbf{transition} from d
 \caption{\label{fig:06_3} Real network of Facebook and Twitter.}
 \end{figure}
 
+
+
+
+
 \subsection{Scale-free networks}
 
 However, so far we have not discussed how real networks look like, in particular what is their degree distribution. In the last decades we started to have really complex and large networks, whose structure really differs from the structure we usually see for a random network. In Fig. \ref{fig:06_4}, as an example, we shown two real social networks we know pretty well: Facebook and Twitter. Note that both plots are in log-log scale. Generalizing, we can say that most of the real networks scales in the same way.
@@ -143,6 +147,10 @@ We note as it converges only if \( \gamma -1 > n  \). This gives an hint on how 
 Remembering that most real networks have \( \gamma \le 3 \), hence the \textbf{variance of the degree also diverges}. The result is that we have extremely \textbf{heterogeneous networks} and not homogeneous ones. This is indeed coherent to our observations. 
 It has indeed a very strong \textbf{implication}: all the models we have been using before, in which we assumed that \textbf{all the people} in the population were \textbf{equal}, does \textbf{not hold} anymore.
 
+
+
+
+
 \subsection{Barabási-Albert Model}
 So far we have discussed about scale-free networks, but actually we have not created a single one yet. Therefore, an \textbf{algorithm} to create such network we can rely on, is the \textbf{Barabasi-Albert model}. This topic is discussed in a paper that is the second, chronologically speaking, that gave birth to modern Network Science. 
 
@@ -183,7 +191,7 @@ This algorithm is indeed able to create networks with some \textbf{interesting p
 \end{equation*}
 where $m$ is the number of links we are adding at each step. Note that $m$ is a parameter that is related the minimal degree of the network. However, this approximation is valid for \textbf{large} \( k \).\\
 An important result is that \( \gamma =3  \) and it is \textbf{independent} of \( m \) and \( m_0 \).
-Hence, the \textbf{maximum degree} of the network scales as \( k_{max} \sim N^{1/2} \). Moreover, it holds that \( \expval{k} \rightarrow c \), but \( \expval{k^2} \rightarrow \infty   \) with \( N \), as we have seen before (heterogeneous system).
+Hence, the \textbf{maximum degree} of the network scales as \( k_{max} \sim N^{1/2} \). Moreover, it holds that \( \expval{k} \rightarrow c \), but \( \expval{k^2} \rightarrow \infty   \) with \( N \), as we have seen before.
 Finally, the \textbf{average length} of the network is:
 \begin{equation*}
   \expval{l} \sim \frac{\ln (N)}{\ln (\ln (N))}

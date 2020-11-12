@@ -228,6 +228,7 @@ it follows that:
 Now, if we think about what happens when we are in \textbf{proximity of the epidemic threshold} (\textit{epidemic onset}), it happens that \( \rho _i^* \) can be assumed to be small for all the nodes \( \rho _i^* = \varepsilon _i^* \ll 1 \).
 Therefore, the product in \( q_i^* \) can be approximated by a sum:
 \begin{equation}
+\label{eqn:q_prod}
   q_i^* = 1 - \prod_{j=1}^{N} \qty[1- \beta A_{ij} \varepsilon _j^*] \simeq \beta \sum_{j=1}^{N} A_{ij} \varepsilon _j^*
 \end{equation}
 Substituting what we have just found in the lhs of \ref{eqn:mu_rho_i^steady} we obtain:
@@ -280,13 +281,5 @@ And in particular:
   \end{cases}
 \end{equation}
 We can conclude that \textbf{IBMF} is \textbf{more accurate} than DBMF. Due to the approximation, indeed, the \textbf{DBMF} is  \textbf{accurate only} in the \textbf{proximity of the epidemic threshold}, while IBMF is accurate for the entire epidemic diagram.
-In Fig. \ref{fig:07_4}, this behavior is shown in a clear way. We can see that the quenched mean field follow exactly the simulation, while the DBMF only around the epidemic treshold.
-
-\begin{figure}[h!]
-\centering
-\includegraphics[width=0.7\textwidth]{../lessons/image/07/4.png}
-\caption{\label{fig:07_4} The DBMF is accurate only in the proximity of the epidemic threshold while IBMF is accurate for the entire epidemic diagram.}
-\end{figure}
-
 
 \end{document}

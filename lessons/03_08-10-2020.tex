@@ -15,7 +15,7 @@ In the well-mixed population assumptions, it holds that that:
 \begin{itemize}
 \item all individuals are \textbf{equivalent}, hence every one has the same probability of being infected;
 \item every individual has the \textbf{same number of contacts} $N-1$, or on average $\expval{k}$;
-\item We are in a \textbf{closed population}. That is to say that the sum of the density distribution of the individuals is equal to 1, hence we have no deaths or births. In practice, we are assuming that our time scale is so little that we can consider the population constant.
+\item we are in a \textbf{closed population}. That is to say that the sum of the density distribution of the individuals is equal to 1, hence we have no deaths or births. In practice, we are assuming that our time scale is so little that we can consider the population constant.
 \end{itemize}
 
 \subsection{SI model}
@@ -32,10 +32,10 @@ where $\beta$ is the \textit{“per contact” infection rate} and dictates the 
   \dv{s}{t} &= - \beta \expval{k} s i \\ \dv{i}{t} &= \beta \expval{k} s i
 \end{split}
 \end{equation}
-where $\expval{k}$ represents the average contacts, while $i$ stands for the fraction of infected people in the entire population ($i=I/N$), and $s$ is the fraction of susceptible people in the population ($s=S/N$).
+where $\expval{k}$ represents the average contacts, while $i$ stands for the fraction of infected people in the entire population ($i=I/N$), and $s$ is the fraction of susceptible people in the population ($s=S/N$). Note as prefactor $\expval{k}$ is constant, therefore sometimes it can be "absorbed" inside $\beta$. 
 The product $s i$ is the probability of having a contact between an infected and a susceptible, and $\beta  s i$ is the probability of having a contact between an infected and a susceptible which in turns leads to an infection.
 
-One of the most important quantity we may want to introduce in our lexicon is the so called \textit{prevalence} $i = \frac{I}{N}$, that is another way to define the density of infected people wrt the entire population.
+One of the most important quantity we may want to introduce in our lexicon is the so called \textbf{prevalence} $i = \frac{I}{N}$, that is another way to define the density of infected people wrt the entire population.
 
 In order to solve it analytically, we recall that our population is closed. Therefore $s+i=1$, and it follows that we only have one equation to be solved since $s=1-i$.
 We have that:
@@ -94,7 +94,7 @@ and in addition can solved in the very same way we previously did.
 
 Also, the shape of the \textbf{solution} is a sigmoid as before:
 \begin{equation}
-  i(t) = i_0 \frac{(\beta - \mu ) e^{(\beta - \mu )t} }{\beta - \mu  + \beta i_0 e^{(\beta - \mu )t} }
+  i(t) = i_0 \frac{(\beta - \mu ) e^{(\beta - \mu )t} }{(\beta - \mu)  + \beta i_0 (e^{(\beta - \mu )t} - 1) }
 \end{equation}
 By plotting it, one should note that despite the same form, we do not saturate at 1, but at $ \frac{\beta - \mu }{\beta } $. Hence, as we said, we have some sort of \textbf{dynamical equilibrium}: the number of new infected is more or less the same of the new recovered people at each moment. The density $i(t)$ will therefore fluctuate around this value $\frac{\beta - \mu }{\beta }$ and, by enlarging \( \mu  \), we can obtain larger fluctuations (Fig. \ref{fig:3_3}).
 \begin{figure}[h!]
@@ -139,11 +139,13 @@ In addition the epidemic threshold is the minimum value of the infection probabi
 
 One may ask what is the relation between \( R_0 \) and the epidemic threshold. Obviously, they are strongly correlated. We actually say that given a \textbf{critical value}, below it we have no spreading, while above we have a fraction of infected people.
 
+We refer to these two different cases as it follows: if our $\beta < \beta_c$, then we end up in the so called \textbf{epidemic extinction} and the virus, in the long run, will not be present any more. On the other hand, if $\beta > \beta_c$, the virus is going to be present in the population and therefore survives. This is the so called $\textbf{endemic state}$. Behavior around the critical point might be of our interest and can be studied using Statistical mechanics formalism and/or numerical simulations. 
+
 The epidemic threshold is given by the condition under which we observe the spreading. Mathematically, given a specific model, its critical version will return the values of the parameters for which $ R_0 = 1 $. If we are slightly above this threshold, we need a minimum of infected people and the disease is going to spread. Considering for instance the case of the SIS model:
 \begin{equation}
-  R_0 = \frac{\beta}{\beta_c} =  \frac{\beta \expval{k} }{\mu } = 1
+  R_0 = \frac{\beta \expval{k} }{\mu } = 1
 \end{equation}
-In general, for an epidemic to occur in a susceptible population $R_0$ must be >1, so the number of cases is increasing.
+
 
 \subsection{SIR model}
 We now discuss the so called $SIR$ model, whose compartments are \textbf{S}\textit{usceptible}, \textbf{I}\textit{nfected} and \textbf{R}\textit{ecovered}. The idea behind is the same one of the SIS, but we are now adding a new state which accounts for long lasting immunity (\textbf{R}). Hence, once a person has got the disease and has recovered, he obtains a long \textbf{immunity}. Recall that, since we assumed that the population is closed, its density is still fixed to 1.
@@ -174,7 +176,7 @@ The differential equations that describe this model are:
 
 This is actually a good point to introduce the \textbf{different regimes} we may encounter during a spreading, which are represented in Fig. \ref{fig:3_6} for the SIS and SIR models.
 
-Initially, at the beginning of each spreading, we see the so called \textbf{noisy phase} where the numbers are too small to cause a large spreading. Here we can observe only some sort of stochastic fluctuations. In many cases, we can end up without any spreading: if we are able to stop the infected people in this noisy phase, we stop the disease (assuming it is heterogeneous \hl{not clear}). If it is not the case, the disease starts spreading according to the characteristic \textbf{exponential growth}. Later, the slope slows down until we reach the \textbf{steady state}: for the SIS the disease keeps circulating among the individuals \textit{(endemic state)}, while for the SIR it disappears \textit{(absorbing state)}.
+Initially, at the beginning of each spreading, we see the so called \textbf{noisy phase} where numbers are too small to cause a large spreading. Here we can observe only some sort of stochastic fluctuations. In many cases, we can end up without any spreading: this may happen if we assume that some nodes are much more linked than others (the so called \textit{super spreaders}), and we are able to recognize and stop them before they can infect anyone\footnote{the assumption is one of the basis for \textbf{heterogeneous} mean field models. We will discuss them later in the course.}. If it is not the case, the disease starts spreading according to the characteristic \textbf{exponential growth}. Later, the slope slows down until we reach the \textbf{steady state}: for the SIS the disease keeps circulating among the individuals \textit{(endemic state)}, while for the SIR it disappears \textit{(absorbing state)}.
 
 In order to compute the \textbf{epidemic threshold} for the SIR model, the path to follow is the same as before. In particular, we assume that, at the starting point, $ r \ll 1 $ so that:
 \begin{equation*}
@@ -185,7 +187,7 @@ and the result we find is again:
   \beta > \beta _c = \frac{\mu }{\expval{k} }
 \end{equation}
 
-Since we are able to obtain an analytic expression for S and I in this SIR model, we want to study what is the behavior for large times ($ t = \infty$). One obtains that:
+Since we are able to obtain an analytic expression for S and I in this SIR model, we want to study what is the behavior for large times ($ t = \infty$ ). One obtains that:
 \begin{equation*}
   \dv{s}{r} = \frac{- \beta  \expval{k}  s}{\mu }
 \end{equation*}
@@ -205,9 +207,9 @@ One may note that \( R_0 = \beta \expval{k} / \mu   \), and this should make us 
 We want now to modify the SIR to take into account some more features we want to implement our model with.
 
 \subsection{SIR with Demography}
-So far we have assumed that the population was totally closed, and so densities always sum up to 1. This is actually unrealistic, so our next step will be to \textbf{drop} the \textbf{closed population} assumptions: we will now introduce births and deaths (timescale of infection is no more much faster than demographics!). This reasoning is justified from what we observe in real world: considering the demography, we note as every year there are new children that are infected by diseases such as Measles and Chickenpox. Anyway, we do not expect that they will die out over weeks, but still it tells us that newborns increase the populations to the susceptible compartment.
+So far we have assumed that the population was totally closed, and so densities always sum up to 1. This is actually unrealistic, so our next step will be to \textbf{drop} the \textbf{closed population} assumptions: we will now introduce births and deaths. This reasoning is justified from what we observe in real world: considering the demography, we note as every year there are new children that are infected by diseases such as Measles and Chickenpox. Anyway, we do not expect that they will die out over weeks, but still it tells us that newborns increase the populations to the susceptible compartment.
 
-The simplest assumption we can make is: similar to the infectious period, individuals can have a \textbf{lifespan}, denoted as \( 1/\alpha  \) years$^{-1}$. Note as in this approximations lifespan is much greater than the infectious period, so \textit{deaths are not due to the disease}. In this way we assume that \( \alpha  \) is the death rate, common to all classes. Moreover, \( \alpha  \) is also the crude birth rate, and in addition we assume that births occur only for susceptible individuals and therefore increase its density.
+The simplest assumption we can make is: similar to the infectious period, individuals can have a \textbf{lifespan}, denoted as \( 1/\alpha  \) years$^{-1}$. Note as in this approximations lifespan is much greater than the infectious period, so deaths are not due to the disease. In this way we assume that \( \alpha  \) is the death rate, common to all classes. Moreover, \( \alpha  \) is also the crude birth rate, and in addition we assume that births occur only for susceptible individuals and therefore increase its density.
 
 In order to keep the population constant, we need to assume:
 \begin{equation}
@@ -250,13 +252,13 @@ which is not differential anymore.
 
 There are two different solutions for this equation: the one for which \( i^* = 0 \) (\textbf{disease free state}) and the one for \( s^* = \frac{\alpha + \mu }{\beta } = \frac{1}{R_0} \), which is the \textbf{endemic state}. Here, the most important result is that the \textbf{SIR} model \textbf{with demography} can actually \textbf{show} an \textbf{endemic state}.
 
-Replacing \( s^* = \frac{1}{R_0} \) in \( \dv{s}{t} = \alpha - \beta s i - \alpha w  \), we obtain:
+Replacing \( s^* = \frac{1}{R_0} \) in \( \dv{s}{t} = \alpha - \beta s i - \alpha s  \), we obtain:
 \begin{equation*}
-  i^* = \frac{\alpha }{\mu } \qty(1 - \frac{1}{R_0}) = \frac{\alpha }{\beta } (R_0 -1)
+  i^* = \frac{\alpha R_0 }{\mu } \qty(1 - \frac{1}{R_0}) = \frac{\alpha }{\beta } (R_0 -1)
 \end{equation*}
 Finally, the three \textbf{equilibrium values} $(s^*, i^*, r^*)$ for the fraction of infected, susceptible and recovered in the endemic state are:
 \begin{equation}
   (s^*, i^*, r^*) = \qty( \frac{1}{R_0}, \frac{\alpha }{\beta } (R_0 -1 ), 1- \frac{1}{R_0} - \frac{\alpha }{\beta } (R_0-1))
 \end{equation}
-Keep in mind that this solution exists only if \( R_0>1 \). Moreover, via linear stability analysis, it can be demonstrated that this equilibrium is stable and is reached through damped oscillations.
+Keep in mind that this solution exists only if \( R_0>1 \) and we obtained the equation for $r*$ by reverting the formula $s^* +  i^* + r^* = 1$. Moreover, via linear stability analysis, it can be demonstrated that this equilibrium is stable and is reached through damped oscillations.
 \end{document}

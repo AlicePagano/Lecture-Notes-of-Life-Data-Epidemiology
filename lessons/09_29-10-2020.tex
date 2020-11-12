@@ -5,16 +5,28 @@
 
 \begin{document}
 
+\marginpar{ \textbf{Lecture 9.} \\  \displaydate{date}. \\ Compiled:  \today.}
+We recall now one of the most important result of the last lecture: if the network is large enough, for \( N \rightarrow \infty  \), the \textbf{epidemic threshold} tends to zero:
+\begin{equation}
+    \beta_c \xrightarrow{N \to \infty} 0
+\end{equation}
+Moreover, the epidemic threshold for IBMF depends on the largest eigenvalue of the adjacency matrix $\Lambda_{max}$.
+The last relations which contain \( \beta _c \) for IBMF and DCBMF, can tell us more about the accuracy of the model: \textbf{DBMF} is accurate only in the proximity of the epidemic threshold, while \textbf{IBMF} is accurate for the entire epidemic diagram. See the figure \ref{fig:09_3}.
 
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.7\textwidth]{../lessons/image/09/3.png}
+\caption{\label{fig:09_3} The quenched mean field (IBMF) curve follows exactly the simulation, while DBMF the is precise only around the epidemic threshold.}
+\end{figure}
 
+We want now to discuss what are the reasons behind this important result. Since we know there is a strong connection between these two theories, it would be of our interest to derive DBMF from IBMF. Once again, we shall repeat that in \textbf{annealed networks} we are not considering a single network but an \textbf{average} of all the \textit{possible random networks} that can be generated \textit{from a degree distribution}. Instead, in the \textbf{quenched networks} we pick a particular \textbf{one}, and we compute the result for \textit{that specific network}. Then, nothing prevents us to run our model on that network and iterate multiple times.
 
-What is the reason behind this result? Since we know the strong connection between the two theories, now we want to \textbf{derive DBMF from IBMF}
-\footnote{We repeat that in annealed networks we are not considering a single network but an average of all the possible random netwrok that you can generate from a degree distribution. Instead, in the quenched network, we take a particular one and we want the result for this specific network.}. \marginpar{ \textbf{Lecture 9.} \\  \displaydate{date}. \\ Compiled:  \today.}
+Let us try to characterize the \textbf{annealed network}, in particular we want to see the \textit{adjacency matrix} looks like.
 We start from:
 \begin{equation*}
   \dot{\rho }_i = - \mu \rho _i + (1 - \rho _i) q_i \qquad \text{ where } \quad q_i = 1- \prod_{j=1}^{N} \qty[ 1 - \beta A_{ij} \rho _j]
 \end{equation*}
-The Adjacency Matrix is replaced by an \textbf{Annealed Adjacency Matrix} (\textbf{AAM}):
+In this case, the \textbf{adjacency matrix} is replaced by an \textbf{Annealed Adjacency Matrix} (\textbf{AAM}) whose general form is:
 \begin{equation}
   \bar{A}_{ij} = \frac{k_j P(k_i|k_j)}{N P (k_i)}
 \end{equation}
@@ -22,57 +34,76 @@ which for \emph{random networks} becomes:
 \begin{equation*}
   \bar{A}_{ij} = \frac{k_i k_j}{N \expval{k} } = \frac{k_i k_j}{2 L}
 \end{equation*}
-where the probability  \(  P(k_i|k_j) \) of picking a random node becomes \( k_j \). The last equation reperesent the number of trials that we have to create the connection \( i,j \) over all the possibile connections in the network.
+where the probability  \(  P(k_i|k_j) \) of picking a random node becomes \( k_j \). This is the number of trials we have available in order to create this specific connection  \( i,j \), over all the possible connections that the network can return.
 If we substitute the explicit form of the adjiacency matrix in the expression of \( q_i \):
 \begin{equation*}
   q_i = 1 - \prod_{j=1}^{N} \qty[1 - \beta \frac{k' P(k'|k)}{N_{k'}} \rho _j]
 \end{equation*}
-From individual nodes to degree classes:
+
+
+And starting from individual nodes and heading towards more general degree classes:
 \begin{equation*}
-  \dot{\rho }_k = - \mu \rho _k + (1- \rho _k) \qty[ 1 - \prod_{k'=1}^{N} \qty[1 - \beta \frac{k P(k'|k)}{N_{k'}} \rho _k]^{N_{k'}} ]
+  \dot{\rho }_k = - \mu \rho _k + (1- \rho _k)\left[ 1 - \prod_{k'} \qty[1 - \beta \frac{k P(k'|k)}{N_{k'}} \rho _k]^{N_{k'}} \right]
 \end{equation*}
-Assuming \( \beta \rho _k \ll 1 \), we can approximate the product with:
+this is the most general expression that we can obtain for DBMF.
+The multiplication can be replaced by a sum, only if assuming that \( \beta \rho _k \ll 1 \):
 \begin{equation*}
-  \dot{\rho }_k = - \mu \rho _k + \beta k (1 - \rho _k) \sum_{k'}^{} P(k'|k) \rho _{k'}
+  \dot{\rho }_ k = - \mu \rho_k + \beta k (1-\rho_k) \sum_{k'}P(k'|k)\rho_k'
 \end{equation*}
-and remembering that \( \Theta _k = \sum_{k'}^{} P(k'|k)\rho _{k'}   \):
+And recalling that the expression for $\Theta_k = \sum_{k'}P(k'|k)\rho_{k'}$:
 \begin{equation*}
-  \dot{\rho }_k = - \mu \rho _k + \beta k (1- \rho _k) \Theta _k
+   \dot{\rho }_ k = - \mu \rho_k + \beta k (1-\rho_k) \Theta_k
 \end{equation*}
 which is the formula obtained for DBMF. Hence, in the DBMF we are implicitly assuming that  \( \beta \rho _k \ll 1 \). This is the reason why DBMF is accurate only around the epidemic threshold. At the end, we are able to pass from IBMF to DBMF and actually we are explaining the difference in the accuracy between the two models.
 
 
 
+
+
+
+
+
 \subsection{IBMF and Pair approximation}
 
-Let us make a very brief introduction in what it means cut down the chaing to pair approximation.
-Until now, all the models that we saw where cutted at the individual level which means that \( \text{Prob} [\sigma _i (t)=0] \) and \( \text{Prob} [\sigma _j (t) = 0] \) are statistically independent:
+Let us make a very brief overview about what means to \textbf{cut down} the chain to \textbf{pair approximation}.
+Up to now, all the models we have seen were cut at the \textit{individual level} which means that \( \text{Prob} [\sigma _i (t)=0] \) and \( \text{Prob} [\sigma _j (t) = 0] \) are statistically independent. Now, instead, let us consider the joint probability of being infected, given that we we susceptible and given that a neighbor of ours was infected:
 \begin{equation*}
   \dv{}{t} \rho (i,t) = - \mu \rho (i,t) + \beta \sum_{j}^{} A_{ij} \text{Prob} [\sigma _i(t)=0, \sigma _j(t)=1]
 \end{equation*}
-Now, if we cut at the link \( (i,j) \) level we have to consider \( \text{Prob} [\sigma _i(t)=0, \sigma _j(t)=1]  \). This involves three nodes terms and so on:
+we look for an approximation for this joint probability, and this time we choose to cut the chain at the level of a single link $(i,j)$.
+We want to see actually how $P\{\sigma_i(t) = 0\ ,\   \sigma_j (t) = 1\}$ changes in the equation for $\dot{\rho}$ (this involves three nodes terms and so on).
+Hence we obtain:
 \begin{equation*}
-  \dv{}{t} \rho (i,t) = - \mu \rho (i,t) + \beta \sum_{j}^{} A_{ij} \rho (j,t) - \beta \sum_{j}^{} A_{ij} E \qty[X_i (t) X_j (t)]
+  \dv{}{t} \rho (i,t) = - \mu \rho (i,t) + \beta \sum_{j}^{} A_{ij} \rho (j,t) - \beta \sum_{j}^{} A_{ij} \mathbb{E} \qty[X_i (t) X_j (t)]
 \end{equation*}
-where \(  E \qty[X_i (t) X_j (t)] \) is the two nodes expectation of being infected.
-We need an expression for the \( \substack{N \\ 2}  \) equations for \(  E \qty[X_i (t) X_j (t)] \).
-The idea is:
+where \(  \mathbb{E} \qty[X_i (t) X_j (t)] \) is the two nodes expectation probability to be infected.
+
+However, we need to look for an expression for the $\binom{N}{2}$ equations for \(  \mathbb{E}  \qty[X_i (t) X_j (t)] \), since we have to take into account one expression for each node multiplied all possible link we can have in the network.
+The main idea is:
 \begin{equation}
 \begin{split}
-  \dv{}{t} E \qty[X_i (t) X_j (t)] &=  - 2 \mu E \qty[X_i (t) X_j (t)] + \beta \sum_{k}^{} A_{ik} E \qty[X_j (t) X_k (t)]  \\
-  & + \beta \sum_{k}^{} A_{jk} E \qty[X_i (t) X_k (t)]  - \beta
-  \sum_{k}^{} (A_{ik}+A_{jk}) E \qty[X_i (t) X_j (t) X_k (t)]
+  \dv{}{t} E \qty[X_i (t) X_j (t)] &=  - 2 \mu \mathbb{E} \qty[X_i (t) X_j (t)] + \beta \sum_{k}^{} A_{ik} \mathbb{E} \qty[X_j (t) X_k (t)]  \\
+  & + \beta \sum_{k}^{} A_{jk} \mathbb{E} \qty[X_i (t) X_k (t)]  - \beta
+  \sum_{k}^{} (A_{ik}+A_{jk}) \mathbb{E} \qty[X_i (t) X_j (t) X_k (t)]
 \end{split}
 \end{equation}
-and the most common possible closures are:
+
+Let us analyze the terms on the rhs. The first one is the \textbf{recovery term} and needs both of \textit{them to be infected}. On the other hand the second and third terms are the \textbf{infection terms}, where either one of the node is already infected and the susceptible term gets infected from any other neighbour. The last term has to be put in order to discard the three nodes expectations, and here comes the need for an \textbf{approximation}, namely a \textbf{closure}.
+
+The most used closures used in the literature are:
 \begin{equation*}
-  E \qty[X_i (t) X_j (t) X_k (t)]   = E \qty[X_i (t) X_j (t)] E[X_k (t)]
+   \mathbb{E} \qty[X_i (t) X_j (t) X_k (t)]   =  \mathbb{E} \qty[X_i (t) X_j (t)]  \mathbb{E}[X_k (t)]
 \end{equation*}
-or
+where in this case the third term we factorize out is the \textit{mean-field} term. Alternatively:
 \begin{equation*}
-  E \qty[X_i (t) X_j (t) X_k (t)]   = \frac{E \qty[X_i (t) X_j (t)] E[X_j (t) X_k (t)]  }{E[X_j (t)]}
+  \mathbb{E} \qty[X_i (t) X_j (t) X_k (t)]   = \frac{\mathbb{E} \qty[X_i (t) X_j (t)] \mathbb{E}[X_j (t) X_k (t)]  }{\mathbb{E}[X_j (t)]}
 \end{equation*}
-where the second is similar to the first but we are considering the two extremes and then the probability that \( j \) is infected.
+where the second is similar to the first but we are considering the two extremes and then the probability that \( j \), the node in between, is infected.
+
+
+
+
+
 
 
 
@@ -88,22 +119,31 @@ In this chapter, we are gonna study non-Markovian epidemic spreading. In the lit
 
 \section{Markovian Models}
 
+Despite it is difficult to find it discussed in literature, we surely need to take into account that \textbf{both} the \textbf{infection process} and \textbf{recovery process} in reality \textbf{DO NOT} have a constant rate.
+
 All the models we have seen till now assume that \( \beta  \) (infection process) and \( \mu  \) (recovery process) are constant rates.
-This means that movement between compartments takes place at constant rate, or equivalent the probability of jumping from one compartment to another does not depend on the time spent in the compartment. Essentially, we are considering a memoryless process.
+This means that movement between compartments takes place at constant rate, or equivalent the probability of jumping from one compartment to another does not depend on the time spent in the compartment. Essentially, we are considering a \textbf{memoryless process}.
 The jump are memoryless, i.e. we are running a Markov chain.
 
 The fundamental property of a Markov chain is called \textbf{Markov property}: \emph{the jump probability at time \( t + \Delta t \) does not depend on elapsed time, but only on \( t \)}, i.e. we have not to take into account the time that we spent in that compartment.
 This property is very useful for mathematical treatments.
 
-Jumps made at a constant rate (\( \beta  \) and \( \mu  \)) imply that the time spent inside each compartment \( \tau  \) follows a expoential distribution:
+Jumps made at a constant rate (\( \beta  \) and \( \mu  \)) imply that the time spent inside each compartment \( \tau  \) follows a \textbf{exponential distribution} (Fig. \ref{fig:09_4}):
 \begin{equation}
   P(x) = \tau e^{- \tau x}
 \end{equation}
 with mean \( \tau = \frac{1}{\mu }\), i.e. \( \tau  \) is the infectious period (average time spent in \( I \)).
 
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.4\textwidth]{../lessons/image/09/4.png}
+\caption{\label{fig:09_4} Exponential probability density function for different $\lambda = \tau$. Note as the most probable value is when we start our observation, namely at the moment in which $x=0$. }
+\end{figure}
+
+
 What are the implication of this property? The most important one is that an exponentially distributed infectious period implies that the most probable duration of the disease is 0. Indeed, the probability decreases with time.
 More particularly, it depends on the mean, but in any case the most probable jump (time in which I am making the jump) is at the beginning.
-It is something that is not realistic, indeed if you got influenza at least you will spend some time infected.
+It is something that is \textbf{not realistic}, indeed if you got influenza at least you will spend some time infected.
 And actually, if you are looking how infectius period are distributed in real life, it is something which is quite different. For a disease, you know exactly when it starts but do not you know when it ends.
 For instance, let us consider the left plot in Fig. \ref{fig:09_1} for 2009 H1N1 Influenza. For this type of diesease the plot show the distribtuion of the infectious period, which has as probable value 2 days and an half. The most important things is that it is not 0. On the right, we have also the estimates for Covid-19. One process we use to measure the infectious period is the \textbf{serial interval}, i.e. from symptoms to symptom. Or we have also the \textbf{generation time}, i.e. from infection to infection. Obviously, these are approximations but can give you some means.
 
@@ -119,7 +159,7 @@ For instance, let us consider the left plot in Fig. \ref{fig:09_1} for 2009 H1N1
 \caption{\label{fig:09_1} \textbf{Left:} Histogram of 1009 H1N1 Influenza. \textbf{Right:} distribution  of Covid-19. }
 \end{figure}
 
-The problem is that, all these results demonstrate that these kind of diseases are non-markovian: transition probability depends on the time spent in a compartment. Indeed, patients usually spend some time infected before starting to recover.
+The problem is that, all these results demonstrate that these kind of diseases are \emph{non-markovian}: \textbf{transition probability depends on the time spent in a compartment}. Indeed, patients usually spend some time infected before starting to recover.
 
 
 
@@ -261,8 +301,8 @@ hence, we are assuming that these numbers should not depend on time and for inst
 
 We call:
 \begin{itemize}
-\item \( E[R] \), the expected value of \( R \);
-\item \( E[M] \), the expected value of \( M \);
+\item \( \mathbb{E}[R] \), the expected value of \( R \);
+\item \( \mathbb{E}[M] \), the expected value of \( M \);
 \item \( v_i \), the probability that node \( i \) is infected in the steady state.
 \end{itemize}
 
@@ -274,12 +314,12 @@ Now, let us build the model:
 In a large time interval \( [0,S] \) the number of times node \( j \) has been infected is proportional to \( S \) (it is linear).
 Since the length of each infected period is \( E[R] \), the \textbf{number of infected periods} experienced by a node \( j \) (number of times a node has been infected in the interval \( [0,S] \)) can be written as:
 \begin{equation*}
-  \frac{v_j S}{E[R]}
+  \frac{v_j S}{\mathbb{E}[R]}
 \end{equation*}
 
 \item during each infected period, node \( j \) will try to infect \( i \) an average \( E[M] \) number of times. So, the \textbf{total number of infection attempts} from node \( j \) to \( i \) in a large period of time are:
 \begin{equation*}
-  \frac{v_j S E[M]}{E[R]}
+  \frac{v_j S \mathbb{E}[M]}{\mathbb{E}[R]}
 \end{equation*}
 the number of times \( j \) has been infectious multiplied by the number of infection attempts per each time;
 
@@ -290,18 +330,18 @@ the number of times \( j \) has been infectious multiplied by the number of infe
 
 \item we can write the \textbf{total number of successful infection attempts} for \( j \) to \( i \) as:
 \begin{equation*}
-  S \frac{E[M]}{E[R] } v_j (1-v_i)
+  S \frac{\mathbb{E}[M]}{\mathbb{E}[R] } v_j (1-v_i)
 \end{equation*}
 that is the total number of attempts multiplied by the probability that $i$ was not infected.
 
 Summing over all the neighbors of $i$ we have the the \textbf{total number of successful infections} \( i \) will receive during interval \( [0,S] \) is:
 \begin{equation*}
-  S \sum_{j=1}^{N}  a_{ij} \frac{E[M]}{E[R]} v_{j} (1-v_i)
+  S \sum_{j=1}^{N}  a_{ij} \frac{\mathbb{E}[M]}{\mathbb{E}[R]} v_{j} (1-v_i)
 \end{equation*}
 
-\item in the \emph{steady state} the number of successful infections (\(  S \sum_{j=1}^{N}  a_{ij} \frac{E[M]}{E[R]} v_{j} (1-v_i) \)) is asymptotically equal to the number of infected periods experienced by \( i \): \( v_i S / E[R] \). Thus we have:
+\item in the \emph{steady state} the number of successful infections (\(  S \sum_{j=1}^{N}  a_{ij} \frac{\mathbb{E}[M]}{\mathbb{E}[R]} v_{j} (1-v_i) \)) is asymptotically equal to the number of infected periods experienced by \( i \): \( v_i S / E[R] \). Thus we have:
 \begin{equation}
-  \cancel{S} \sum_{j=1}^{N}  a_{ij} \frac{E[M]}{\cancel{E[R]}} v_{j} (1-v_i) = v_i \frac{\cancel{ S}}{\cancel{E[R]}} \qquad \rightarrow \qquad  v_i = E[M] (1- v_i) \sum_{j=1}^{N} a_{ij} v_j
+  \cancel{S} \sum_{j=1}^{N}  a_{ij} \frac{\mathbb{E}[M]}{\cancel{\mathbb{E}[R]}} v_{j} (1-v_i) = v_i \frac{\cancel{ S}}{\cancel{\mathbb{E}[R]}} \qquad \rightarrow \qquad  v_i = \mathbb{E}[M] (1- v_i) \sum_{j=1}^{N} a_{ij} v_j
 \end{equation}
 hence the probability of \( i \) being infected depends by the sum over all its neighbours, times the term \( E[M] \) which is the average infection attempts that it is gonna experience during the evolution.
 \end{enumerate}
@@ -317,10 +357,10 @@ The implications are:
 \item exponential case: \( E[M] \) is the expected number of infection events in a Poisson preocess with intensity \( \beta  \) within an exponential recovery time with expectation \( 1/ \mu  \). Thus: \( E[M] = \beta / \mu  \).
 \item epidemic treshold (lower bound):
 \begin{equation*}
-  m_c = E[M_c] = \frac{1}{\Lambda _{max}}
+  m_c = \mathbb{E}[M_c] = \frac{1}{\Lambda _{max}}
 \end{equation*}
 \end{itemize}
-Hence, this is the form in which we can generate a generic model from. 
+Hence, this is the form in which we can generate a generic model from.
 
 
 
