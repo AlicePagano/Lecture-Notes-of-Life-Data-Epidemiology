@@ -23,9 +23,9 @@ Models can be of two types: simple and more complex ones. In the simplest ones w
 In this course, we are going to start with very simple models in which we assume that there is no structure behind in the population. Obviously this is not accurate, but allows us to understand at a first glance some underlying mechanisms.
 Then, we are going to consider social structures and introduce contact network models. We will also take into account interactions among different populations and exploit data to understand how members move from one population to another. Finally, we are going to introduce deal with the so called “Agent Based” models, for a quick overview on them.
 
-\section{Comportamental models}
+\section{Compartmental models}
 
-We now introduce the \textbf{comportamental models}. These are fundamental since the most of epidemiological theories are based on them. In reality, however, there are different levels of understanding how diseases can diffuse: we can consider the disease only at a biological level, or at simpler one. Note as it is practically impossible to insert all the details of a process in a single model. We therefore need to summarize all the biological processes in few \textbf{parameters} which describe, on average, what we can see inside the population. This is the same principle behind the statistical mechanics in which we look for large scale (macroscopical) effects.
+We now introduce the \textbf{compartmental models}. These are fundamental since the most of epidemiological theories are based on them. In reality, however, there are different levels of understanding how diseases can diffuse: we can consider the disease only at a biological level, or at simpler one. Note as it is practically impossible to insert all the details of a process in a single model. We therefore need to summarize all the biological processes in few \textbf{parameters} which describe, on average, what we can see inside the population. This is the same principle behind the statistical mechanics in which we look for large scale (macroscopical) effects.
 
 \begin{figure}[!b]
 \centering
@@ -35,7 +35,7 @@ We now introduce the \textbf{comportamental models}. These are fundamental since
 
 Let us consider a population of individuals and try to characterize it. Note as we have not made any assumption on the individuals and relationships between them. We now introduce three different \textbf{compartments}, denoted with \textbf{S} (that stands for \textit{Susceptible}), \textbf{I} (\textit{Infected}), \textbf{R} (\textit{Recovered}), and want to label people according to the stage of their disease, as seen in Fig. \ref{fig:1_classification}. However, one should note that there can be also transitions from one state to another one, according to some rates that describe the \textbf{dynamic}. For instance, in Fig. \ref{fig:1_classification} these are $\beta$ and $\mu$.
 
-This approximation, on the other hand, is quite strong: by keeping the rates fixed we are assuming that the process underlying the spreading of the disease is a \textbf{Markovian}. In reality, we do not see exponential distributions, but a decay. \hl{previous sentence not clear} This last point will be discussed during the course when we will deal with \textbf{“non-Markovian”} epidemics. The interpretation we may give to $\beta$ is the \textit{“per contact” infectious rate}, in this way we only need to count the number of contacts.
+This approximation, on the other hand, is quite strong: by keeping the rates fixed we are assuming that the process underlying the spreading of the disease is \textbf{Markovian}. In reality, we do not see exponential distributions (i.e. decays), but some other distributions such as the $Gamma$ one. This last point, however, will be discussed during the course when we will deal with \textbf{“non-Markovian”} epidemics. The interpretation we may give to $\beta$ is the \textit{“per contact” infectious rate}, in this way we only need to count the number of contacts.
 Different models can be introduced according to the type of the disease: for instance \textbf{SI}, \textbf{SIR}, \textbf{SIS}, \textbf{SEIR} and so forth.
 
 
@@ -60,7 +60,7 @@ Now, let us introduce the \textbf{Basic Reproductive Number} $\mathbf{R_0}$ (pr.
 Let us consider the plot of Fig. \ref{fig:2_R_0.png}, we have a sort of \textbf{second order phase transition} at the point $R_0=1$.
 Note that $R_0$ for the SARS is higher than the one of COVID-19. However, we did not experienced an outbreak of this disease, so that is not the only parameters to be taken into account in the models. In order to compute $R_0$ we assume that the population is totally susceptible. This is however valid only at the very early stages, later on, we must consider both epidemiological and demographical aspects. The conclusion is the following: $R_0$ may vary from one population to another.
 
-Since we are doing a \textbf{coarse-graining} of the dynamics, this number represents the average of all possible different distributions. A wrong argument is to think that similar $R_0$ lead to similar outbreaks. The distribution of infections can be quite heterogeneous: the mean could be quite representative only if we are dealing with homogeneous populations, that is not the case for real networks. For instance, let us consider the plot in Fig. \ref{fig:3_outbreaks}. We see that SARS is heterogeneous, while Spanish Flu was more a homogeneous one. COVID-19 is most likely somewhere in the middle.
+Since we are doing a \textbf{coarse-graining} of the dynamics, this number represents the average of all possible different distributions. A \textit{wrong} argument is to think that similar $R_0$'s lead to similar outbreaks. The distribution of infections can be quite heterogeneous: the mean could be quite representative only if we are dealing with homogeneous populations, that is not the case for real networks. For instance, let us consider the plot in Fig. \ref{fig:3_outbreaks}. We see that SARS was heterogeneous, while Spanish Flu was a more homogeneous one. COVID-19 is most likely somewhere in the middle.
 
 Let us now introduce the \textbf{Effective Reproductive Number} \pmb{R(t)}, which is the same of $R_0$ but varying wrt time. Hence, it is the average number of secondary cases that a single case produces in a population at time $t$.
 
@@ -87,7 +87,7 @@ Let us now introduce the \textbf{Effective Reproductive Number} \pmb{R(t)}, whic
 Other important quantities we may want to introduce are:
 
 \begin{itemize}
-    \item \textbf{Infectious period}: average period for a person to be infectious and is computed as $ \tau = \frac{1}{\mu }, \quad \tau = \frac{1}{(\alpha + \mu )} $ where the presence of $\alpha$ depends on the model ($\alpha$: average duration of "exposed time" stay).
+    \item \textbf{Infectious period}: average period for a person to be infectious is computed either as $ \tau = \frac{1}{\mu }$ or $\quad \tau = \frac{1}{(\alpha + \mu )} $ where the presence of $\alpha$ depends on the model ($\alpha$: average duration of "exposed time" stay).
     \item \textbf{Incubation period}: period of time between infection to occurrence of symptoms
     \item \textbf{Generation time}: time for an infected person to generate a second infection
     \item \textbf{Serial interval}: time between the onset of symptoms for a person and the onset of symptoms for another second infected person
