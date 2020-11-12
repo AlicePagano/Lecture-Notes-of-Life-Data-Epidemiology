@@ -1,66 +1,80 @@
 %%%%%%FRONTESPIZIO%%%%%%
-\begin{titlepage} % Suppresses headers and footers on the title page
+\begin{titlepage} % Suppresses displaying the page number on the title page and the subsequent page counts as page 1
+	\newcommand{\HRule}{\rule{\linewidth}{0.5mm}} % Defines a new command for horizontal lines, change thickness here
+	
+	\center % Centre everything on the page
+	
+	%------------------------------------------------
+	%	Headings
+	%------------------------------------------------
+	
+	\textsc{\LARGE University of Padova}\vspace{1.5cm} % Main heading such as the name of your university/college
+	
 
-	\centering % Centre everything on the title page
-	
-	\scshape % Use small caps for all text on the title page
-	
-	\vspace*{\baselineskip} % White space at the top of the page
-	
 	%------------------------------------------------
 	%	Title
 	%------------------------------------------------
 	
-	\rule{\textwidth}{1.6pt}\vspace*{-\baselineskip}\vspace*{2pt} % Thick horizontal rule
-	\rule{\textwidth}{0.4pt} % Thin horizontal rule
+	\HRule \vspace{0.5cm}
 	
-	\vspace{0.75\baselineskip} % Whitespace above the title
+	{\LARGE \bfseries LECTURE NOTES \\ OF\\ LIFE DATA EPIDEMIOLOGY \\}\vspace{0.5cm} % Title of your document
 	
-	{\LARGE LECTURE NOTES\\ OF\\ LIFE DATA EPIDEMIOLOGY \\} % Title
-	
-	\vspace{0.75\baselineskip} % Whitespace below the title
-	
-	\rule{\textwidth}{0.4pt}\vspace*{-\baselineskip}\vspace{3.2pt} % Thin horizontal rule
-	\rule{\textwidth}{1.6pt} % Thick horizontal rule
-	
-	\vspace{2\baselineskip} % Whitespace after the title block
-	
-	%------------------------------------------------
-	%	Subtitle
-	%------------------------------------------------
-	
-	Collection of the lectures notes of professors Chiara Poletto and Sandro Meloni. % Subtitle or further description
-	
-	\vspace*{3\baselineskip} % Whitespace under the subtitle
-	
-	%------------------------------------------------
-	%	Editor(s)
-	%------------------------------------------------
-	
-	Edited By
-	
-	\vspace{0.5\baselineskip} % Whitespace before the editors
-	
-	{\scshape\Large Alice Pagano \\} % Editor list
-	
-	\vspace{0.5\baselineskip} % Whitespace below the editor list
-	
-	\textit{The University of Padua } % Editor affiliation
-	
-	\vfill % Whitespace between editor names and publisher logo
-	
-%	%------------------------------------------------
-%	%	Publisher
-%	%------------------------------------------------
-%	
-%	\plogo % Publisher logo
-%	
-%	\vspace{0.3\baselineskip} % Whitespace under the publisher logo
-%	
-%	2017 % Publication year
-%	
-%	{\large publisher} % Publisher
+	\HRule\\[0.5cm]
 
+	\textsc{ \small Collection of the lectures notes of professors Chiara Poletto and Sandro Meloni.}\vspace{0.5cm} % Minor heading such as course title
+	
+	\vspace{1.5cm}
+	%------------------------------------------------
+	%	Author(s)
+	%------------------------------------------------
+	
+	\begin{minipage}{0.4\textwidth}
+		\begin{flushleft}
+			\large
+			\textit{Author:}\\
+			\textsc{Alice Pagano} % Your name
+		\end{flushleft}
+	\end{minipage}
+	~
+	\begin{minipage}{0.4\textwidth}
+		\begin{flushright}
+			\large
+			\textit{Revised by:}\\
+			\textsc{Andrea Nicolai} % Supervisor's name
+		\end{flushright}
+	\end{minipage}
+	
+	% If you don't want a supervisor, uncomment the two lines below and comment the code above
+	%{\large\textit{Author}}\\
+	%John \textsc{Smith} % Your name
+
+	\vspace{1.5cm}
+	
+	\includegraphics[width=15cm]{../frontespizio/image.jpg}
+	
+	%\vspace{0.5cm}
+	
+	%\vfill 
+		
+	%------------------------------------------------
+	%	Date
+	%------------------------------------------------
+	
+	\vfill\vfill % Position the date 3/4 down the remaining page
+	
+	{\large\today} % Date, change the \today to a set date if you want to be precise
+	
+	%------------------------------------------------
+	%	Logo
+	%------------------------------------------------
+	
+	%\vfill\vfill
+	%\includegraphics[width=0.2\textwidth]{placeholder.jpg}\\[1cm] % Include a department/university logo - this will require the graphicx package
+	 
+	%----------------------------------------------------------------------------------------
+	
+	\vfill % Push the date up 1/4 of the remaining page
+	
 \end{titlepage}
 
 \clearpage{\pagestyle{empty}\cleardoublepage}
