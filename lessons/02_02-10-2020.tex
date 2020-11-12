@@ -49,7 +49,8 @@ As an example, for the \textbf{SEIR} compartmental model, we have four main stag
 \caption{\label{fig:2_5} A sketch of the time-line of infection, showing the dynamics of the pathogen (grey area) and the host immune response (black line) with the labeling for the various infection classes: \textbf{S}usceptible, \textbf{E}xposed, \textbf{I}nfectious, and \textbf{R}ecovered. Note that the period when symptoms are experienced (medical status) is not necessarily correlated with any particular class of epidemiological models.}
 \end{figure}
 
-Now, let us introduce the \textbf{Basic Reproductive Number} $\mathbf{R_0}$ (pr. \textit{"R naught"}) which is a measure of the infection in the population. If we wanted to empirically determine it: we put one guy inside a group for an arbitrarily long time period and, at the end, we count the number of secondary cases that we have. This is the main idea behind the computation of \( R_0 \). This parameters therefore determines whether a disease will spread or not:
+Now, let us introduce the \textbf{Basic Reproductive Number} $\mathbf{R_0}$ (pr. \textit{"R naught"}) which is a measure of the infection in the population. If we wanted to empirically determine it: we put one guy inside a group for an arbitrarily long time period and, at the end, we count the number of secondary cases that we have. This is the main idea behind the computation of \( R_0 \). By definition \( R_0 \) is the average number of secondary cases an average primary case produces in a \textbf{totally susceptible population}. 
+This parameters therefore determines whether a disease will spread or not:
   \begin{equation}
     \begin{cases}
      R_0 < 1\\
@@ -87,15 +88,20 @@ Let us now introduce the \textbf{Effective Reproductive Number} \pmb{R(t)}, whic
 Other important quantities we may want to introduce are:
 
 \begin{itemize}
-    \item \textbf{Infectious period}: average period for a person to be infectious and is computed as $ \tau = \frac{1}{\mu }, \quad \tau = \frac{1}{(\alpha + \mu )} $ where the presence of $\alpha$ depends on the model ($\alpha$: average duration of "exposed time" stay).
-    \item \textbf{Incubation period}: period of time between infection to occurrence of symptoms
-    \item \textbf{Generation time}: time for an infected person to generate a second infection
-    \item \textbf{Serial interval}: time between the onset of symptoms for a person and the onset of symptoms for another second infected person
-    \item \textbf{TOST}: time between the onset of symptoms to an infection
+    \item \textbf{Infectious period}: average period for a person to be infectious and is computed as $ \tau = \frac{1}{\mu }, \quad \tau = \frac{1}{(\alpha + \mu )} $ where the presence of $\alpha$ depends on the model ($\alpha$: average duration of "exposed time" stay);
+    \item \textbf{Incubation period}: period of time between infection to occurrence of symptoms;
+    \item \textbf{Generation time}: time for an infected person to generate a second infection;
+    \item \textbf{Serial interval}: time between the onset of symptoms for a person and the onset of symptoms for another second infected person;
+    \item \textbf{TOST}: time between the onset of symptoms to an infection.
     
 \end{itemize}
-A problem in predicting a possible outbreak of a disease is that TOST in many cases can be negative (see Fig. \ref{fig:4_TOST} for more details).
+A problem in predicting a possible outbreak of a disease is that TOST in many cases can be negative (see Fig. \ref{fig:4_TOST} for more details). See Fig. \ref{fig:4_11}.
 
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.6\textwidth]{../lessons/image/02/4_11.png}
+\caption{\label{fig:4_11} Figure which explains better the already defined quantities.}
+\end{figure}
 
 
 

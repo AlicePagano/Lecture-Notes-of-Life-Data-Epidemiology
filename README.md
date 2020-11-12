@@ -1,6 +1,6 @@
 # Lecture Notes of Life Data Epidemology
 
-Lectures notes of the Master degree course "Life Data Epidemology" of professors Chiara Polletto and Sandro Meloni at the University of Padova (Academic Year 2020/2021).
+Lectures notes of the Master degree course "Life Data Epidemology" of professors Chiara Poletto and Sandro Meloni at the University of Padova (Academic Year 2020/2021).
 
 The code of the notes is organized in multiple directories as:
 

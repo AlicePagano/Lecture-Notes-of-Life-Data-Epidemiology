@@ -141,9 +141,9 @@ One may ask what is the relation between \( R_0 \) and the epidemic threshold. O
 
 The epidemic threshold is given by the condition under which we observe the spreading. Mathematically, given a specific model, its critical version will return the values of the parameters for which $ R_0 = 1 $. If we are slightly above this threshold, we need a minimum of infected people and the disease is going to spread. Considering for instance the case of the SIS model:
 \begin{equation}
-  R_0 = \frac{\beta \expval{k} }{\mu } = 1
+  R_0 = \frac{\beta}{\beta_c} =  \frac{\beta \expval{k} }{\mu } = 1
 \end{equation}
-
+In general, for an epidemic to occur in a susceptible population $R_0$ must be >1, so the number of cases is increasing.
 
 \subsection{SIR model}
 We now discuss the so called $SIR$ model, whose compartments are \textbf{S}\textit{usceptible}, \textbf{I}\textit{nfected} and \textbf{R}\textit{ecovered}. The idea behind is the same one of the SIS, but we are now adding a new state which accounts for long lasting immunity (\textbf{R}). Hence, once a person has got the disease and has recovered, he obtains a long \textbf{immunity}. Recall that, since we assumed that the population is closed, its density is still fixed to 1.
@@ -185,7 +185,7 @@ and the result we find is again:
   \beta > \beta _c = \frac{\mu }{\expval{k} }
 \end{equation}
 
-Since we are able to obtain an analytic expression for S and I in this SIR model, we want to study what is the behavior for large times ($ t = \infty$ ). One obtains that:
+Since we are able to obtain an analytic expression for S and I in this SIR model, we want to study what is the behavior for large times ($ t = \infty$). One obtains that:
 \begin{equation*}
   \dv{s}{r} = \frac{- \beta  \expval{k}  s}{\mu }
 \end{equation*}
@@ -205,9 +205,9 @@ One may note that \( R_0 = \beta \expval{k} / \mu   \), and this should make us 
 We want now to modify the SIR to take into account some more features we want to implement our model with.
 
 \subsection{SIR with Demography}
-So far we have assumed that the population was totally closed, and so densities always sum up to 1. This is actually unrealistic, so our next step will be to \textbf{drop} the \textbf{closed population} assumptions: we will now introduce births and deaths. This reasoning is justified from what we observe in real world: considering the demography, we note as every year there are new children that are infected by diseases such as Measles and Chickenpox. Anyway, we do not expect that they will die out over weeks, but still it tells us that newborns increase the populations to the susceptible compartment.
+So far we have assumed that the population was totally closed, and so densities always sum up to 1. This is actually unrealistic, so our next step will be to \textbf{drop} the \textbf{closed population} assumptions: we will now introduce births and deaths (timescale of infection is no more much faster than demographics!). This reasoning is justified from what we observe in real world: considering the demography, we note as every year there are new children that are infected by diseases such as Measles and Chickenpox. Anyway, we do not expect that they will die out over weeks, but still it tells us that newborns increase the populations to the susceptible compartment.
 
-The simplest assumption we can make is: similar to the infectious period, individuals can have a \textbf{lifespan}, denoted as \( 1/\alpha  \) years$^{-1}$. Note as in this approximations lifespan is much greater than the infectious period, so deaths are not due to the disease. In this way we assume that \( \alpha  \) is the death rate, common to all classes. Moreover, \( \alpha  \) is also the crude birth rate, and in addition we assume that births occur only for susceptible individuals and therefore increase its density.
+The simplest assumption we can make is: similar to the infectious period, individuals can have a \textbf{lifespan}, denoted as \( 1/\alpha  \) years$^{-1}$. Note as in this approximations lifespan is much greater than the infectious period, so \textit{deaths are not due to the disease}. In this way we assume that \( \alpha  \) is the death rate, common to all classes. Moreover, \( \alpha  \) is also the crude birth rate, and in addition we assume that births occur only for susceptible individuals and therefore increase its density.
 
 In order to keep the population constant, we need to assume:
 \begin{equation}
