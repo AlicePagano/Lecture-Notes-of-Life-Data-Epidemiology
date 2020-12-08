@@ -5,13 +5,13 @@
 
 \begin{document}
 
-\marginpar{ \textbf{Lecture 9.} \\  \displaydate{date}. \\ Compiled:  \today.}
 We recall now one of the most important result of the last lecture: if the network is large enough, for \( N \rightarrow \infty  \), the \textbf{epidemic threshold} tends to zero:
 \begin{equation}
     \beta_c \xrightarrow{N \to \infty} 0
 \end{equation}
 Moreover, the epidemic threshold for IBMF depends on the largest eigenvalue of the adjacency matrix $\Lambda_{max}$.
-The last relations which contain \( \beta _c \) for IBMF and DCBMF, can tell us more about the accuracy of the model: \textbf{DBMF} is accurate only in the proximity of the epidemic threshold, while \textbf{IBMF} is accurate for the entire epidemic diagram. See the figure \ref{fig:09_3}.
+The last relations which contain \( \beta _c \) for IBMF and DBMF, can tell us more about the accuracy of the model: \textbf{DBMF} is accurate only in the proximity of the epidemic threshold, while \textbf{IBMF} is accurate for the entire epidemic diagram. See the figure \ref{fig:09_3}.
+\marginpar{ \textbf{Lecture 9.} \\  \displaydate{date}. \\ Compiled:  \today.}
 
 \begin{figure}[h!]
 \centering
@@ -76,7 +76,7 @@ Hence we obtain:
 \begin{equation*}
   \dv{}{t} \rho (i,t) = - \mu \rho (i,t) + \beta \sum_{j}^{} A_{ij} \rho (j,t) - \beta \sum_{j}^{} A_{ij} \mathbb{E} \qty[X_i (t) X_j (t)]
 \end{equation*}
-where \(  \mathbb{E} \qty[X_i (t) X_j (t)] \) is the two nodes expectation probability to be infected.
+where \(  \mathbb{E} \qty[X_i (t) X_j (t)] \) is the two nodes expectation probability of being infected.
 
 However, we need to look for an expression for the $\binom{N}{2}$ equations for \(  \mathbb{E}  \qty[X_i (t) X_j (t)] \), since we have to take into account one expression for each node multiplied all possible link we can have in the network.
 The main idea is:
@@ -257,7 +257,7 @@ With \( \lambda  \) as the solution of:
 
 The \( S I_1 I_2 \dots I_k R \) model has several limitaionts:
 \begin{itemize}
-\item it is defined only for well-midex populations;
+\item it is defined only for well-mixed populations;
 \item focus only on the infectious period distribution. We have that infections are still Markovian and this model only reproduces as Gamma distribution.
 \end{itemize}
 
@@ -276,7 +276,7 @@ The ingredients are:
 \item a random number \( M_{ij} (t) \): infection times at which node \( i \) tries to infect node \( j \).
 \end{itemize}
 In order:
-\begin{itemize}
+\begin{enumerate}
 \item node \( i \) get the infection at time \( t \);
 \item we extract the random number \( R_i (t) \) which represents the time in which node \( i \) is gonna recovery (or, the time for which it stay infected);
 \item then, we extract the random number  \( M_{ij} (t) \) which reprsenets the number of trials that \( i \) try to infect node \( j \) while infected;
@@ -286,8 +286,8 @@ In order:
 \end{equation*}
 in which node \( i \) try to infect node \( j \). For instance, \(  T_{ij}^{(1)} \) is the first time that node \( i \) try to infect node \( j \) then we have the second time and so on;
 \item I am gonna repeat the last step for all my neighbours.
-\end{itemize}
-Hence, the trasmitibility of the diesease is seen as how many trials I am gonna make to infect.
+\end{enumerate}
+Hence, the trasmissibility of the disease is seen as how many trials I am gonna make to infect.
 One important thins is that \( R_i (t) \) and \( M_{ij} (t) \) can be drawn from any distribution and not only from the exponential one.
 How do we extract the \( T_{ij} \) is not important at this point, because we are only gonna focus on the distribution of \( R_i (t) \) and \( M_{ij} (t) \).
 

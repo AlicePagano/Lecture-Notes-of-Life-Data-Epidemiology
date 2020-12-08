@@ -187,17 +187,17 @@ We now need an expression for \( q_i(t) \), that is the \textbf{probability} for
 \end{equation}
 Let us consider Fig. \ref{fig:07_3}, in green we have susceptible nodes, which include node \( i \) itself, and in red its infected neighbours.
 The probability of getting infected, at least, by a generic node $j$ is:
-\begin{equation}
+\begin{equation*}
    \beta A_{ij} \rho _j (t) 
-\end{equation}
+\end{equation*}
 Its complementary to 1 is the probability of $NOT$ get the infection by node $j$.  
-\begin{equation}
+\begin{equation*}
    [1- \beta A_{ij} \rho _j (t)] 
-\end{equation}
+\end{equation*}
 Repeating this argument for all neighbors that are actually infected, we can obtain the probability of $NOT$ contracting the disease from $ANY$ neighbor, namely:
-\begin{equation}
+\begin{equation*}
     \prod_{j=1}^{N} [1- \beta A_{ij} \rho _j (t)]
-\end{equation}
+\end{equation*}
 Again, we previously introduced \(   q_i (t) \) as the probability of getting infected by at least one neighbor. Hence, the probability of getting infected the complementary to one probability of not getting infected by any neighbor:
 \begin{equation}
   q_i (t) = 1 - \prod_{j=1}^{N} \qty[1- \beta A_{ij} \rho _j (t)]
@@ -260,7 +260,7 @@ One may wonder now what is the relation between the two values for the epidemic 
 \begin{itemize}
 \item for \textbf{DBMF}:
 \begin{equation*}
-  \beta _c^{DBMF} = \frac{\mu \expval{k} }{\expval{k^*} }
+  \beta _c^{DBMF} = \frac{\mu \expval{k} }{\expval{k^2} }
 \end{equation*}
 
 \item for \textbf{IBMF}:
@@ -270,7 +270,7 @@ One may wonder now what is the relation between the two values for the epidemic 
 \end{itemize}
 For \textbf{scale-free networks} \( P(k) \sim k^{-\gamma  } \) it holds that:
 \begin{equation}
-  \Lambda _{max} \sim \max \qty(\sqrt{k_{\max}}, \frac{\expval{k^*}}{\expval{k}}   )
+  \Lambda _{max} \sim \max \qty(\sqrt{k_{\max}}, \frac{\expval{k^2}}{\expval{k}}   )
 \end{equation}
 And in particular:
 \begin{equation}
