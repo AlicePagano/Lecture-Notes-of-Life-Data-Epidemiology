@@ -26,7 +26,7 @@ The \textbf{transition diagram} that describes this model is the following:
 \begin{equation}
   S + I \overset{\beta }{\rightarrow} I + I
 \end{equation}
-where $\beta$ is the \textit{“per contact” infection rate} and dictates the speed of the spreading. We can write down the \textbf{equation} that can be solved exactly:
+where $\beta$ is the \textit{“per contact” infection rate} and dictates the speed of the spreading. We can write down the \textbf{equations} that can be solved exactly:
 \begin{equation}
 \begin{split}
   \dv{s}{t} &= - \beta \expval{k} s i \\ \dv{i}{t} &= \beta \expval{k} s i
@@ -96,7 +96,7 @@ Also, the shape of the \textbf{solution} is a sigmoid as before:
 \begin{equation}
   i(t) = i_0 \frac{(\beta - \mu ) e^{(\beta - \mu )t} }{(\beta - \mu)  + \beta i_0 (e^{(\beta - \mu )t} - 1) }
 \end{equation}
-By plotting it, one should note that despite the same form, we do not saturate at 1, but at $ \frac{\beta - \mu }{\beta } $. Hence, as we said, we have some sort of \textbf{dynamical equilibrium}: the number of new infected is more or less the same of the new recovered people at each moment. The density $i(t)$ will therefore fluctuate around this value $\frac{\beta - \mu }{\beta }$ and, by enlarging \( \mu  \), we can obtain larger fluctuations (Fig. \ref{fig:3_3}).
+Note that we have included $\expval{k}$ inside the definition of $\beta$: it can be done since both of them are constant. By plotting it, one should note that despite the same form, we do not saturate at 1, but at $ \frac{\beta - \mu }{\beta } $. Hence, as we said, we have some sort of \textbf{dynamical equilibrium}: the number of new infected is more or less the same of the new recovered people at each moment. The density $i(t)$ will therefore fluctuate around this value $\frac{\beta - \mu }{\beta }$ and, by enlarging \( \mu  \), we can obtain larger fluctuations (Fig. \ref{fig:3_3}).
 \begin{figure}[h!]
 \centering
 \includegraphics[width=0.7\textwidth]{../lessons/image/03/3.png}
@@ -105,9 +105,10 @@ By plotting it, one should note that despite the same form, we do not saturate a
 
 It can be instructive to study what happens according to this model at the \textbf{transient}. At the beginning, one can assume that almost the entire population is composed by susceptible  people ($ s \sim 1 $), while the number of infected is very small ($ i \ll 1 $).
 Hence, the differential equations can be rewritten as following:
-\begin{equation*}
+\begin{equation}
   \dv{i}{t} = \beta \expval{k} s i - \mu i \sim \beta \expval{k} i - \mu i \rightarrow i(t) \sim i_0 e^{(\beta \expval{k} - \mu  )t}
-\end{equation*}
+  \label{eqn:rho_dt}
+\end{equation}
 One should note that if \( \beta \expval{k} < \mu   \) there is no spreading at this point anymore, while, if \( \beta \expval{k} > \mu   \) the exponent becomes positive and from this follows the exponential growth at the beginning (Fig. \ref{fig:3_4}).
 
 \begin{figure}[h!]
@@ -116,14 +117,14 @@ One should note that if \( \beta \expval{k} < \mu   \) there is no spreading at 
 \caption{\label{fig:3_4} Initial transient for the SIS model.}
 \end{figure}
 
-One very important thing is that considering the \textbf{steady state} we can have two possible behaviors:
+One very important thing is that considering the \textbf{steady state} we can have two possible behaviors, according to the limiting values of the incidence:
 \begin{equation*}
   \dv{i}{t} = 0 \rightarrow  \begin{cases}
    i=0 & \beta \expval{k} < \mu  \\
    i>0 & \beta \expval{k} > \mu
   \end{cases}
 \end{equation*}
-and we have that:
+and we have that, in the long run, the incidence is different from zero only when the epidemics has not become extinct in the early phase. More formally:
 \begin{equation}
   i>0 \iff \beta > \beta_c = \frac{\mu }{ \expval{k} }
 \end{equation}
@@ -141,9 +142,9 @@ One may ask what is the relation between \( R_0 \) and the epidemic threshold. O
 
 We refer to these two different cases as it follows: if our $\beta < \beta_c$, then we end up in the so called \textbf{epidemic extinction} and the virus, in the long run, will not be present any more. On the other hand, if $\beta > \beta_c$, the virus is going to be present in the population and therefore survives. This is the so called $\textbf{endemic state}$. Behavior around the critical point might be of our interest and can be studied using Statistical mechanics formalism and/or numerical simulations. 
 
-The epidemic threshold is given by the condition under which we observe the spreading. Mathematically, given a specific model, its critical version will return the values of the parameters for which $ R_0 = 1 $. If we are slightly above this threshold, we need a minimum of infected people and the disease is going to spread. Considering for instance the case of the SIS model:
+The epidemic threshold is given by the condition under which we observe the spreading. Mathematically, given a specific model, its critical version will return the values of the parameters for which $ R_0 = 1 $. If we are slightly above this threshold, we only need a minimum of infected people and the disease is going to spread. Considering for instance the case of the SIS model, the $\beta_c$ critical is such that it makes $R_0$ being equal to 1:
 \begin{equation}
-  R_0 = \frac{\beta \expval{k} }{\mu } = 1
+\beta_c\ :  \qquad  R_0 = \frac{\beta_c \expval{k} }{\mu } = 1
 \end{equation}
 
 
@@ -178,16 +179,16 @@ This is actually a good point to introduce the \textbf{different regimes} we may
 
 Initially, at the beginning of each spreading, we see the so called \textbf{noisy phase} where numbers are too small to cause a large spreading. Here we can observe only some sort of stochastic fluctuations. In many cases, we can end up without any spreading: this may happen if we assume that some nodes are much more linked than others (the so called \textit{super spreaders}), and we are able to recognize and stop them before they can infect anyone\footnote{the assumption is one of the basis for \textbf{heterogeneous} mean field models. We will discuss them later in the course.}. If it is not the case, the disease starts spreading according to the characteristic \textbf{exponential growth}. Later, the slope slows down until we reach the \textbf{steady state}: for the SIS the disease keeps circulating among the individuals \textit{(endemic state)}, while for the SIR it disappears \textit{(absorbing state)}.
 
-In order to compute the \textbf{epidemic threshold} for the SIR model, the path to follow is the same as before. In particular, we assume that, at the starting point, $ r \ll 1 $ so that:
+In order to compute the \textbf{epidemic threshold} for the SIR model, the path to follow is the same as before. In particular, we assume that at the starting point $s\sim 1$ and $ r \ll 1 $, hence:
 \begin{equation*}
-  \dv{i}{t} = \beta \expval{k} s i - \mu i \sim \beta \expval{k} i - \mu i \rightarrow i(t) \sim i_0 e^{(\beta \expval{k} - \mu  )t}
+  \dv{i}{t} = \beta \expval{k} s i - \mu i \sim \beta \expval{k} i - \mu i \rightarrow i(t) \sim i_0 e^{(\beta \expval{k} - \mu  )t} = i_0 e^{\mu (R_0 - 1)t}
 \end{equation*}
-and the result we find is again:
+where we introduced the $R_0 =\frac{\beta \expval{k}}{\mu} $. It should be clear now why estimating $R_0$ is such important: it drives the exponential growth in early phase. Once again we see that we have no extinction when $\beta > \beta_c$:
 \begin{equation}
   \beta > \beta _c = \frac{\mu }{\expval{k} }
 \end{equation}
 
-Since we are able to obtain an analytic expression for S and I in this SIR model, we want to study what is the behavior for large times ($ t = \infty$ ). One obtains that:
+Since it is difficult to obtain an analytic expression for S and I in this SIR model unless we make some assumptions, we want to study what is the behavior for large times ($ t = \infty$ ). Dividing $\dv{s}{t}$ by $\dv{r}{t}$, and considering that $i(\infty) \to 0$ one obtains that:
 \begin{equation*}
   \dv{s}{r} = \frac{- \beta  \expval{k}  s}{\mu }
 \end{equation*}
@@ -209,7 +210,7 @@ We want now to modify the SIR to take into account some more features we want to
 \subsection{SIR with Demography}
 So far we have assumed that the population was totally closed, and so densities always sum up to 1. This is actually unrealistic, so our next step will be to \textbf{drop} the \textbf{closed population} assumptions: we will now introduce births and deaths. This reasoning is justified from what we observe in real world: considering the demography, we note as every year there are new children that are infected by diseases such as Measles and Chickenpox. Anyway, we do not expect that they will die out over weeks, but still it tells us that newborns increase the populations to the susceptible compartment.
 
-The simplest assumption we can make is: similar to the infectious period, individuals can have a \textbf{lifespan}, denoted as \( 1/\alpha  \) years$^{-1}$. Note as in this approximations lifespan is much greater than the infectious period, so deaths are not due to the disease. In this way we assume that \( \alpha  \) is the death rate, common to all classes. Moreover, \( \alpha  \) is also the crude birth rate, and in addition we assume that births occur only for susceptible individuals and therefore increase its density.
+The simplest assumption we can make is: similar to the infectious period, individuals can have a \textbf{lifespan}, denoted as \( 1/\alpha  \) ($[\alpha]= \text{year}^{-1}$). Note as in this approximations lifespan is much greater than the infectious period, so deaths are not due to the disease. In this way we assume that \( \alpha  \) is the death rate, common to all classes. Moreover, \( \alpha  \) is also the crude birth rate, and in addition we assume that births occur only for susceptible individuals and therefore increase its density.
 
 In order to keep the population constant, we need to assume:
 \begin{equation}
@@ -232,7 +233,7 @@ on average, individuals spend less time infected because some of them may die wh
 
 Also, \( \mathbf{R_0} \) is reduced due to mortality:
 \begin{equation}
-  R_0 = \frac{\beta }{\alpha + \mu }
+  R_0 = \beta \tau = \frac{\beta }{\alpha + \mu }
 \end{equation}
 
 We want now to study the \textbf{equilibrium points} of the dynamic for this model. Assuming:
@@ -254,7 +255,7 @@ There are two different solutions for this equation: the one for which \( i^* = 
 
 Replacing \( s^* = \frac{1}{R_0} \) in \( \dv{s}{t} = \alpha - \beta s i - \alpha s  \), we obtain:
 \begin{equation*}
-  i^* = \frac{\alpha R_0 }{\mu } \qty(1 - \frac{1}{R_0}) = \frac{\alpha }{\beta } (R_0 -1)
+  i^* = \frac{\alpha R_0 }{\beta } \qty(1 - \frac{1}{R_0}) = \frac{\alpha }{\beta } (R_0 -1)
 \end{equation*}
 Finally, the three \textbf{equilibrium values} $(s^*, i^*, r^*)$ for the fraction of infected, susceptible and recovered in the endemic state are:
 \begin{equation}

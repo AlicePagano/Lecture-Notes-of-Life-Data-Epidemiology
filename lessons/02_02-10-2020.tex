@@ -21,7 +21,7 @@ Models in science have two different roles: \textbf{understanding} what happens 
 Models can be of two types: simple and more complex ones. In the simplest ones we just consider the minimal number of parameters and events involved: this indeed allows to understand what are the main mechanisms of a phenomenon.
 
 In this course, we are going to start with very simple models in which we assume that there is no structure behind in the population. Obviously this is not accurate, but allows us to understand at a first glance some underlying mechanisms.
-Then, we are going to consider social structures and introduce contact network models. We will also take into account interactions among different populations and exploit data to understand how members move from one population to another. Finally, we are going to introduce deal with the so called “Agent Based” models, for a quick overview on them.
+Then, we are going to consider social structures and introduce contact network models. We will also take into account interactions among different populations and exploit data to understand how members move from one population to another. Finally, we are going to introduce the so called “Agent Based” models, for a quick overview on them.
 
 \section{Compartmental models}
 
@@ -49,7 +49,7 @@ As an example, for the \textbf{SEIR} compartmental model, we have four main stag
 \caption{\label{fig:2_5} A sketch of the time-line of infection, showing the dynamics of the pathogen (grey area) and the host immune response (black line) with the labeling for the various infection classes: \textbf{S}usceptible, \textbf{E}xposed, \textbf{I}nfectious, and \textbf{R}ecovered. Note that the period when symptoms are experienced (medical status) is not necessarily correlated with any particular class of epidemiological models.}
 \end{figure}
 
-Now, let us introduce the \textbf{Basic Reproductive Number} $\mathbf{R_0}$ (pr. \textit{"R naught"}) which is a measure of the infection in the population. If we wanted to empirically determine it: we put one guy inside a group for an arbitrarily long time period and, at the end, we count the number of secondary cases that we have. This is the main idea behind the computation of \( R_0 \). This parameters therefore determines whether a disease will spread or not:
+Now, let us introduce the \textbf{Basic Reproductive Number} $\mathbf{R_0}$ (pr. \textit{"R naught"}) which is a measure of the infection in the population. If we wanted to empirically determine it: we put one guy inside a group for an arbitrarily long time period and, at the end, we count the number of secondary cases we have. This is the main idea behind the computation of \( R_0 \). This parameter therefore determines whether a disease will spread or not:
   \begin{equation}
     \begin{cases}
      R_0 < 1\\
@@ -58,7 +58,7 @@ Now, let us introduce the \textbf{Basic Reproductive Number} $\mathbf{R_0}$ (pr.
     \end{cases}
   \end{equation}
 Let us consider the plot of Fig. \ref{fig:2_R_0.png}, we have a sort of \textbf{second order phase transition} at the point $R_0=1$.
-Note that $R_0$ for the SARS is higher than the one of COVID-19. However, we did not experienced an outbreak of this disease, so that is not the only parameters to be taken into account in the models. In order to compute $R_0$ we assume that the population is totally susceptible. This is however valid only at the very early stages, later on, we must consider both epidemiological and demographical aspects. The conclusion is the following: $R_0$ may vary from one population to another.
+Note that $R_0$ for the SARS is higher than the one of COVID-19. However, since we did not observe any outbreak of that disease, it means that the Basic Reproductive number is not the only relevant parameter to be taken into account in the models. In order to compute $R_0$ we assume that the population is totally susceptible. This is however valid only at the very early stages, later on, we must consider both epidemiological and demographical aspects. The conclusion is the following: $R_0$ may vary from one population to another.
 
 Since we are doing a \textbf{coarse-graining} of the dynamics, this number represents the average of all possible different distributions. A \textit{wrong} argument is to think that similar $R_0$'s lead to similar outbreaks. The distribution of infections can be quite heterogeneous: the mean could be quite representative only if we are dealing with homogeneous populations, that is not the case for real networks. For instance, let us consider the plot in Fig. \ref{fig:3_outbreaks}. We see that SARS was heterogeneous, while Spanish Flu was a more homogeneous one. COVID-19 is most likely somewhere in the middle.
 

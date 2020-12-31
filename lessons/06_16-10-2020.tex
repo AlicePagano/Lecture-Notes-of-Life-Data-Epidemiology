@@ -72,7 +72,7 @@ The problem of this distribution is that it is difficult to be dealt with analyt
 \end{equation*}
 which becomes narrower as \( N \) becomes larger, therefore some sort of \textbf{approximation} needs to be introduced.
 
-Fortunately, since for sparse networks we have \( k \ll N \), the binomial \( (N,p) \) distribution can be approximated by a \textbf{Poisson distribution} with parameter \( \lambda = p N \). Indeed, given that  \( \expval{k} = p(N-1)  \), if we have \( k \ll N \) then it implies that \( p \ll N \). Hence we can write the following:
+Fortunately, since for sparse networks we have \( k \ll N \), the binomial distribution \( Binom(N,k,p) \)  can be approximated by a \textbf{Poisson distribution} with parameter \( \lambda = p N \). Indeed, given that  \( \expval{k} = p(N-1)  \), if we have \( k \ll N \) then it implies that \( p \ll N \). Hence we can write the following:
 \begin{equation*}
   (1-p)^{N-1-k} \approx e^{(N-1-k) \log (1- \expval{k}/(N-1) )} \overset{N \rightarrow \infty }{\longrightarrow } e^{- \expval{k} }
 \end{equation*}
@@ -80,9 +80,9 @@ and
 \begin{equation*}
   \binom{N-1}{k} \approx \frac{(N-1)^k}{k!}
 \end{equation*}
-Obtaining the \textbf{Poisson distribution} we were looking for:
+Obtaining the \textbf{Poisson distribution} for the \textit{degree} we were looking for:
 \begin{equation}
-  p_k = e^{- \expval{k} } \frac{\expval{k} }{k!}
+  p_k = e^{- \expval{k} } \frac{\expval{k}^k }{k!}
 \end{equation}
 As before, the average and the variance scale exactly in the same way with the size of the network ($\sim \lambda = Np$). This actually tells us that \textbf{all} the \textbf{nodes are} more or less \textbf{the same}. Indeed when we observe a bounded variance, it means that all the nodes more or less have the same degree.
 In particular, as $p$ increases the graph undergoes a \textbf{transition} from disconnected to fully connected one:
@@ -106,7 +106,7 @@ In particular, as $p$ increases the graph undergoes a \textbf{transition} from d
 
 \subsection{Scale-free networks}
 
-However, so far we have not discussed how real networks look like, in particular what is their degree distribution. In the last decades we started to have really complex and large networks, whose structure really differs from the structure we usually see for a random network. In Fig. \ref{fig:06_4}, as an example, we shown two real social networks we know pretty well: Facebook and Twitter. Note that both plots are in log-log scale. Generalizing, we can say that most of the real networks scales in the same way.
+However, so far we have not discussed how real networks look like, in particular what is their degree distribution. In the last decades we started to have really complex and large networks, whose structure really differs from the structure we usually see for a random network. In Fig. \ref{fig:06_3}, as an example, we show two real social networks we know pretty well: Facebook and Twitter. Note that both plots are in log-log scale. Generalizing, we can say that most of the real networks scales in the same way.
 
 We now want to understand how the \textbf{degree distribution} looks like. Let us consider Fig. \ref{fig:06_4}: black dots follow the Poissonian distribution that we were mentioning before, while the squares follow a power-law \( P(k) \sim k^{- \gamma  } \), which is \textbf{heavy tailed distribution}, in the sense that possibility for large degrees is not null. One should note that the Poissonian distribution is not able to reproduce the heterogeneity we can see in the data, while the power-law is. Hence, in most contexts real networks are \textbf{highly heterogeneous} and degrees can span \textbf{several orders of magnitude}. In particular, the \( \gamma   \) coefficient of the power-law has an important role, since it represents the \textbf{slope} of the curve in log-log scale.
 Since we observe similar structures for different scales, these networks are said to be \textbf{scale-free} networks. In most real networks $\gamma$ has small values, i.e. \( \gamma \le 3 \).
@@ -114,7 +114,7 @@ Since we observe similar structures for different scales, these networks are sai
 
 \begin{figure}[h!]
 \centering
-\includegraphics[width=0.7\textwidth]{../lessons/image/06/5.png}
+\includegraphics[width=0.35\textwidth]{../lessons/image/06/5.png}
 \caption{\label{fig:06_4} Difference between random networks and scale-free networks.}
 \end{figure}
 
@@ -126,21 +126,26 @@ We want now to study the \textbf{limiting cases} of these scale-free networks. F
 \end{equation}
 To understand how \( k_{max} \) scales with \( N \), we have to study the case where:
 \begin{equation*}
-  \int_{k_{max}}^{\infty } P(k) \dd[]{k}  = \frac{1}{N} \quad \rightarrow  \qty(\frac{k_{min}}{k_{max}})^{\gamma -1 } = N
+  \int_{k_{max}}^{\infty } P(k) \dd[]{k}  = \frac{1}{N} \quad \rightarrow  \qty(\frac{k_{min}}{k_{max}})^{\gamma -1 } = \frac{1}{N}
 \end{equation*}
-Thus, when:
+In the lhs formula, we exploited the fact that, on average, a single node drawn uniformly (prob 1/N) will have a degree that is $k_{max}$. Thus, when:
 \begin{equation}
+\label{eqn:cut_off_expr}
   k_{max} = k_{min} N^{\frac{1}{\gamma -1 }}
 \end{equation}
-Since in most of networks \( \gamma \sim 2-3  \), so it is easily to understand that $k_max$ scales \textbf{sub-linearly} with N, but still way faster than random graphs. This is valid for previous plots, such as in Fig. \ref{fig:06_3} as well.
+The last formula is known as the \textit{natural cut-off}.
+Since in most of networks \( \gamma \sim 2-3  \), it is easily to understand that $k_{max}$ scales \textbf{sub-linearly} with N, but still faster than random graphs, in the sense that the larger the number of nodes the higher is $k_max$. Hence it is possible to observe highly connected nodes. This is valid for previous plots, such as in Fig. \ref{fig:06_3} as well.
 
 Recalling the definition for the general \( n^{th} \) moment of a distribution: 
 \begin{equation}
-  \expval{k^n} = \int_{k_{min}}^{\infty } k^n P(k) \dd[]{k} = \int_{k_{min}}^{\infty }  C_0 k^{n- \gamma  }\dd[]{k}
+  \expval{k^n} = \int_{k_{min}}^{k_{max} } k^n P(k) \dd[]{k} = \int_{k_{min}}^{k_{max} }  C_0 k^{n- \gamma  }\dd[]{k} = C_0 \frac{k_{max}^{n -\gamma + 1}- k_{min}^{n -\gamma + 1}}{n -\gamma + 1} 
 \end{equation}
-We note as it converges only if \( \gamma -1 > n  \). This gives an hint on how the \textbf{average degree} scales as the size of the network: a very important result. If instead we consider the variance \( \sigma ^2  = \expval{k^2} - \expval{k}^2  \), we it holds that:
+\begin{equation}
+\expval{k^n} = C_0 k_{min}^{n -\gamma + 1} \frac{N^{\frac{n}{\gamma-1} - 1} - 1}{n -\gamma + 1}
+\end{equation}
+Where we used \ref{eqn:cut_off_expr}. We note as it converges only if \( \gamma -1 > n  \). This gives an hint on how the \textbf{average degree} scales as the size of the network: a very important result. If instead we consider the variance \( \sigma ^2  = \expval{k^2} - \expval{k}^2  \), we it holds that:
 \begin{itemize}
-\item if \( \gamma <2  \), both \( \expval{k}  \) and \( \expval{k^2}  \) diverge with \( N \rightarrow  \infty  \);
+\item if \( \gamma <2  \), both \( \expval{k}  \) and \( \expval{k^2}  \) diverge as \( N \rightarrow  \infty  \);
 
 \item if \( 2 < \gamma < 3  \), the average degree \( \expval{k}  \rightarrow c \) but \( \expval{k^2}  \rightarrow \infty \) as \( N \rightarrow  \infty  \), and \( \sigma ^2 \rightarrow \infty  \).
 \end{itemize}
@@ -289,7 +294,7 @@ Hence, putting everything together, we derive the equation:
   \dv{\rho }{t} = - \mu \rho  + \beta \sum_{j}^{} A_{ij} (1- \rho ) \rho \qquad \rightarrow \qquad
    \dv{\rho }{t} = - \mu \rho  + \beta (1- \rho ) \rho \sum_{j}^{} A_{ij}
 \end{equation*}
-Actually, this last term is the degree of the network:
+Actually, this last term is the degree of a generic node. Recalling that we have assumed that all nodes are equal, the degree of a generic node is therefore the average degree of the network:
 \begin{equation}
   \sum_{j}^{} A_{ij} = k_i \simeq \expval{k}
 \end{equation}
@@ -297,17 +302,15 @@ and by replacing it, we can obtain the same expression that we derived before fo
 \begin{equation}
   \dv{\rho }{t} = \beta \expval{k} (1- \rho ) \rho - \mu \rho
 \end{equation}
-This is a very important result.
-One should keep in mind that now we are considering all the \textbf{nodes statistically independent} and we are back again to exactly the same result of well-mixed population. The only \textbf{difference} is that when we were considering well-mixed population, we assumed that the \textbf{probabilities} where \emph{exactly} \textbf{statistically independent}. Now, this is just an \textbf{approximation}.
+This is a very important result and one should recall that is the same we previously found in \ref{eqn:rho_dt}.
+One should keep in mind that now we are considering all the \textbf{nodes statistically independent} and we are back again to exactly the same result of well-mixed population. The only \textbf{difference} is that when we were considering well-mixed population, we assumed that the \textbf{probabilities} were \emph{exactly} \textbf{statistically independent}. Now, this is just an \textbf{approximation}.
 
 Obviously, all the results derived for SIS model in well-mixed populations are still valid, for instance the epidemic threshold.
 
-\begin{remark}
-Let us recap what we have seen at the end of this lecture.
+\textit{Recap.} 
+Let us summarize what we have seen at the end of this lecture.
 We moved from well-mixed populations to contact networks, so we added more complexity in order to make the model is more realistic. We also derived the equations for SIS dynamics on a generic network and then considered its adjacency matrix. Since for us was impossible to write down a closed equation for this model, given the expression for the infection joint probability that involves two nodes, we were not able to compute exactly the probability for a single node of being infected ($\rho_i$). It would take into account the probability of three nodes $i$, $j$, $k$ at the same time. This is actually unfeasible for all the models and all the possible graphs: it has been done in the literature up to only 4/5 nodes. Hence we end to somehow approximate this probability, in order to cut this infinite chain to a certain value. This is exactly why we introduce mean-field approximation: in this way we take into account the effects of all terms on a specific quantity, not individually, but on average therefore reducing the complexity of our problem. We are switching from a many body problem to a one body problem.
 The simplest approximation we have seen is the one of homogeneous network in which all the nodes are equal, used on SIS model. According to this argument, for each node there is the same probability of getting infected, so we can approximate the probabilities to be statistically independent. After, we derived all the equations. Their solutions were the same as the ones we had found for well-mixed population. However, in that case the solutions found were \textit{exact}, while now are the result of an approximation.
-\end{remark}
-
 
 
 

@@ -34,7 +34,7 @@ The first problem regards \textbf{data visualization}. We are dealing with netwo
 \begin{figure}[h!]
 \centering
 \includegraphics[width=0.9\textwidth]{../lessons/image/17/image03.png}
-\caption{\label{fig:17_03} Example of temporal network. }
+\caption{\label{fig:17_03} Example of temporal network using \text{sequence of links} in time representation.}
 \end{figure}
 
 
@@ -61,9 +61,9 @@ Some possible \text{solutions} are the following ones and are depicted in Fig. \
 \captionof{figure}{\label{fig:17_05} Reachability issue is not important in static networks.}
 }
 
-The second \textbf{issue} one may face when dealing with temporal network is \textbf{reachability}. We say that $i$ is \textbf{reachable} from $j$ if it exists a path $i\to j$. This is indeed a very easy problem to tackle when dealing with \textit{undirected static networks}: every node belonging to the same \textbf{connected component} is reachable from the other members. We recall now that we are losing much information: if, for instance, two nodes share a link only at the very beginning, we see them as connected even though they are not present any more after a certain time instant. It actually shows lots of path that might be \textbf{not} available any more. Hence, the \textbf{existence} of a \textit{time respecting path} does depend on the window $[t,T]$ of observation!
+The second \textbf{issue} one may face when dealing with temporal network is \textbf{reachability}. We say that $i$ is \textbf{reachable} from $j$ if it exists a path $i\to j$. This is indeed a very easy problem to tackle when dealing with \textit{undirected static networks}: every node belonging to the same \textbf{connected component} is reachable from the other members. On the other hand, if the network where we start from is a temporal one, a static network might be the output we obtain after aggregating it. However in this we are losing some important information: if, for instance, two nodes share a link only at the very beginning, we see them as connected even though they are not present any more after a certain time instant. It actually shows lots of path that might be \textbf{not} available any more. Hence, the \textbf{existence} of a \textit{time respecting path} does depend on the window $[t,T]$ of observation (see fig. \ref{fig:17:07a})!
 
-However, in an \textbf{undirected temporal network}, $j$ is reachable from $i$ only if there exist a \textbf{time respecting patch} $i \to j$. That is to say that there is a \textbf{sequence of contacts} that connects $i \to j$ with each contact in the path coming sequentially one after the other from node $i\to j$ (see Fig. \ref{fig:17_06}).
+As said, in an \textbf{undirected temporal network}, $j$ is reachable from $i$ only if there exist a \textbf{time respecting patch} $i \to j$. That is to say that there is a \textbf{sequence of contacts} that connects $i \to j$ with each contact in the path coming sequentially one after the other from node $i\to j$ (see Fig. \ref{fig:17_06}).
 
 \begin{figure}[h!]
 \centering
@@ -74,7 +74,7 @@ However, in an \textbf{undirected temporal network}, $j$ is reachable from $i$ o
 
 \begin{figure}[h!]
 \begin{minipage}[c]{0.5\linewidth}
-\subfloat[][Reachability depends on the choice of time window.]{ \includegraphics[width=0.8\textwidth]{../lessons/image/17/image07a.png}  \label{fig:} }
+\subfloat[][Reachability depends on the choice of time window.]{ \includegraphics[width=0.8\textwidth]{../lessons/image/17/image07a.png}  \label{fig:17:07a} }
 \end{minipage}
 \begin{minipage}[]{0.5\linewidth}
 \centering
@@ -84,7 +84,7 @@ However, in an \textbf{undirected temporal network}, $j$ is reachable from $i$ o
 \end{figure}
 
 
-One should recall that we are dealing with \textbf{epidemic spreading}: if we aggregate network into a static one, possibilities to infect other nodes are much larger rather then what happens for temporal network.  Moreover, infection has a certain duration that is given by the \textbf{recovery rate} $\mu$: the longer it is, the more likely we stay infected and are able to infect other nodes spreading the disease. On the other hand, when infection duration is small we may recover without having the time to spread it to other nodes that at that moment are not connected to us.
+One should recall that we are dealing with \textbf{epidemic spreading}: if we aggregate network into a static one, possibilities to infect other nodes are much larger rather then what happens for temporal network.  Moreover, infection has a certain duration that is given by the \textbf{recovery rate} $\mu$: the longer it is, the more likely we stay infected and are able to infect other nodes spreading the disease. On the other hand, when infection duration is small we may recover without having the time to spread it to other nodes that at that moment are not connected to us (see fig. \ref{fig:17:07b}).
 
 
 The third \textbf{issue} that arises is the \textit{activation frequency} or, in other words, the \textbf{contact heterogeneities}. In static network, we know that there are actually some nodes that have more contacts whereas some have few. The analogous for temporal networks is that, besides the \textit{number of contacts} a node may have, we must consider how \textbf{often activation occurs}.
@@ -117,7 +117,7 @@ where $k_{i,t}$ and $s_{i,t}$ are respectively the \textit{degree} and the \text
 
 Let us consider now, once we have a dataset with temporal description of the network, how its main \textbf{properties affect} the \textbf{dynamics}. Up to some years ago, temporal networks were not considered of much interest: for instance indeed under some assumption, namely the \textbf{time scales separation}, the time dimension seemed not to be relevant in the spreading process and therefore was dropped.
 
-Let us refer to the \textbf{average infectious duration} as $\mu^{-1}$, while to the \textbf{average contact time} $\tau$. For $\tau \ll \mu^{-1}$ we do not need to take into account contacts with a high resolution in time, being the network faster than the disease: considering the average network would be actually sufficient. Conversely, if the network is slower than the disease (e.g. migration network), namely $ \tau \gg \mu^{-1} $, one may want to exploit the static network and drop the time information. We want to understand when $\tau \sim \mu^{-1}$, so when \textbf{timescales} are \textbf{comparable}. This can be done obviously if and only if \textbf{timescales are definite}: there might be some distributions whose mean is not informative, since its variance is high and a timescale cannot be defined out of them.
+Let us refer to the \textbf{average infectious duration} with $\mu^{-1}$, while let $\tau$ be the \textbf{average contact time}. For $\tau \ll \mu^{-1}$ we do not need to take into account contacts with a high resolution in time, being the network faster than the disease: considering the average network would be actually sufficient. Conversely, if the network is slower than the disease (e.g. migration network), namely $ \tau \gg \mu^{-1} $, one may want to exploit the static network and drop the time information. We want to understand when $\tau \sim \mu^{-1}$, so when \textbf{timescales} are \textbf{comparable}. This can be done obviously if and only if \textbf{timescales are definite}: there might be some distributions whose mean is not informative, since its variance is high and a timescale cannot be defined out of them.
 
 We can follow two main approaches when dealing with temporal networks in epidemiology: \textbf{bottom-up} perspective and \textbf{top-down} approaches.
 In the first one, we start \textit{building mathematical} models for human interactions and the spreading dynamics. However, this is not at all a simple approach and requires too much work. The second approach is to take some \textit{empirical networks} and \textit{run numerical simulations} over them, by randomising (i.e. neglecting/throwing away) some properties whose we want to study the effects. In this way, we are able to understand the \textit{impact of a specific property} in the spreading process.
@@ -126,7 +126,7 @@ In the first one, we start \textit{building mathematical} models for human inter
 
 \subsection{Activity driven model}
 
-It is the first and the simplest model\footnote{Perra et al, Sci Rep 2012.} that was introduced to study human interactions, where nodes activate according to a certain frequency.
+It is the first and the simplest model\footnote{Perra et al, Sci Rep 2012.} that was introduced to study human interactions, where nodes activate according to a certain rate. It follows the so-called \textbf{bottom-up} approach.
 
 \marginpar{
 \includegraphics[width=\marginparwidth]{../lessons/image/17/image09.png}
@@ -150,7 +150,7 @@ The \textbf{algorithm} for the model is indeed the following:
 \end{itemize}
 This model actually captures the issue introduced when talking about \textbf{heterogeinity in activations}: now we are indeed modelling Poisson activations, despite the rate of activation is heterogeneous.
 In addition, it does not take into account possible correlations between activations.
-Moreover, \textit{network at each timestep} has \textit{on average} $E_t = m \eta \expval{x} N$ \textbf{edges} and $\expval{k}_t = \frac{2E_t}{N} = 2 m \eta \expval{x}$ \textbf{average degree}. Network is indeed \textbf{homogeneous}\footnote{$P(k)$ is Poisson} wrt its topology!
+Moreover, \textit{network at each timestep} has \textit{on average} $E_t = m \eta \expval{x} N$ \textbf{edges} and $\expval{k}_t = \frac{2E_t}{N} = 2 m \eta \expval{x}$ \textbf{average degree}. At the end of the day the \textbf{topology} of the network is \textit{homogeneous}\footnote{$P(k)$ is Poisson}, even though \textbf{activation rate} is \textit{heterogeneous}!
 
 
 Now we want to understand how properties change when we \textbf{integrate the network over a time window} $T$. The \textbf{degree} of a node $i$, in the aggregated network is:
@@ -158,8 +158,8 @@ Now we want to understand how properties change when we \textbf{integrate the ne
     k_T(i) = k_T^{OUT} (i) + k_T^{IN}(i)
 \end{equation}
 
-Let us focus on the first term \( k_T^{OUT} (i) \): $i$ makes $T a_i m$ links.
-We want to understand how many different nodes $i$ connects to, without counting twice repeated links with the same node. This should resemble the \textit{Urn problem}, where we want to count the number of \textit{different} balls extracted from an urn with $N$ balls after $T a_i m$ extractions.
+Let us focus on the first term \( k_T^{OUT} (i) \): $i$ makes on average $T a_i m$ links.
+We want to understand how many different nodes $i$ connects to, without counting twice repeated links with the same node. This should resemble the \textit{Urn problem}, where we want to count the number of \textit{different} balls extracted from an urn with $N$ balls after $T$ extractions.
 We know that the probability for each ball (node) to be extracted at least once is $p = 1 - \qty[ 1 - 1/N ]^{T a_i m}$ and the probability of extracting $d$ balls is binomial with parameters $\text{Bin}(p, N, d)$. Hence, the average number of balls $k_T^{OUT}$ is:
 \begin{equation}
     \expval{ k_T^{OUT} } = Np = N [1-e^{-\frac{T a_i m}{N}} ]
@@ -167,9 +167,9 @@ We know that the probability for each ball (node) to be extracted at least once 
 as $N \to \infty$ and the time window is such that $T/N \to 0$.
 
 
-Let us focus on the other term $k_T^{IN}(i)$, that is the number of nodes that make connections with $i$ among those that were not targeted by $i$. In this way we avoid double counting. The probability that a node was not a target of $i$ is the complementary as before, that is: $[1-1/N]^{T a_i m} \sim e^{-\frac{T a_i m}{N}}$. Given that the average number of edges formed at each timestep is $m N \expval{a}$ and they can connect to $i$ with probability $1/N$, we have that:
+Let us focus on the other term $k_T^{IN}(i)$, that is the number of nodes that make connections with $i$ among those that were not targeted by $i$. In this way we avoid double counting. The probability that a node was not a target of $i$ is the complementary as before, that is: $[1-1/N]^{T a_i m} \sim e^{-\frac{T a_i m}{N}}$. Given that the average number of edges formed at each timestep is $m N \expval{a}$ and they can connect to node $i$ with probability $1/N$, we have that:
 \begin{equation}
-    \expval{k_T^{IN}} = m \expval{a} e^{-\frac{T a_i m}{N}}
+    \expval{k_T^{IN}} = \frac{m \cancel{N}\expval{a}}{\cancel{N}} e^{-\frac{T a_i m}{N}} = m \expval{a} e^{-\frac{T a_i m}{N}}
 \end{equation}
 Therefore, the degree formula can be written as function of each activity potential $a_i$:
 \begin{align}
@@ -195,7 +195,7 @@ If the time window dimension is small, namely $T\to 0$, then also $k/N \to 0$, a
         P_T(k) \sim \frac{1}{T m \eta} F \left[ \frac{k}{Tm\eta} \right]
     \end{empheq}
 This implies that \textbf{nodes activate and form a heterogeneous network} despite they activate heterogeneously.
-In other words, heterogenous topology in the aggregated network (i.e. there are hubs), over a window $T$, results from a heterogeneous activity potential (i.e. they activate more often).
+In other words, heterogenous topology in the \textbf{aggregated} network (i.e. there are hubs), over a window $T$, results from a heterogeneous activity potential (i.e. they activate more often). To avoid any further confusion: at each \textit{timestep} the static network is homogeneous, regardless the the activation rate which is heterogeneous. On the other hand the \textit{aggregated} network results being heterogeneous, thanks to the heterogeneous firing rate distribution.
 
 
 Let us try to understand what are the \textbf{effects} on the network dynamics on epidemic spreading. For instance, let us consider how the \textbf{epidemic threshold} changes according to the activation dynamics.
@@ -204,7 +204,7 @@ Let us define the \textit{probability of transmission per contact} as $\beta$, m
 \begin{equation}
    I_a^{t+\Delta t} = -\mu \Delta t I^t_a + I^t_a + \mathcolorbox{green!20}{\beta(N_a^t - I_a^t) a \Delta t \int da' \frac{I_{a'}^t}{N} } +  \mathcolorbox{blue!20}{\beta (N_a^t - I_a^t)\int da' \frac{I_{a'}^t a' \Delta  t}{N}}
 \end{equation}
-The \textit{green} term describes the probability for a node in class $a$ to activate and get in contact with infected nodes of any other classes $a'$, from which it contracts the disease. The blue term, on the other hand, returns the probability we have to be infected by other infectious nodes that instead activate while we are not.
+The \textit{green} term describes the probability for a node in class $a$ to activate and get in contact with infected nodes of any other classes $a'$, from which it contracts the disease. The blue term, on the other hand, returns the probability we have to be infected by other infectious nodes that instead activate while we do not.
 Defining the last integral $\theta^t = \int da' \frac{I_a'^t a' \Delta  t}{N} $, we are able to write the \textbf{total number of infectious} as:
 \begin{equation}
     \int da I_a^{t + \Delta t} = I^{t + \Delta t} = I^t - \mu \Delta t I^t + \beta \expval{a} I^t \Delta t + \beta \theta^t \Delta t
@@ -236,10 +236,10 @@ The condition for the \textit{largest eigenvalue} to be \textit{positive} is thu
 \begin{empheq}[box=\myyellowbox]{equation}
 \frac{\beta}{\mu} > \frac{1}{\expval{a} + \sqrt{\expval{a^2}}} + \mathcal{O}\left(\frac{1}{N}\right)
 \end{empheq}
-and it set a threshold for $\beta$ that is function of the moments of the activity distribution. Note as if activity distribution is heterogeneous, then its variance becomes large and the threshold decreases, hence favoring the spread.
+and it sets a threshold for $\beta$ that is function of the moments of the activity distribution. Note as if activity distribution is heterogeneous, then its variance becomes large and the threshold decreases, hence favoring the spread.
 
 
-Summarizing, the \textbf{activity driven model} captures the realistic property of human behavior (face-to-face, sexual contacts, phone call, email, tweets) and takes into account heterogeneous activity rate. Moreover, the contact network at a \textbf{given instant} is \textit{sparse} and has homogeneous degree. Once we want to stress that the \textbf{aggregated network} over a certain window is well connected with \textit{heterogeneous degree} networks!
+Summarizing, the \textbf{activity driven model} captures the realistic property of human behavior (face-to-face, sexual contacts, phone call, email, tweets) and takes into account heterogeneous activity rate. Moreover, the contact network at a \textbf{given instant} is \textit{sparse} and has homogeneous degree. Once again, we want to stress that the \textbf{aggregated network} over a certain time window is really resembling a \textit{heterogeneous degree} network!
 
 So if  we do not make any assumption on the pattern of activation that may unfold at the same time scale of the spreading process, computations are made possible within the \textit{activity-block} approximation, which follows the same scheme as the degree-block approximation. In conclusion, \textbf{contact heterogeneity lowers the epidemic threshold}.
 
@@ -254,9 +254,9 @@ We are going to study 3 different types of randomizations.
 Let us define the following quantities:
 \begin{itemize}
     \item $P(\tau)$: inter-contact time distribution;
-    \item $\omega_{AB}$: cumulated contact durations of an arbitrary link;
+    \item $\omega_{AB}$: cumulated contact durations of an arbitrary link $AB$;
     \item $P(\omega)$: distribution of the cumulated contacts duration;
-    \item $n_{ab}$: number of contacts per link of an arbitrary link. These are the total times A, B are in contact, regardless of how much;
+    \item $n_{AB}$: number of contacts per link of an arbitrary link. These are the total times A, B are in contact, regardless of how much;
     \item $P(n)$ distribution of the number of contacts per link.
 \end{itemize}
 
@@ -276,15 +276,15 @@ Let us define the following quantities:
 \centering
 \subfloat[][GTS: Global Time Shuffling applied.]{\includegraphics[width=0.8\textwidth]{../lessons/image/17/image13.png}  \label{fig:} }
 \end{minipage}
-\caption{\label{fig:17_15} }
+\caption{\label{fig:17_15} Red (light) segments indicate $A–B$ contacts, while blue (dark) segments indicate $C–D$ contacts. For each link, individual contact intervals are marked with latin letters and inter-contact intervals with greek letters. }
 \end{figure}
 
 
 Let us discuss the three different of shuffling (see Fig. \ref{fig:17_15}) we may have:
 \begin{itemize}
     \item \textbf{Interval Shuffling}: the sequences of contact and inter-contact durations are reshuffled for each link separately. The only property we destroy is the \textit{causality}: correlations between historical information of link are destroyed, since their chronological order (sequence) is randomized.
-    \item \textbf{Link Shuffling}: the unaltered sequence of events (i.e. contacts) are swapped between link pairs. In this case we are destroying \textit{causality}: by reshuffling links we destroy causal correlations between pair nodes. Moreover, we are also dropping $\omega_{AB}$ and $n_{AB}$, since we are assigning to each link a history that has been taken randomly from other nodes.
-    \item \textbf{Global Time Shuffling}: build a global list of the contact durations. For each link, we generate a synthetic activity timeline by sampling with replacement the global list according to the original number of contacts for that link. We are preserving, by construction, the topology, the number of connections between each pair and their distribution. On the other hand, we are destroying all other ones \textit{causality}, $P(\omega)$, $\omega_{AB}$, $P(\tau)$ since now we are drawing randomly activation times.
+    \item \textbf{Link Shuffling}: the unaltered sequence of events (i.e. contacts) are swapped between link pairs. In this case we are destroying \textit{causality}: by reshuffling links we destroy causal correlations between pair nodes. Moreover, we are also dropping $\omega_{AB}$ and $n_{AB}$, since we are assigning to each link a history that has been taken randomly from other nodes. We are destroying the exact structure of the networks, i.e. swapping labels.
+    \item \textbf{Global Time Shuffling}:  we build a global list of the empirical contact durations and, for each link, we generate a synthetic activity timeline by sampling with replacement the global list of contact durations according to the original number of contacts for that link. We are preserving by construction the topology, the number of connections between each pair and their distribution. On the other hand, we are destroying the remaining ones: namely \textit{causality}, $P(\omega)$, $\omega_{AB}$, $P(\tau)$ since now we are drawing randomly activation times.
 \end{itemize}
 See Fig. \ref{fig:17_14} in which the main shuffling characteristics are summarized.
 

@@ -37,7 +37,7 @@ One may note that the transition \( R \rightarrow S \) does not affect the \( I 
 \end{equation}
 while the $ \mathbf{R_0} $ factor is:
 \begin{equation}
-  R_0 = \frac{\beta }{\alpha + \mu }
+  R_0 = = \beta \tau = \frac{\beta }{\alpha + \mu }
 \end{equation}
 In addition, the equilibrium values \( s^* \), \( i^* \) and \( r^* \) can be easily obtained using the same arguments as of the SIR model with demography.
 
@@ -47,7 +47,7 @@ In reality people do not become instantaneously infectious, but there is a \text
 
 Moreover, this period can be extremely heterogeneous depending on the disease: it can take from few hours to years, such as the case for $HIV$ or, even longer, $TBC$. In the latter, latent periods might appear to be even longer than an individual's lifespan, with the result that he may have contracted the disease, but the death occurs for other causes before the onset of any symptom.
 
-It is important to remind that the \textbf{latent period} is \textbf{not the same} of the \textbf{incubation period} (see Fig. \ref{fig:05_1}). An individual can be infectiuous before symptoms. For instance, there might be a \textbf{pre-syntomatic infection period} as it occurs in the case of COVID-19! This explains, once again, why medical status is different from the infection status.
+It is important to remind that the \textbf{latent period} is \textbf{not the same} of the \textbf{incubation period} (see Fig. \ref{fig:05_1}). An individual can be infectious before symptoms. For instance, there might be a \textbf{pre-syntomatic infection period} as it occurs in the case of COVID-19! This explains, once again, why medical status is different from the infection status.
 
 \begin{figure}[h!]
 \centering
@@ -115,14 +115,15 @@ Let us summarize all the compartmental models in well-mixed populations we have 
 \end{equation*}
 In the early stages we observe an exponential growth, governed by \( \beta  \), that always saturates at 1;
 
-\item in the \textbf{SIS model} things starts to change. We have and \textbf{endemic} (meta-stable) \textbf{state}:
+\item in the \textbf{SIS model} things starts to change. We have an \textbf{endemic} (meta-stable) \textbf{state}:
 \begin{equation*}
-  i= \frac{\beta -\mu }{\beta }
+  i(\infty) = \frac{\beta -\mu }{\beta }
 \end{equation*}
-and we reach a sort of \textbf{dynamical equilibrium}. We can define an \textbf{epidemic threshold}:
+which is a sort of \textbf{dynamical equilibrium} we reach. We can define an \textbf{epidemic threshold} $\beta_c$ according to which epidemics might spread or not:
 \begin{equation*}
   \beta > \beta _c = \frac{\mu }{\expval{k} }
 \end{equation*}
+if $\beta> \beta_c$ then no exctinction for the epidemics occurs.
 
 \item for the \textbf{SIR model} equations cannot be solved analytically. However, we observe \textbf{no endemic state} and the \textbf{epidemic threshold} is once again:
 \begin{equation*}
@@ -170,9 +171,9 @@ A \textbf{Graph} $G(V,E)$ is simply an object that is composed by a set of \text
 Links can be of different kinds and so networks: the basic distinction is between \textbf{undirected} and \textbf{directed} links. The former ones can be thought as directed edges, but with arrows pointing in both directions, i.e. to both node of the pair. While the second ones do have a direction according to which sense the relationship represented by the link holds.\\
 Another important distinction is between \textbf{unweighted} and \textbf{weighted} links. The latter ones can be exploited to take into account the possibility that some nodes can be more connected than the others, therefore \textbf{weights} follow. In a certain sense, it describes the "strength" of the link between two nodes.\\
 
-Another important quantity is the \textbf{network density} (connectance), that is the fraction of links present normalized to all the possible pairs:
+Another important quantity is the \textbf{network density} (connectance), that is the fraction of links present normalized to all the possible pairs, and for undirected networks is:
 \begin{equation}
-  d = \frac{L}{N(N-1)}
+  d = \frac{2L}{N(N-1)}
 \end{equation}
 \textbf{Real networks} usually have a very low density, so are \textbf{sparse systems} (\( L \ll N^2 \)).
 
@@ -185,7 +186,7 @@ Many mathematical tools can be used to determine the properties of the system al
 However, as we already told, real networks are usually sparse, therefore the adjacency matrix will be filled for large part by zeros. Hence in order to store graphs in a computer efficiently, it is better to use other tools such as adjacency lists, etc.
 
 Two nodes that share a link are defined "connected", "adjacent", "neighbors". In particular, the \textbf{neighborhood} of node \( i \) is the set of nodes connected to \( i \).
-The number of neighbors \( k_i \) of each node \( i \) is what is called the \textbf{degree} of the node $i$. This is the basic measure that we are going to encounter so many times. Once we have defined the degree, the next step is to define what is the \textbf{average degree} over the entire network:
+The number of neighbors \( k_i \) of each node \( i \) is what is called the \textbf{degree} of the node $i$. This is the basic measure that we are going to encounter so many times. Once we have defined the degree, the next step is to define what is the \textbf{average degree} over the entire network (undirected case):
 \begin{equation}
   \expval{k} = \frac{1}{N} \sum_{i=1}^{N} k_i, \qquad \text{or} \qquad \expval{k} = \frac{2L}{N} = d(N-1)
 \end{equation}
@@ -200,7 +201,7 @@ Another measure we may want to introduce is the \textbf{average} (shortest) \tex
   \expval{I} = \frac{\sum_{ij}^{} l_{ij} }{N(N-1)}
 \end{equation*}
 
-The network is said to be \textbf{connected} if every possible couple of nodes is reachable trough a path. Otherwise, each connected part is defined as a \textbf{connected component}.
+The network is said to be \textbf{connected} if every possible couple of nodes is reachable through a path. Otherwise, each connected part is defined as a \textbf{connected component}.
 
 
 
