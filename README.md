@@ -2,6 +2,8 @@
 
 Lectures notes of the Master degree course "Life Data Epidemology" of professors Chiara Poletto and Sandro Meloni at the University of Padova (Academic Year 2020/2021).
 
+**Authors:** Alice Pagano and Andrea Nicolai
+
 *“All models are wrong, but some of them are useful.”*
 
 ## Contents
